@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="904.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Accordion layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="909.0">
+      <expandedPane>
+        <TitledPane fx:id="x4" animated="false" text="Service and repair">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="389.0" layoutY="38.0" text="Chop shop">
+                  <font>
+                    <Font name="System Bold" size="25.0" />
+                  </font>
+                </Label>
+                <ComboBox layoutX="80.0" layoutY="99.0" prefWidth="281.0" promptText="Select the motorhome">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="191.0" prefWidth="281.0">
+                  <children>
+                    <Label text="Mark" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <font>
+                        <Font size="18.0" fx:id="x1" />
+                      </font>
+                    </Label>
+                    <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label font="$x1" text="Beds" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Button mnemonicParsing="false" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="530.0" layoutY="149.0" prefHeight="191.0" prefWidth="227.0">
+                  <children>
+                    <Label font="$x1" text="Oil" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label font="$x1" text="Water" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label font="$x1" text="Tire pressure" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Button mnemonicParsing="false" text="ok" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <Label font="$x1" text="Repairs" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <CheckBox mnemonicParsing="false" text="Needed" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="86.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+      </expandedPane>
+      <panes>
+        <TitledPane animated="false" text="Start Screen">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="14.0" layoutY="47.0" text="Welcome to Nordic Motorhomes program!">
+                  <font>
+                    <Font name="System Bold" size="32.0" />
+                  </font>
+                </Label>
+                <Label font="$x1" layoutX="14.0" layoutY="90.0" text="This is the place were you do all your shit" />
+                <Label font="$x1" layoutX="14.0" layoutY="122.0" prefHeight="73.0" prefWidth="709.0" text="Other practical information.The different kind of extra that you can buy with your reservation of a Motorhome are:bike racks, bed linen, child seats, picnic tables and chairs, each cost a extra 10€" wrapText="true" />
+                <Button layoutX="734.0" layoutY="412.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="OFF" textFill="RED">
+                  <font>
+                    <Font name="System Bold" size="19.0" />
+                  </font>
+                </Button>
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Display">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <GridPane gridLinesVisible="true" layoutX="247.0" layoutY="111.0" prefHeight="153.0" prefWidth="351.0">
+                  <children>
+                    <Label font="$x1" prefWidth="325.0" text="Status | beds | mark | model" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox prefWidth="351.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane layoutX="247.0" layoutY="285.0">
+                  <children>
+                    <TextField prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" prefWidth="100.0" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Add/Update">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <GridPane gridLinesVisible="true" layoutX="33.0" layoutY="112.0" prefHeight="282.0" prefWidth="267.0">
+                  <children>
+                    <Label text="Mark:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <font>
+                        <Font size="17.0" fx:id="x2" />
+                      </font>
+                    </Label>
+                    <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Button mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="71.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="433.0" layoutY="111.0" prefHeight="260.0" prefWidth="400.0">
+                  <children>
+                    <Label font="$x2" text="Mark:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label font="$x2" text="Availability" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="108.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="292.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <ComboBox layoutX="433.0" layoutY="68.0" prefWidth="338.0" promptText="The motor houses">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <GridPane gridLinesVisible="false" layoutX="434.0" layoutY="395.0" prefWidth="350.0">
+                  <children>
+                    <TextField prefWidth="200.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" prefWidth="81.0" text="DELETE" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" prefWidth="87.0" text="Load" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" prefWidth="87.0" text="Save" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Label layoutX="52.0" layoutY="66.0" text="Add a new Motorhome">
+                  <font>
+                    <Font name="System Bold" size="20.0" fx:id="x3" />
+                  </font>
+                </Label>
+                <Label font="$x3" layoutX="456.0" layoutY="23.0" text="Modify a Motorhome" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Reserver">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label font="$x3" layoutX="313.0" layoutY="37.0" text="Select motor home to reserve" />
+                <ComboBox layoutX="313.0" layoutY="78.0" prefWidth="278.0" promptText="Motor homes">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <GridPane gridLinesVisible="true" layoutX="204.0" layoutY="156.0" prefHeight="99.0" prefWidth="159.0">
+                  <children>
+                    <Label text="Select date start &amp; end" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" promptText="yyyy - mm - dd" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField prefWidth="200.0" promptText="yyyy - mm - dd" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="402.0" layoutY="156.0" prefHeight="99.0">
+                  <children>
+                    <Label text="Select the amount of extras" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="185.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="635.0" layoutY="157.0" prefHeight="99.0">
+                  <children>
+                    <Label text="Final Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Button mnemonicParsing="false" prefWidth="93.0" text="Sum up" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="174.0" layoutY="308.0" prefWidth="641.0">
+                  <children>
+                    <Label text="Add the persons signiture:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" prefWidth="122.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="194.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="6.0" prefWidth="349.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="0.0" prefWidth="133.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Pick up/Turn in/Cancel reservation">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label font="$x3" layoutX="143.0" layoutY="60.0" text="Pick Up" />
+                <GridPane gridLinesVisible="true" layoutX="105.0" layoutY="105.0" prefHeight="118.0" prefWidth="190.0">
+                  <children>
+                    <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox prefWidth="200.0" promptText="whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" text="Pick up" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Label font="$x3" layoutX="387.0" layoutY="55.0" text="Turn in" />
+                <GridPane gridLinesVisible="true" layoutX="339.0" layoutY="105.0" prefHeight="118.0" prefWidth="174.0">
+                  <children>
+                    <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox prefWidth="200.0" promptText="whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" text="Turn in" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="105.0" layoutY="312.0" prefWidth="372.0">
+                  <children>
+                    <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox prefWidth="200.0" promptText="whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" text="Select" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="Penenlty" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button mnemonicParsing="false" text="Cancel reservation" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="108.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="0.0" prefWidth="202.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Label font="$x3" layoutX="114.0" layoutY="257.0" text="Cancel reservation" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <fx:reference source="x4" />
+      </panes>
+    </Accordion>
+  </children>
+</AnchorPane>
