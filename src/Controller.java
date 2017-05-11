@@ -25,7 +25,7 @@ public class Controller {
     public javafx.scene.control.TextField log;
     @FXML
     private javafx.scene.control.TextField pas;
-    private ActionEvent actionEvent;
+
 
 
     public void LoginAction(ActionEvent actionEvent) {
@@ -36,4 +36,6 @@ public class Controller {
          adminLogin.LoginStatus(LoginInput, PassInput);
 
     }
+
+    
 }
