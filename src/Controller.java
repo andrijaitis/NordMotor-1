@@ -25,6 +25,8 @@ public class Controller {
     public javafx.scene.control.TextField log;
     @FXML
     private javafx.scene.control.TextField pas;
+    @FXML
+    private javafx.scene.control.TextField brand;
 
 
 
@@ -34,8 +36,20 @@ public class Controller {
          String PassInput = pas.getText();
          AdminLogin adminLogin = new AdminLogin();
          adminLogin.LoginStatus(LoginInput, PassInput);
+    }
+
+    @FXML
+    public void motorHomeMods(ActionEvent actionEvent){
+
+        String theBrand =  brand.getText();
+        String mark;
+        double price;
+        int bed;
+
+        MotorhomeModification mm = new MotorhomeModification();
+        MotorhomeModification.addMotorHome(theBrand);
 
     }
 
-    
+
 }

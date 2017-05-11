@@ -94,7 +94,7 @@
                     <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Button mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Button mnemonicParsing="false" onAction="#motorHomeMods" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <ComboBox prefWidth="87.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                       <items>
@@ -106,7 +106,7 @@
                       </items>
                     </ComboBox>
                     <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="brand" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="71.0" />
