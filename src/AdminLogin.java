@@ -21,7 +21,7 @@ public class AdminLogin {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `userID` = 1");
+            ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `ID` = 1");
 
             while (rs.next()) {
 
