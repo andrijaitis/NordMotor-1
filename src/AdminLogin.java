@@ -11,7 +11,7 @@ import java.sql.Statement;
  */
 public class AdminLogin {
 
-    public void LoginStatus(String peck, String pick) // login & password prom controller action
+    public boolean LoginStatus(String peck, String pick) // login & password prom controller action
     {
 
         String Login ;
@@ -21,7 +21,7 @@ public class AdminLogin {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `userID` = 1");
+            ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `ID` = 1");
 
             while (rs.next()) {
 
@@ -31,9 +31,9 @@ public class AdminLogin {
                 System.out.println(" SQL " + Login + " " + Pass);
 
                 if(peck.equals(Login) && pick.equals(Pass)){
-                    System.out.println("Succccssessss ");
+                    return true;
                 } else {
-                    System.out.println("Bith u suck");
+                    return false;
                 }
             }
             con.close();
@@ -44,7 +44,7 @@ public class AdminLogin {
         }
 
 
-
+return false;
     }
 
 }
