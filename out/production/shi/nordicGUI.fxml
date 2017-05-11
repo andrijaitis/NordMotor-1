@@ -95,18 +95,10 @@
                     <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Button mnemonicParsing="false" onAction="#motorHomeMods" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <ComboBox prefWidth="87.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <TextField fx:id="brand" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="priceTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField fx:id="modelTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="brandTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                              <TextField fx:id="bedTxtField" layoutX="81.0" layoutY="123.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="71.0" />
@@ -211,6 +203,7 @@
                            <font>
                               <Font name="System Bold" size="20.0" fx:id="x8" />
                            </font></Label>
+                        <Label fx:id="statusOfAction" layoutX="35.0" layoutY="394.0" text="Status: " />
               </children>
             </AnchorPane>
           </content>

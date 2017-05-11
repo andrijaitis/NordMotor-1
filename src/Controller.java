@@ -25,8 +25,17 @@ public class Controller {
     public javafx.scene.control.TextField log;
     @FXML
     private javafx.scene.control.TextField pas;
+    //motorhome modification class variables
     @FXML
-    private javafx.scene.control.TextField brand;
+    private javafx.scene.control.TextField brandTxtField;
+    @FXML
+    private javafx.scene.control.TextField modelTxtField;
+    @FXML
+    private javafx.scene.control.TextField priceTxtField;
+    @FXML
+    private javafx.scene.control.TextField bedTxtField;
+    @FXML
+    private javafx.scene.control.Label statusOfAction;
 
 
 
@@ -41,15 +50,17 @@ public class Controller {
     @FXML
     public void motorHomeMods(ActionEvent actionEvent){
 
-        String theBrand =  brand.getText();
-        String mark;
-        double price;
-        int bed;
+        String theBrand = brandTxtField.getText();
+        String theModel = modelTxtField.getText();
+        String thePrice = priceTxtField.getText(); /// Needs a fix to be a double not a fcking string
+        String theBed   = bedTxtField.getText();   /// Needs a fcking fix so its a combobox with ints NOT a string txt field
 
         MotorhomeModification mm = new MotorhomeModification();
-        MotorhomeModification.addMotorHome(theBrand);
+        MotorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed);
+        statusOfAction.setText("Status: Congratualtions! "+theBrand+ " " +theModel+ "has been saved!");
 
     }
+
 
 
 }

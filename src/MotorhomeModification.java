@@ -1,6 +1,8 @@
 /**
  * Created by Mantas_MSI on 5/11/2017.
  */
+import javafx.fxml.FXML;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +10,9 @@ import java.sql.Statement;
 
 public class MotorhomeModification {
 
-    public static void addMotorHome(String theBrand) {
+    public static void addMotorHome(String theBrand, String theModel, String thePrice, String theBed) {//fix this to be a double and int
 
-        String mhBrand = theBrand;
-
-        System.out.println("Name ->" + mhBrand + "<-");
+        System.out.println("Name ->" + theBrand + "<-");
 
         try {
             Connection con = DBConnection.getConnection();
@@ -21,13 +21,13 @@ public class MotorhomeModification {
             String sql = "INSERT INTO nordic_rv " +
                     "VALUES " +
                     "(NULL, "
-                    +"'"+ mhBrand  +"'    ,"
-                    +"'"+ theBrand +"'    ,"
-                    +"'"+ theBrand +"'    ,"
-                    +0+                  ","
-                    +"'"+ theBrand +"'    ,"
-                    +0+                  ","
-                    +0+ ");";
+                    +"'"+ "Available"  +"'  ,"
+                    +"'"+ theBrand     +"'  ,"
+                    +"'"+ theModel     +"'  ,"
+                    +"'"+ thePrice     +"'  ,"
+                    +"'"+ theBed       +"'  ,"
+                    +100               +"   ,"
+                    +11224             +")  ;";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -36,6 +36,7 @@ public class MotorhomeModification {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 }
