@@ -76,6 +76,8 @@
                         <Text layoutX="213.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
                         <Text layoutX="200.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                         <Button layoutX="541.0" layoutY="195.0" mnemonicParsing="false" onAction="#LoginAction" text="Login" />
+                        <Label fx:id="statusBar" layoutX="172.0" layoutY="485.0" prefHeight="17.0" prefWidth="356.0" />
+                        <Text layoutX="250.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin pass: password123" wrappingWidth="211.302734375" />
                      </children>
                   </AnchorPane>
               </content>
