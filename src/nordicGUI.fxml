@@ -21,7 +21,7 @@
   <children>
     <Accordion layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="909.0">
       <panes>
-        <TitledPane animated="false" text="Start Screen">
+        <TitledPane fx:id="startSceenPan" animated="false" text="Start Screen">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;">
               <children>
@@ -66,7 +66,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-            <TitledPane animated="false" text="Login">
+            <TitledPane animated="false" prefWidth="909.0" text="Login">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -77,12 +77,13 @@
                         <Text layoutX="200.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                         <Button layoutX="541.0" layoutY="195.0" mnemonicParsing="false" onAction="#LoginAction" text="Login" />
                         <Label fx:id="statusBar" layoutX="172.0" layoutY="485.0" prefHeight="17.0" prefWidth="356.0" />
-                        <Text layoutX="250.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin pass: password123" wrappingWidth="211.302734375" />
+                        <Text layoutX="267.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
+                        <Button fx:id="fckingShit" layoutX="32.0" layoutY="131.0" mnemonicParsing="false" text="Bastard" />
                      </children>
                   </AnchorPane>
               </content>
             </TitledPane>
-        <TitledPane animated="false" text="Add/Update" fx:id="x5">
+        <TitledPane fx:id="motorhomeModPan" animated="false" text="Add/Update">
           <content>
             <AnchorPane id="AddCSS" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -210,7 +211,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane animated="false" text="Reserver">
+        <TitledPane fx:id="reservePan" animated="false" text="Reserver">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -293,7 +294,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane animated="false" text="Pick up/Turn in/Cancel reservation" fx:id="x6">
+        <TitledPane fx:id="customerOrderFunctioPan" animated="false" text="Pick up/Turn in/Cancel reservation">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -329,7 +330,7 @@
                 <GridPane gridLinesVisible="true" layoutX="339.0" layoutY="104.0" prefHeight="152.0" prefWidth="174.0">
                   <children>
                     <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox prefWidth="200.0" promptText="whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <ComboBox prefWidth="200.0" promptText="whomst'd've" GridPane.rowIndex="1">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -338,10 +339,10 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Button mnemonicParsing="false" text="Turn in" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <Button mnemonicParsing="false" text="Turn in" GridPane.rowIndex="4" />
                     <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField prefWidth="200.0" promptText="milege" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField prefWidth="200.0" promptText="fuel left" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField prefWidth="200.0" promptText="milege" GridPane.rowIndex="2" />
+                    <TextField prefWidth="200.0" promptText="fuel left" GridPane.rowIndex="3" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -388,7 +389,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane animated="false" text="Service and repair" fx:id="x4">
+        <TitledPane fx:id="repairPan" animated="false" text="Service and repair">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>

@@ -3,6 +3,7 @@
  */
 import javafx.fxml.FXML;
 import java.awt.*;
+import java.awt.Button;
 import java.awt.TextField;
 import java.net.URL;
 import java.sql.Connection;
@@ -24,10 +25,21 @@ import javafx.scene.control.Label;
 public class Controller {
 
    private boolean userLoggedIn = false ;
+    //Admin Login class variables
     @FXML
     public javafx.scene.control.TextField log;
     @FXML
     private javafx.scene.control.TextField pas;
+    @FXML
+    private javafx.scene.control.TitledPane startSceenPan;
+    @FXML
+    private javafx.scene.control.TitledPane motorhomeModPan;
+    @FXML
+    private javafx.scene.control.TitledPane reservePan;
+    @FXML
+    private javafx.scene.control.TitledPane customerOrderFunctioPan;
+    @FXML
+    private javafx.scene.control.TitledPane repairPan;
     //motorhome modification class variables
     @FXML
     private javafx.scene.control.TextField brandTxtField;
@@ -41,8 +53,8 @@ public class Controller {
     private javafx.scene.control.Label statusOfAction;
     @FXML
     private Label statusBar;
-
-
+    @FXML
+    private javafx.scene.control.Button fckingShit;
 
     public void LoginAction(ActionEvent actionEvent) {
 
@@ -54,10 +66,18 @@ public class Controller {
         if (status == true) {
             statusBar.setText("You are logged in");
             userLoggedIn = status;
+            //enabalink tabus
+            startSceenPan.setDisable(false);
+            motorhomeModPan.setDisable(false);
+            reservePan.setDisable(false);
+            customerOrderFunctioPan.setDisable(false);
+            repairPan.setDisable(false);
         } else {
             statusBar.setText("Wrong password or username");
             userLoggedIn = status;
         }
+
+        fckingShit.setDisable(true);//DELETE THIS
     }
     @FXML
     public void motorHomeMods(ActionEvent actionEvent){
