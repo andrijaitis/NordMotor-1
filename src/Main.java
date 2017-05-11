@@ -1,7 +1,6 @@
 /**
- * Created by Vidas on 5/9/2017.
+ * Created by Kompas on 2017-05-11.
  */
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
