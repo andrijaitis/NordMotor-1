@@ -44,9 +44,39 @@ public class MotorhomeModification {
 
     }
 
-    public void updatingMotorHomne(){
+    public void updatingMotorHomne() {
 
     }
+
+    public java.util.List<String> Load(String ID) {
+        String P; // called P with no reason
+
+      java.util.List<String> MH = new ArrayList<String>();
+
+        try {
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT `status`, `mark`,`model`,`beds`,`price` FROM `nordic_rv` WHERE `rvID`=" + ID);
+
+            while (rs.next()) {
+
+                MH.add(rs.getString(1));
+                MH.add(rs.getString(2));
+                MH.add(rs.getString(3));
+                MH.add(rs.getString(4));
+                MH.add(rs.getString(5));
+
+            }
+
+
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return MH;
+    }
+
 
     public  ObservableList<String> refresh(){
 

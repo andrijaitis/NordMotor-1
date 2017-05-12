@@ -56,14 +56,28 @@ public class Controller {
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating
     @FXML
     private ComboBox ModifyMHcombo;
+    @FXML
+    private javafx.scene.control.TextField ModifyMark;
+    @FXML
+    private javafx.scene.control.TextField ModifyModel;
+    @FXML
+    private ComboBox ModifyBeds;
+    @FXML
+    private ComboBox ModifyAvailability;
+    @FXML
+    public javafx.scene.control.TextField ModifyPrice;
+    @FXML
+    public javafx.scene.control.TextField ModifyID;
 
 
+    MotorhomeModification motorhomeModification = new MotorhomeModification();
+    AdminLogin adminLogin = new AdminLogin();
 
     public void LoginAction(ActionEvent actionEvent) {
 
         String LoginInput = log.getText();
         String PassInput = pas.getText();
-        AdminLogin adminLogin = new AdminLogin();
+
         boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
         System.out.println(status+ " aa");
         if (status == true) {
@@ -97,15 +111,43 @@ public class Controller {
 
 
 
+
+
+    }
+
+    @FXML
+    public void motorHomeModLoad(ActionEvent actionEvent){
+        String Aidy = ModifyID.getText();
+        ModifyAvailability.setPromptText(motorhomeModification.Load(Aidy).get(0));
+        ModifyMark.setText(motorhomeModification.Load(Aidy).get(1));
+        ModifyModel.setText(motorhomeModification.Load(Aidy).get(2));
+        ModifyPrice.setText(motorhomeModification.Load(Aidy).get(3));
+        ModifyBeds.setPromptText(motorhomeModification.Load(Aidy).get(4));
+        System.out.println(motorhomeModification.Load(Aidy).get(0));
+        System.out.println(motorhomeModification.Load(Aidy).get(1));
+        System.out.println(motorhomeModification.Load(Aidy).get(2));
+        System.out.println(motorhomeModification.Load(Aidy).get(3));
+        System.out.println(motorhomeModification.Load(Aidy).get(4));
+
+
+
     }
     @FXML
     public void RefreshMH(ActionEvent actionEvent){
         System.out.println("rehreshing");
-
-        MotorhomeModification motorhomeModification = new MotorhomeModification();
         ObservableList<String> list = FXCollections.observableArrayList();
         String listString = "";
         ModifyMHcombo.setItems(motorhomeModification.refresh());
+        ObservableList<String> beds = FXCollections.observableArrayList();
+        ObservableList<String> availability = FXCollections.observableArrayList();
+        beds.addAll("2","4","6","8");
+        availability.addAll("Available","Unavailable");
+        ModifyAvailability.setItems(availability);
+        ModifyBeds.setItems(beds);
+
+
+
+
 
     }
 
