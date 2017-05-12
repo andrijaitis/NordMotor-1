@@ -78,7 +78,6 @@
                         <Button layoutX="541.0" layoutY="195.0" mnemonicParsing="false" onAction="#LoginAction" text="Login" />
                         <Label fx:id="statusBar" layoutX="172.0" layoutY="485.0" prefHeight="17.0" prefWidth="356.0" />
                         <Text layoutX="267.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
-                        <Button fx:id="fckingShit" layoutX="32.0" layoutY="131.0" mnemonicParsing="false" text="Bastard" />
                      </children>
                   </AnchorPane>
               </content>
@@ -97,7 +96,7 @@
                     <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Button mnemonicParsing="false" onAction="#motorHomeMods" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Button mnemonicParsing="false" onAction="#motorHomeModsAddingMH" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <TextField fx:id="priceTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <TextField fx:id="modelTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <TextField fx:id="brandTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -115,7 +114,7 @@
                     <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane gridLinesVisible="true" layoutX="433.0" layoutY="111.0" prefHeight="260.0" prefWidth="400.0">
+                <GridPane gridLinesVisible="true" layoutX="433.0" layoutY="111.0" prefHeight="260.0" prefWidth="424.0">
                   <children>
                     <Label font="$x2" text="Mark:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -161,8 +160,8 @@
                     </ComboBox>
                   </children>
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="108.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="292.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="97.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="10.0" prefWidth="327.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
@@ -206,7 +205,8 @@
                            <font>
                               <Font name="System Bold" size="20.0" fx:id="x8" />
                            </font></Label>
-                        <Label fx:id="statusOfAction" layoutX="35.0" layoutY="394.0" text="Status: " />
+                        <Label fx:id="statusBarForSuccessesfullyAddingMH" layoutX="35.0" layoutY="394.0" text="Status: " />
+                        <Button layoutX="784.0" layoutY="68.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" text="Refresh" />
               </children>
             </AnchorPane>
           </content>

@@ -25,7 +25,9 @@ import javafx.scene.control.Label;
 public class Controller {
 
    private boolean userLoggedIn = false ;
-    //Admin Login class variables
+    //AdminLogin CLASS variables >>>>>>>>>> for logingin
+    @FXML
+    private Label statusBar;
     @FXML
     public javafx.scene.control.TextField log;
     @FXML
@@ -40,7 +42,7 @@ public class Controller {
     private javafx.scene.control.TitledPane customerOrderFunctioPan;
     @FXML
     private javafx.scene.control.TitledPane repairPan;
-    //motorhome modification class variables
+    //MotorhomeModification CLASS variables >>>>>>>>>> for adding a MH
     @FXML
     private javafx.scene.control.TextField brandTxtField;
     @FXML
@@ -50,11 +52,12 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField bedTxtField;
     @FXML
-    private javafx.scene.control.Label statusOfAction;
+    private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    //MotorhomeModification CLASS variables >>>>>>>>>> for updating
     @FXML
-    private Label statusBar;
-    @FXML
-    private javafx.scene.control.Button fckingShit;
+    //add variable
+
+
 
     public void LoginAction(ActionEvent actionEvent) {
 
@@ -66,7 +69,7 @@ public class Controller {
         if (status == true) {
             statusBar.setText("You are logged in");
             userLoggedIn = status;
-            //enabalink tabus
+            //Enabale all the tabs after the login is correct
             startSceenPan.setDisable(false);
             motorhomeModPan.setDisable(false);
             reservePan.setDisable(false);
@@ -76,11 +79,9 @@ public class Controller {
             statusBar.setText("Wrong password or username");
             userLoggedIn = status;
         }
-
-        fckingShit.setDisable(true);//DELETE THIS
     }
     @FXML
-    public void motorHomeMods(ActionEvent actionEvent){
+    public void motorHomeModsAddingMH(ActionEvent actionEvent){
 
         String theBrand = brandTxtField.getText();
         String theModel = modelTxtField.getText();
@@ -89,10 +90,12 @@ public class Controller {
 
         MotorhomeModification mm = new MotorhomeModification();
         MotorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed);
-        statusOfAction.setText("Status: Congratualtions! "+theBrand+ " " +theModel+ "has been saved!");
+        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ "has been saved!");
+    }
+    @FXML
+    public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
 
     }
-
 
 
 }
