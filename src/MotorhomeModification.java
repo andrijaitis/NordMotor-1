@@ -51,8 +51,8 @@ public class MotorhomeModification {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "UPDATE `nordic_rv` SET `status` = "  + availability + " " + "mark = " +  brand + " " +
-             "model = " + model + " " + "beds = "  + beds + " " +  "price = " + price +  "WHERE `nordic_rv` rvID=" + ID;
+            String sql = "UPDATE `nordic_rv` SET `status` = "  +"'" +availability + "'"+", " + "mark = " +"'" +  brand +"'"+ ", " +
+             "model = " +"'" + model +"'"+ ", " + "beds = "  + "'"+ beds +"'" +", " +  "price = " +"'"+ price +"'" +  " WHERE rvID=" + ID+";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
