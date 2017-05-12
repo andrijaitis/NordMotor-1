@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="904.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="904.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
     <Accordion layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="909.0">
       <panes>
@@ -171,7 +171,7 @@
                     <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <ComboBox layoutX="433.0" layoutY="68.0" prefWidth="338.0" promptText="The motor houses">
+                <ComboBox fx:id="ModifyMHcombo" layoutX="433.0" layoutY="68.0" prefWidth="338.0" promptText="The motor houses">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -206,7 +206,7 @@
                               <Font name="System Bold" size="20.0" fx:id="x8" />
                            </font></Label>
                         <Label fx:id="statusBarForSuccessesfullyAddingMH" layoutX="35.0" layoutY="394.0" text="Status: " />
-                        <Button layoutX="784.0" layoutY="68.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" text="Refresh" />
+                        <Button layoutX="784.0" layoutY="68.0" mnemonicParsing="false" onAction="#RefreshMH" prefHeight="31.0" prefWidth="72.0" text="Refresh" />
               </children>
             </AnchorPane>
           </content>

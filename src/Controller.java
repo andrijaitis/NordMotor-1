@@ -55,7 +55,7 @@ public class Controller {
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating
     @FXML
-    //add variable
+    private ComboBox ModifyMHcombo;
 
 
 
@@ -94,6 +94,18 @@ public class Controller {
     }
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
+
+
+
+    }
+    @FXML
+    public void RefreshMH(ActionEvent actionEvent){
+        System.out.println("rehreshing");
+
+        MotorhomeModification motorhomeModification = new MotorhomeModification();
+        ObservableList<String> list = FXCollections.observableArrayList();
+        String listString = "";
+        ModifyMHcombo.setItems(motorhomeModification.refresh());
 
     }
 

@@ -3,13 +3,15 @@
  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import java.awt.*;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.*;
 
 public class MotorhomeModification {
 
@@ -46,47 +48,44 @@ public class MotorhomeModification {
 
     }
 
-    public  void refresh(){
+    public  ObservableList<String> refresh(){
 
-        List<String> members = new ArrayList<String>();
+
+        java.util.List<String> members = new ArrayList<String>();
 
         try {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * " +
-                    "FROM Teams");
+                    "FROM nordic_rv");
 
             while (rs.next()) {
-                members.add(
-                        rs.getString(4));
+                members.add(rs.getString(1) + " "+
+                        rs.getString(2) + " "+
+                        rs.getString(3) + " "+
+                        rs.getString(4) + " "+
+                        rs.getString(5) + " "+
+                        rs.getString(6));
+                System.out.println(rs.getString(4));
             }
             con.close();
 
             ObservableList<String> list = FXCollections.observableArrayList();
+
 
             String listString = "";
 
             for (String s : members) {
                 listString += list.add(s);
             }
-            Team1R1.setItems(list);
-            Team2R1.setItems(list);
-            Team3R1.setItems(list);
-            Team4R1.setItems(list);
-
-            Team1R2.setItems(list);
-            Team2R2.setItems(list);
-
-            winnerTeam.setItems(list);
-            // pickTournamentDate.setItems(list);
-
-            //inputScore3.setItems(list);
+            return list;
 
         } catch (SQLException e) {
             e.printStackTrace();
-
+            ObservableList<String> list2 = FXCollections.observableArrayList();
+            list2.add("Failed to load");
+            return list2;
         }
     }
-
 }
