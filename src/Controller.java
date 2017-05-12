@@ -20,6 +20,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+
 
 
 public class Controller {
@@ -56,8 +58,22 @@ public class Controller {
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating
     @FXML
     private ComboBox ModifyMHcombo;
-
-
+    //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
+    @FXML
+    private javafx.scene.control.TextField extraItemsTxtField;
+    @FXML
+    private javafx.scene.control.TextArea extraItemsTxtArea;
+    //ReserveMH CLASS variables >>>>>>>>>> for date season
+    @FXML
+    private javafx.scene.control.TextField startDateDAYTxtField;
+    @FXML
+    private javafx.scene.control.TextField startDateMONTHTxtField;
+    @FXML
+    private javafx.scene.control.TextField endDateDAYTxtField;
+    @FXML
+    private javafx.scene.control.TextField endDateMONTHTxtField;
+    @FXML
+    private javafx.scene.control.TextField whichSeason;
 
     public void LoginAction(ActionEvent actionEvent) {
 
@@ -107,6 +123,39 @@ public class Controller {
         String listString = "";
         ModifyMHcombo.setItems(motorhomeModification.refresh());
 
+    }
+
+    //FROM RESERVEMH CLASS
+    @FXML
+    public void addExtaItemAction(ActionEvent actionEvent){
+
+
+
+        //String item = extraItemsTxtField.getText();
+
+        //rmh.addExtra(item);
+
+        //extraItemsTxtArea.setText(String.valueOf(day));
+        //extraItemsTxtArea.setText(String.valueOf(month));
+
+    }
+    @FXML
+    public  void calculatePriceAction(ActionEvent actionEvent){
+        //Checks which season it is--------------------------------------
+        if (startDateMONTHTxtField.getText().isEmpty() || startDateDAYTxtField.getText().isEmpty() || endDateMONTHTxtField.getText().isEmpty() || endDateDAYTxtField.getText().isEmpty()){
+            System.out.println(" Ble cyka you need normal value");
+            whichSeason.setText("Fill all the dates!");
+            whichSeason.setFont(Font.font ("Verdana", 17));
+
+        }else{
+            int startDay   = Integer.parseInt(startDateDAYTxtField.getText());
+            int startMonth = Integer.parseInt(startDateMONTHTxtField.getText());
+            int endDay     = Integer.parseInt(endDateDAYTxtField.getText());
+            int endMonth   = Integer.parseInt(endDateMONTHTxtField.getText());
+            ReserveMH rmh = new ReserveMH();
+            whichSeason.setText(rmh.season(startMonth));
+        }
+        //----------------------------------------------------------------
     }
 
 
