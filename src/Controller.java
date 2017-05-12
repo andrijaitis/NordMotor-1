@@ -108,13 +108,30 @@ public class Controller {
     }
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
-
+        String ID = ModifyID.getText();
+        String brand = ModifyMark.getText();
+        String model = ModifyMark.getText();
+        String price = ModifyPrice.getText();
+        String  beds = (String) ModifyBeds.getValue();
+        String availability = (String) ModifyAvailability.getValue();
+                motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
+        System.out.println("Shit works");
 
 
 
 
     }
 
+    @FXML
+    public void motorHomeModsDeleteMH(ActionEvent actionEvent){
+        String deleteID = ModifyID.getText();
+        motorhomeModification.DeleteMotorHome(deleteID);;
+
+
+
+
+
+    }
     @FXML
     public void motorHomeModLoad(ActionEvent actionEvent){
         String Aidy = ModifyID.getText();
@@ -123,13 +140,6 @@ public class Controller {
         ModifyModel.setText(motorhomeModification.Load(Aidy).get(2));
         ModifyPrice.setText(motorhomeModification.Load(Aidy).get(3));
         ModifyBeds.setPromptText(motorhomeModification.Load(Aidy).get(4));
-        System.out.println(motorhomeModification.Load(Aidy).get(0));
-        System.out.println(motorhomeModification.Load(Aidy).get(1));
-        System.out.println(motorhomeModification.Load(Aidy).get(2));
-        System.out.println(motorhomeModification.Load(Aidy).get(3));
-        System.out.println(motorhomeModification.Load(Aidy).get(4));
-
-
 
     }
     @FXML
