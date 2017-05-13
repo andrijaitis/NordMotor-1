@@ -1,8 +1,22 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Mantas_MSI on 5/12/2017.
  */
 public class ReserveMH {
-    public void addExtra(String item) {
+
+    public ArrayList<String> addExtra(String item) {
+
+        java.util.ArrayList<String> members = new ArrayList<String>();
+
+        int i =-1;
+        members.add(i+1,item);
+
+        return members;
     }
 
     public String season(int startMonth) {

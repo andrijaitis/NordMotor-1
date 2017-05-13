@@ -63,7 +63,9 @@ public class Controller {
     private javafx.scene.control.TextField extraItemsTxtField;
     @FXML
     private javafx.scene.control.TextArea extraItemsTxtArea;
-    //ReserveMH CLASS variables >>>>>>>>>> for date season
+    @FXML
+    private  javafx.scene.control.ComboBox listOfExtraItemsComBox;
+
     @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
     @FXML
@@ -86,10 +88,24 @@ public class Controller {
     public javafx.scene.control.TextField ModifyPrice;
     @FXML
     public javafx.scene.control.TextField ModifyID;
+    //Repair CLASS variables >>>>>>>>>> for loading up the motorhome
+    @FXML
+    private javafx.scene.control.TextField idForMechanic;
+    @FXML
+    private javafx.scene.control.TextField brandForMechanic;
+    @FXML
+    private javafx.scene.control.TextField modelForMechanic;
+    @FXML
+    private javafx.scene.control.TextField bedForMechanic;
+    @FXML
+    private javafx.scene.control.TextField fuelForMechanic;
+    @FXML
+    private javafx.scene.control.TextField mileageForMechanic;
 
 
-    MotorhomeModification motorhomeModification = new MotorhomeModification();
-    AdminLogin adminLogin = new AdminLogin();
+    MotorhomeModification motorhomeModification = new MotorhomeModification();//MotorhomeModification Class
+    AdminLogin adminLogin = new AdminLogin();//AdminLogin class
+    Repair repair = new Repair();
 
     public void LoginAction(ActionEvent actionEvent) {
 
@@ -134,21 +150,12 @@ public class Controller {
         String availability = (String) ModifyAvailability.getValue();
                 motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
         System.out.println("Shit works");
-
-
-
-
     }
 
     @FXML
     public void motorHomeModsDeleteMH(ActionEvent actionEvent){
         String deleteID = ModifyID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);;
-
-
-
-
-
     }
     @FXML
     public void motorHomeModLoad(ActionEvent actionEvent){
@@ -173,25 +180,38 @@ public class Controller {
         ModifyAvailability.setItems(availability);
         ModifyBeds.setItems(beds);
 
-
-
-
-
     }
 
     //FROM RESERVEMH CLASS
     @FXML
+    public void extraItemCatalogComBox(MouseEvent mouseEvent){
+        ObservableList<String> extraItems = FXCollections.observableArrayList();
+        extraItems.addAll("Baby seat", "Bike rack", "Table");
+        listOfExtraItemsComBox.setItems(extraItems);
+    }
+    @FXML
     public void addExtaItemAction(ActionEvent actionEvent){
 
+        String item = (String) listOfExtraItemsComBox.getValue();
 
+        ReserveMH rmh = new ReserveMH();
 
-        //String item = extraItemsTxtField.getText();
+        rmh.addExtra(item);
 
-        //rmh.addExtra(item);
+        java.util.ArrayList<String> members = new ArrayList<String>();
 
-        //extraItemsTxtArea.setText(String.valueOf(day));
-        //extraItemsTxtArea.setText(String.valueOf(month));
+        members.add(item);
 
+        String listString = "";
+
+        for (String s : members) {
+            listString += s + "\n";
+            extraItemsTxtArea.setText(listString);
+        }
+
+        for(int i=0;i<10;i++){
+            System.out.println(" all of your items "+listString);
+        }
     }
     @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
@@ -210,6 +230,14 @@ public class Controller {
             whichSeason.setText(rmh.season(startMonth));
         }
         //----------------------------------------------------------------
+    }
+    @FXML
+    public void loadActionForRepair(MouseEvent mouseEvent){
+        String idMH = idForMechanic.getText();
+        brandForMechanic.setPromptText(repair.loadItUpForTheMechanic(idMH).get(0));
+        modelForMechanic.setText(repair.loadItUpForTheMechanic(idMH).get(1));
+        bedForMechanic.setText(repair.loadItUpForTheMechanic(idMH).get(2));
+        //ModifyPrice.setText(motorhomeModification.Load(idMH).get(3));
     }
 
 

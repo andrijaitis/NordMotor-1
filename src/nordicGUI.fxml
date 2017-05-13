@@ -257,11 +257,12 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane gridLinesVisible="true" layoutX="298.0" layoutY="157.0" prefHeight="129.0">
+                <GridPane gridLinesVisible="true" layoutX="298.0" layoutY="157.0" prefHeight="160.0" prefWidth="185.0">
                   <children>
                     <Label text="Select the amount of extras" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <TextField fx:id="extraItemsTxtField" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Button mnemonicParsing="false" onAction="#addExtaItemAction" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="listOfExtraItemsComBox" onMouseClicked="#extraItemCatalogComBox" prefWidth="150.0" GridPane.rowIndex="2" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="185.0" />
@@ -269,6 +270,7 @@
                   <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
@@ -412,7 +414,7 @@
                     <Font name="System Bold" size="25.0" />
                   </font>
                 </Label>
-                <ComboBox layoutX="80.0" layoutY="99.0" prefWidth="281.0" promptText="Select the motorhome">
+                <ComboBox layoutX="80.0" layoutY="99.0" onMouseClicked="#loadActionForRepair" prefWidth="281.0" promptText="Select the motorhome">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -426,11 +428,11 @@
                     <Label font="$x1" text="Mark" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Label font="$x1" text="Beds" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="idForMechanic" prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Button mnemonicParsing="false" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField fx:id="brandForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="modelForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="bedForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
