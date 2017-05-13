@@ -99,11 +99,7 @@ public class MotorhomeModification {
                 MH.add(rs.getString(3));
                 MH.add(rs.getString(4));
                 MH.add(rs.getString(5));
-
             }
-
-
-
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,10 +126,8 @@ public class MotorhomeModification {
                         rs.getString(2) + " "+
                         rs.getString(3) + " "+
                         rs.getString(4) + " "+
-                        rs.getString(5) + " "+
-                        rs.getString(6));
-
-               // System.out.println(rs.getString(4));
+                        rs.getString(5) + "[B]"+
+                        rs.getString(6) + "[€]");
             }
             con.close();
 

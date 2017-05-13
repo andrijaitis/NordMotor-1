@@ -307,7 +307,7 @@
                     <Font name="System Bold" size="25.0" />
                   </font>
                 </Label>
-                <ComboBox layoutX="80.0" layoutY="99.0" onMouseClicked="#loadActionForRepair" prefWidth="281.0" promptText="Select the motorhome">
+                <ComboBox fx:id="repairListForMH" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#loadActionForRepair" prefWidth="281.0" promptText="Select the motorhome">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -316,16 +316,28 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="191.0" prefWidth="281.0">
+                <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="211.0" prefWidth="281.0">
                   <children>
                     <Label font="$x1" text="Mark" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Label font="$x1" text="Beds" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="idForMechanic" prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Button mnemonicParsing="false" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField fx:id="idForMechanic" prefWidth="200.0" promptText="id" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <Button mnemonicParsing="false" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                     <TextField fx:id="brandForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     <TextField fx:id="modelForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <TextField fx:id="bedForMechanic" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label layoutX="10.0" layoutY="85.0" text="Fuel" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" fx:id="x11" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="120.0" text="Mileage" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" fx:id="x111" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="fuelForMechanic" layoutX="151.0" layoutY="83.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="mileageForMechanic" layoutX="151.0" layoutY="118.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -335,6 +347,8 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
