@@ -274,11 +274,11 @@ public class Controller {
         String ID = valuesFromComBox.substring(0,1);
         System.out.println(valuesFromComBox);
 
-        updateAvailability.setPromptText(motorhomeModification.Load(ID).get(0));
+        updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
         updateMark.setText(motorhomeModification.Load(ID).get(1));
         updateModel.setText(motorhomeModification.Load(ID).get(2));
         updatePrice.setText(motorhomeModification.Load(ID).get(3));
-        updateBeds.setPromptText(motorhomeModification.Load(ID).get(4));
+        updateBeds.setValue(motorhomeModification.Load(ID).get(4));
         updateID.setText(ID);
     }
     @FXML
