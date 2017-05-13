@@ -142,12 +142,17 @@ public class Controller {
     }
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
+        String beds = (String) ModifyBeds.getValue();
+        System.out.println(beds + "beds!!!!!!!!!!");
+        String availability = (String) ModifyAvailability.getValue();
+        System.out.println(availability + "available!!!!!!!!!!");
+
         String ID = ModifyID.getText();
         String brand = ModifyMark.getText();
-        String model = ModifyMark.getText();
+        String model = ModifyModel.getText();
         String price = ModifyPrice.getText();
-        String  beds = (String) ModifyBeds.getValue();
-        String availability = (String) ModifyAvailability.getValue();
+        //String beds = (String) ModifyBeds.getValue();
+
                 motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
         System.out.println("Shit works");
     }
@@ -160,15 +165,17 @@ public class Controller {
     @FXML
     public void motorHomeModLoad(ActionEvent actionEvent){
         String Aidy = ModifyID.getText();
-        ModifyAvailability.setPromptText(motorhomeModification.Load(Aidy).get(0));
+        ModifyAvailability.setValue(motorhomeModification.Load(Aidy).get(0));
         ModifyMark.setText(motorhomeModification.Load(Aidy).get(1));
         ModifyModel.setText(motorhomeModification.Load(Aidy).get(2));
         ModifyPrice.setText(motorhomeModification.Load(Aidy).get(3));
-        ModifyBeds.setPromptText(motorhomeModification.Load(Aidy).get(4));
+        ModifyBeds.setValue(motorhomeModification.Load(Aidy).get(4));
+
 
     }
     @FXML
-    public void RefreshMH(ActionEvent actionEvent){
+    public void RefreshMH(MouseEvent mouseEvent){
+        ModifyMHcombo.setValue(null);
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
         String listString = "";
@@ -212,6 +219,24 @@ public class Controller {
         for(int i=0;i<10;i++){
             System.out.println(" all of your items "+listString);
         }
+    }
+
+    public void Autistic(ActionEvent actionEvent){
+
+
+        System.out.println("Screeching");
+
+        String autistic = (String) ModifyMHcombo.getValue();
+        String ID = autistic.substring(0,1);
+        System.out.println(autistic);
+        ModifyAvailability.setPromptText(motorhomeModification.Load(ID).get(0));
+        ModifyMark.setText(motorhomeModification.Load(ID).get(1));
+        ModifyModel.setText(motorhomeModification.Load(ID).get(2));
+        ModifyPrice.setText(motorhomeModification.Load(ID).get(3));
+        ModifyBeds.setPromptText(motorhomeModification.Load(ID).get(4));
+        ModifyID.setText(ID);
+
+
     }
     @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
