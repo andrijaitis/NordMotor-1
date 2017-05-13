@@ -196,29 +196,48 @@ public class Controller {
         extraItems.addAll("Baby seat", "Bike rack", "Table");
         listOfExtraItemsComBox.setItems(extraItems);
     }
+
+
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent){
 
         String item = (String) listOfExtraItemsComBox.getValue();
 
-        ReserveMH rmh = new ReserveMH();
 
-        rmh.addExtra(item);
-
-        java.util.ArrayList<String> members = new ArrayList<String>();
-
-        members.add(item);
 
         String listString = "";
 
-        for (String s : members) {
+        for (String s : ReserveMH.addExtraShit(item)) {
             listString += s + "\n";
-            extraItemsTxtArea.setText(listString);
-        }
+            System.out.println();
 
-        for(int i=0;i<10;i++){
-            System.out.println(" all of your items "+listString);
         }
+        extraItemsTxtArea.setText(listString);
+
+    }
+
+    @FXML
+    public void setItemsToNull(ActionEvent actionEvent){
+        ReserveMH.items.clear();
+        extraItemsTxtArea.setText("");
+
+    }
+
+
+
+    @FXML
+    public void removeLastExtraItem(ActionEvent actionEvent){
+        ReserveMH.items.remove(ReserveMH.items.size()-1);
+        extraItemsTxtArea.setText("");
+        String listString = "";
+
+        for (String s : ReserveMH.items) {
+            listString += s + "\n";
+            System.out.println();
+
+        }
+        extraItemsTxtArea.setText(listString);
+
     }
 
     public void Autistic(ActionEvent actionEvent){

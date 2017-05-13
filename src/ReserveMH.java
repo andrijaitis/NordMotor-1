@@ -36,4 +36,12 @@ public class ReserveMH {
     }
     return  " ";
     }
+
+   static java.util.ArrayList<String> items = new ArrayList<String>();
+    public static java.util.ArrayList<String> addExtraShit(String item) {
+
+        items.add(item);
+
+        return items;
+    }
 }
