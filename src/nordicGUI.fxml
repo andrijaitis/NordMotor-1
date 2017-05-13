@@ -90,7 +90,7 @@
                            <font>
                               <Font name="System Bold" size="20.0" fx:id="x9" />
                            </font></Label>
-                <ComboBox layoutX="313.0" layoutY="78.0" prefWidth="278.0" promptText="Motor homes">
+                <ComboBox fx:id="reserverCombo" layoutX="313.0" layoutY="78.0" onMouseClicked="#reserveMHLoad" prefWidth="278.0" promptText="Motor homes">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -198,7 +198,7 @@
                 <TextArea fx:id="extraItemsTxtArea" layoutX="507.0" layoutY="157.0" prefHeight="129.0" prefWidth="200.0" wrapText="true" />
                         <Button layoutX="641.0" layoutY="297.0" mnemonicParsing="false" onAction="#setItemsToNull" text="Clear" />
                         <Button layoutX="507.0" layoutY="297.0" mnemonicParsing="false" onAction="#removeLastExtraItem" text="Remove Last" />
-                        <Label fx:id="TotalItems" layoutX="651.0" layoutY="128.0" text="Label" />
+                        <Label fx:id="totalItems" layoutX="651.0" layoutY="128.0" text="Label" />
               </children>
             </AnchorPane>
           </content>

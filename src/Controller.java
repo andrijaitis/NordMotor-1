@@ -55,6 +55,8 @@ public class Controller {
     private javafx.scene.control.TextField bedTxtField;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    @FXML
+    private Label totalItems;
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating
     @FXML
     private ComboBox ModifyMHcombo;
@@ -65,6 +67,9 @@ public class Controller {
     private javafx.scene.control.TextArea extraItemsTxtArea;
     @FXML
     private  javafx.scene.control.ComboBox listOfExtraItemsComBox;
+
+    @FXML
+    private  javafx.scene.control.ComboBox reserverCombo;
 
     @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
@@ -180,7 +185,7 @@ public class Controller {
         ModifyMHcombo.setValue(null);
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
-        String listString = "";
+        String listString = ""; //not sure
         ModifyMHcombo.setItems(motorhomeModification.refresh());
 
         ObservableList<String> beds = FXCollections.observableArrayList();
@@ -191,6 +196,17 @@ public class Controller {
         ModifyBeds.setItems(beds);
 
     }
+
+    @FXML
+    public void reserveMHLoad(MouseEvent mouseEvent){
+         System.out.println("rehreshing");
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        reserverCombo.setItems(motorhomeModification.refresh());
+
+
+    }
+
 
     //FROM RESERVEMH CLASS
     @FXML
@@ -216,6 +232,9 @@ public class Controller {
 
         }
         extraItemsTxtArea.setText(listString);
+        String sizes = Integer.toString(ReserveMH.items.size());
+        totalItems.setText(sizes);
+        System.out.println(sizes);
 
     }
 
@@ -223,6 +242,8 @@ public class Controller {
     public void setItemsToNull(ActionEvent actionEvent){
         ReserveMH.items.clear();
         extraItemsTxtArea.setText("");
+       String sizes = Integer.toString(ReserveMH.items.size());
+       totalItems.setText(sizes);
 
     }
 
@@ -240,6 +261,8 @@ public class Controller {
 
         }
         extraItemsTxtArea.setText(listString);
+        String sizes = Integer.toString(ReserveMH.items.size());
+        totalItems.setText(sizes);
 
     }
 
