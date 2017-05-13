@@ -54,9 +54,11 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox addBedComBox;
     @FXML
-    private javafx.scene.control.TextField addMileageCTxtField;
+    private javafx.scene.control.TextField addMileageTxtField;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    @FXML
+    private Label totalItems;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
     @FXML
     private javafx.scene.control.TextField extraItemsTxtField;
@@ -65,6 +67,9 @@ public class Controller {
     @FXML
     private  javafx.scene.control.ComboBox listOfExtraItemsComBox;
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
+    @FXML
+    private  javafx.scene.control.ComboBox reserverCombo;
+
     @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
     @FXML
@@ -140,7 +145,7 @@ public class Controller {
         String theModel   = addModelTxtField.getText();
         String thePrice   = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
         String theBed     = (String) addBedComBox.getValue();
-        String theMileage = addMileageCTxtField.getText();
+        String theMileage = addMileageTxtField.getText();
 
         motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed,theMileage);
         statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ " has been saved!");
@@ -187,8 +192,10 @@ public class Controller {
         listOfMHforUpdating.setValue(null);
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
+
         String listString = "";
         listOfMHforUpdating.setItems(motorhomeModification.refresh());
+
 
         ObservableList<String> availability = FXCollections.observableArrayList();
         availability.addAll("Available","Unavailable");
@@ -198,34 +205,69 @@ public class Controller {
 
     //FROM RESERVEMH CLASS ###############################
     @FXML
+    public void reserveMHLoad(MouseEvent mouseEvent){
+         System.out.println("rehreshing");
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        reserverCombo.setItems(motorhomeModification.refresh());
+
+    }
+    //FROM RESERVEMH CLASS
+    @FXML
     public void extraItemCatalogComBox(MouseEvent mouseEvent){
         ObservableList<String> extraItems = FXCollections.observableArrayList();
         extraItems.addAll("Baby seat", "Bike rack", "Table");
         listOfExtraItemsComBox.setItems(extraItems);
     }
+
+
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent){
 
         String item = (String) listOfExtraItemsComBox.getValue();
 
-        ReserveMH rmh = new ReserveMH();
 
-        rmh.addExtra(item);
-
-        java.util.ArrayList<String> members = new ArrayList<String>();
-
-        members.add(item);
 
         String listString = "";
 
-        for (String s : members) {
+        for (String s : ReserveMH.addExtraShit(item)) {
             listString += s + "\n";
-            extraItemsTxtArea.setText(listString);
-        }
+            System.out.println();
 
-        for(int i=0;i<10;i++){
-            System.out.println(" all of your items "+listString);
         }
+        extraItemsTxtArea.setText(listString);
+        String sizes = Integer.toString(ReserveMH.items.size());
+        totalItems.setText(sizes);
+        System.out.println(sizes);
+
+    }
+
+    @FXML
+    public void setItemsToNull(ActionEvent actionEvent){
+        ReserveMH.items.clear();
+        extraItemsTxtArea.setText("");
+       String sizes = Integer.toString(ReserveMH.items.size());
+       totalItems.setText(sizes);
+
+    }
+
+
+
+    @FXML
+    public void removeLastExtraItem(ActionEvent actionEvent){
+        ReserveMH.items.remove(ReserveMH.items.size()-1);
+        extraItemsTxtArea.setText("");
+        String listString = "";
+
+        for (String s : ReserveMH.items) {
+            listString += s + "\n";
+            System.out.println();
+
+        }
+        extraItemsTxtArea.setText(listString);
+        String sizes = Integer.toString(ReserveMH.items.size());
+        totalItems.setText(sizes);
+
     }
 
     public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent){
