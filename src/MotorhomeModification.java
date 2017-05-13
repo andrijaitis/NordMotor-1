@@ -90,7 +90,7 @@ public class MotorhomeModification {
         try {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `status`, `mark`,`model`,`beds`,`price` FROM `nordic_rv` WHERE `rvID`=" + ID);
+            ResultSet rs = stmt.executeQuery("SELECT `status`, `mark`,`model`,`price`,`beds` FROM `nordic_rv` WHERE `rvID`=" + ID);
 
             while (rs.next()) {
 
@@ -133,7 +133,7 @@ public class MotorhomeModification {
                         rs.getString(5) + " "+
                         rs.getString(6));
 
-                System.out.println(rs.getString(4));
+               // System.out.println(rs.getString(4));
             }
             con.close();
 
