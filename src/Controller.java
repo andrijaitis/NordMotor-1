@@ -90,6 +90,8 @@ public class Controller {
     public javafx.scene.control.TextField ModifyID;
     //Repair CLASS variables >>>>>>>>>> for loading up the motorhome
     @FXML
+    private javafx.scene.control.ComboBox repairListForMH;
+    @FXML
     private javafx.scene.control.TextField idForMechanic;
     @FXML
     private javafx.scene.control.TextField brandForMechanic;
@@ -180,9 +182,10 @@ public class Controller {
         ObservableList<String> list = FXCollections.observableArrayList();
         String listString = "";
         ModifyMHcombo.setItems(motorhomeModification.refresh());
+
         ObservableList<String> beds = FXCollections.observableArrayList();
         ObservableList<String> availability = FXCollections.observableArrayList();
-        beds.addAll("2","4","6","8");
+        beds.addAll("2","3","4","5","6");
         availability.addAll("Available","Unavailable");
         ModifyAvailability.setItems(availability);
         ModifyBeds.setItems(beds);
@@ -258,11 +261,25 @@ public class Controller {
     }
     @FXML
     public void loadActionForRepair(MouseEvent mouseEvent){
-        String idMH = idForMechanic.getText();
-        brandForMechanic.setPromptText(repair.loadItUpForTheMechanic(idMH).get(0));
-        modelForMechanic.setText(repair.loadItUpForTheMechanic(idMH).get(1));
-        bedForMechanic.setText(repair.loadItUpForTheMechanic(idMH).get(2));
-        //ModifyPrice.setText(motorhomeModification.Load(idMH).get(3));
+        //loads all the information into the combobox
+        repairListForMH.setValue(null);
+        System.out.println("the fucker has to refreshhhhh");
+        ObservableList<String> list = FXCollections.observableArrayList();
+        String listString = "";
+        repairListForMH.setItems(repair.refreshItForTheMechanic());
+    }
+    @FXML
+    public void setAllValuesForMechanic(ActionEvent actionEvent){
+
+        String autistic = (String) repairListForMH.getValue();
+        String ID = autistic.substring(0,1);
+        System.out.println(autistic);
+        idForMechanic.setText(ID);
+        brandForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(0));
+        modelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(1));
+        bedForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(2));
+        fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3));
+        mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4));
     }
 
 
