@@ -394,11 +394,17 @@
                     <Label font="$x2" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Button mnemonicParsing="false" onAction="#motorHomeModsAddingMH" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <TextField fx:id="priceTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <TextField fx:id="modelTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <TextField fx:id="brandTxtField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                              <TextField fx:id="bedTxtField" layoutX="81.0" layoutY="123.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Button mnemonicParsing="false" onAction="#motorHomeModsAddingMH" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <TextField fx:id="addPriceTxtField" prefWidth="200.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField fx:id="addModelTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="addBrandTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                              <ComboBox fx:id="addBedComBox" onMouseClicked="#bedFrom2To6" prefHeight="31.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Mileage:" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="17.0" fx:id="x21" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="addMileageCTxtField" layoutX="81.0" layoutY="112.0" prefWidth="200.0" promptText="km" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="71.0" />
@@ -409,6 +415,7 @@
                     <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
@@ -419,8 +426,8 @@
                     <Label font="$x2" text="Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Label font="$x2" text="Availability" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="ModifyPrice" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="ModifyBeds" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <TextField fx:id="updatePrice" prefWidth="196.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="updateBeds" onMouseClicked="#bedFrom2To6" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -429,7 +436,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="ModifyAvailability" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <ComboBox fx:id="updateAvailability" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -438,8 +445,8 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                              <TextField fx:id="ModifyMark" prefWidth="196.0" GridPane.columnIndex="1" />
-                              <TextField fx:id="ModifyModel" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="updateMark" prefWidth="196.0" promptText="Name" GridPane.columnIndex="1" />
+                              <TextField fx:id="updateModel" prefWidth="196.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="97.0" />
@@ -453,7 +460,7 @@
                     <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <ComboBox fx:id="ModifyMHcombo" layoutX="433.0" layoutY="68.0" onAction="#Autistic" onMouseClicked="#RefreshMH" prefWidth="338.0" promptText="The motor houses">
+                <ComboBox fx:id="listOfMHforUpdating" layoutX="433.0" layoutY="68.0" onAction="#setAllValuesFromComboboxToTextField" onMouseClicked="#RefreshMH" prefWidth="338.0" promptText="The motor houses">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -464,7 +471,7 @@
                 </ComboBox>
                 <GridPane gridLinesVisible="false" layoutX="434.0" layoutY="395.0" prefWidth="350.0">
                   <children>
-                    <TextField fx:id="ModifyID" prefWidth="200.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="updateID" prefWidth="200.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     <Button mnemonicParsing="false" onAction="#motorHomeModsDeleteMH" prefWidth="81.0" text="DELETE" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Button mnemonicParsing="false" onAction="#motorHomeModLoad" prefWidth="87.0" text="Load" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                     <Button mnemonicParsing="false" onAction="#motorHomeModsUpdatingMH" prefWidth="87.0" text="Save" GridPane.columnIndex="3" GridPane.rowIndex="0" />

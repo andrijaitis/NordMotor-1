@@ -15,7 +15,7 @@ import java.util.*;
 
 public class MotorhomeModification {
 
-    public static void addMotorHome(String theBrand, String theModel, String thePrice, String theBed) {//fix this to be a double and int
+    public static void addMotorHome(String theBrand, String theModel, String thePrice, String theBed, String theMileage) {//fix this to be a double and int
 
         System.out.println("Name ->" + theBrand + "<-");
 
@@ -32,7 +32,11 @@ public class MotorhomeModification {
                     +"'"+ thePrice     +"'  ,"
                     +"'"+ theBed       +"'  ,"
                     +100               +"   ,"
-                    +11224             +")  ;";
+                    +"'"+ theMileage   +"'   "
+                    +");                     ";
+
+
+
 
             System.out.println(sql);
             stmt.executeUpdate(sql);

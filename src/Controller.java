@@ -46,18 +46,17 @@ public class Controller {
     private javafx.scene.control.TitledPane repairPan;
     //MotorhomeModification CLASS variables >>>>>>>>>> for adding a MH
     @FXML
-    private javafx.scene.control.TextField brandTxtField;
+    private javafx.scene.control.TextField addBrandTxtField;
     @FXML
-    private javafx.scene.control.TextField modelTxtField;
+    private javafx.scene.control.TextField addModelTxtField;
     @FXML
-    private javafx.scene.control.TextField priceTxtField;
+    private javafx.scene.control.TextField addPriceTxtField;
     @FXML
-    private javafx.scene.control.TextField bedTxtField;
+    private javafx.scene.control.ComboBox addBedComBox;
+    @FXML
+    private javafx.scene.control.TextField addMileageCTxtField;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
-    //MotorhomeModification CLASS variables >>>>>>>>>> for updating
-    @FXML
-    private ComboBox ModifyMHcombo;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
     @FXML
     private javafx.scene.control.TextField extraItemsTxtField;
@@ -65,7 +64,7 @@ public class Controller {
     private javafx.scene.control.TextArea extraItemsTxtArea;
     @FXML
     private  javafx.scene.control.ComboBox listOfExtraItemsComBox;
-
+    //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
     @FXML
@@ -76,19 +75,22 @@ public class Controller {
     private javafx.scene.control.TextField endDateMONTHTxtField;
     @FXML
     private javafx.scene.control.TextField whichSeason;
+    //MotorhomeModification CLASS variables >>>>>>>>>> for updating existing values for database
     @FXML
-    private javafx.scene.control.TextField ModifyMark;
+    private ComboBox listOfMHforUpdating;
     @FXML
-    private javafx.scene.control.TextField ModifyModel;
+    private javafx.scene.control.TextField updateID;
     @FXML
-    private ComboBox ModifyBeds;
+    private javafx.scene.control.TextField updateMark;
     @FXML
-    private ComboBox ModifyAvailability;
+    private javafx.scene.control.TextField updateModel;
     @FXML
-    public javafx.scene.control.TextField ModifyPrice;
+    private javafx.scene.control.TextField updatePrice;
     @FXML
-    public javafx.scene.control.TextField ModifyID;
-    //Repair CLASS variables >>>>>>>>>> for loading up the motorhome
+    private ComboBox updateBeds;
+    @FXML
+    private ComboBox updateAvailability;
+    //Repair CLASS variables >>>>>>>>>> for loading up the motorhome for the mechanic
     @FXML
     private javafx.scene.control.ComboBox repairListForMH;
     @FXML
@@ -104,9 +106,9 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField mileageForMechanic;
 
-
-    MotorhomeModification motorhomeModification = new MotorhomeModification();//MotorhomeModification Class
-    AdminLogin adminLogin = new AdminLogin();//AdminLogin class
+    //Class instences
+    MotorhomeModification motorhomeModification = new MotorhomeModification();
+    AdminLogin adminLogin = new AdminLogin();
     Repair repair = new Repair();
 
     public void LoginAction(ActionEvent actionEvent) {
@@ -130,69 +132,71 @@ public class Controller {
             userLoggedIn = status;
         }
     }
+
     @FXML
     public void motorHomeModsAddingMH(ActionEvent actionEvent){
+        //add a motorhome to the data base
+        String theBrand   = addBrandTxtField.getText();
+        String theModel   = addModelTxtField.getText();
+        String thePrice   = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
+        String theBed     = (String) addBedComBox.getValue();
+        String theMileage = addMileageCTxtField.getText();
 
-        String theBrand = brandTxtField.getText();
-        String theModel = modelTxtField.getText();
-        String thePrice = priceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theBed   = bedTxtField.getText();   /// Needs a fcking fix so its a combobox with ints NOT a string txt field
+        motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed,theMileage);
+        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ " has been saved!");
+    }
+    @FXML
+    public void bedFrom2To6(MouseEvent mouseEvent){
+        //make the beds only available from 2 to 6 in the combo box
+        ObservableList<String> beds = FXCollections.observableArrayList();
+        beds.addAll("2","3","4","5","6");
 
-        MotorhomeModification mm = new MotorhomeModification();
-        MotorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ "has been saved!");
+        addBedComBox.setItems(beds);
+        updateBeds.setItems(beds);
     }
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
-        String beds = (String) ModifyBeds.getValue();
-        System.out.println(beds + "beds!!!!!!!!!!");
-        String availability = (String) ModifyAvailability.getValue();
-        System.out.println(availability + "available!!!!!!!!!!");
+        //updates existing motorhomes
+        String beds = (String) updateBeds.getValue();
+        String availability = (String) updateAvailability.getValue();
 
-        String ID = ModifyID.getText();
-        String brand = ModifyMark.getText();
-        String model = ModifyModel.getText();
-        String price = ModifyPrice.getText();
-        //String beds = (String) ModifyBeds.getValue();
+        String ID = updateID.getText();
+        String brand = updateMark.getText();
+        String model = updateModel.getText();
+        String price = updatePrice.getText();
 
-                motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
-        System.out.println("Shit works");
+        motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
     }
 
     @FXML
     public void motorHomeModsDeleteMH(ActionEvent actionEvent){
-        String deleteID = ModifyID.getText();
+        String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);;
     }
     @FXML
     public void motorHomeModLoad(ActionEvent actionEvent){
-        String Aidy = ModifyID.getText();
-        ModifyAvailability.setValue(motorhomeModification.Load(Aidy).get(0));
-        ModifyMark.setText(motorhomeModification.Load(Aidy).get(1));
-        ModifyModel.setText(motorhomeModification.Load(Aidy).get(2));
-        ModifyPrice.setText(motorhomeModification.Load(Aidy).get(3));
-        ModifyBeds.setValue(motorhomeModification.Load(Aidy).get(4));
-
-
+        String Aidy = updateID.getText();
+        updateAvailability.setValue(motorhomeModification.Load(Aidy).get(0));
+        updateMark.setText(motorhomeModification.Load(Aidy).get(1));
+        updateModel.setText(motorhomeModification.Load(Aidy).get(2));
+        updatePrice.setText(motorhomeModification.Load(Aidy).get(3));
+        updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
     @FXML
     public void RefreshMH(MouseEvent mouseEvent){
-        ModifyMHcombo.setValue(null);
+        listOfMHforUpdating.setValue(null);
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
         String listString = "";
-        ModifyMHcombo.setItems(motorhomeModification.refresh());
+        listOfMHforUpdating.setItems(motorhomeModification.refresh());
 
-        ObservableList<String> beds = FXCollections.observableArrayList();
         ObservableList<String> availability = FXCollections.observableArrayList();
-        beds.addAll("2","3","4","5","6");
         availability.addAll("Available","Unavailable");
-        ModifyAvailability.setItems(availability);
-        ModifyBeds.setItems(beds);
+        updateAvailability.setItems(availability);
 
     }
 
-    //FROM RESERVEMH CLASS
+    //FROM RESERVEMH CLASS ###############################
     @FXML
     public void extraItemCatalogComBox(MouseEvent mouseEvent){
         ObservableList<String> extraItems = FXCollections.observableArrayList();
@@ -224,22 +228,18 @@ public class Controller {
         }
     }
 
-    public void Autistic(ActionEvent actionEvent){
+    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent){
 
+        String valuesFromComBox = (String) listOfMHforUpdating.getValue();
+        String ID = valuesFromComBox.substring(0,1);
+        System.out.println(valuesFromComBox);
 
-        System.out.println("Screeching");
-
-        String autistic = (String) ModifyMHcombo.getValue();
-        String ID = autistic.substring(0,1);
-        System.out.println(autistic);
-        ModifyAvailability.setPromptText(motorhomeModification.Load(ID).get(0));
-        ModifyMark.setText(motorhomeModification.Load(ID).get(1));
-        ModifyModel.setText(motorhomeModification.Load(ID).get(2));
-        ModifyPrice.setText(motorhomeModification.Load(ID).get(3));
-        ModifyBeds.setPromptText(motorhomeModification.Load(ID).get(4));
-        ModifyID.setText(ID);
-
-
+        updateAvailability.setPromptText(motorhomeModification.Load(ID).get(0));
+        updateMark.setText(motorhomeModification.Load(ID).get(1));
+        updateModel.setText(motorhomeModification.Load(ID).get(2));
+        updatePrice.setText(motorhomeModification.Load(ID).get(3));
+        updateBeds.setPromptText(motorhomeModification.Load(ID).get(4));
+        updateID.setText(ID);
     }
     @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
@@ -259,6 +259,7 @@ public class Controller {
         }
         //----------------------------------------------------------------
     }
+    //FROM REPAIR CLASS ###############################
     @FXML
     public void loadActionForRepair(MouseEvent mouseEvent){
         //loads all the information into the combobox
@@ -268,12 +269,14 @@ public class Controller {
         String listString = "";
         repairListForMH.setItems(repair.refreshItForTheMechanic());
     }
+    //FROM REPAIR CLASS ###############################
     @FXML
     public void setAllValuesForMechanic(ActionEvent actionEvent){
+        //set the text into the text fields from the combo box directly
+        String valuesFromComBox = (String) repairListForMH.getValue();
+        String ID = valuesFromComBox.substring(0,1);
+        System.out.println(valuesFromComBox);
 
-        String autistic = (String) repairListForMH.getValue();
-        String ID = autistic.substring(0,1);
-        System.out.println(autistic);
         idForMechanic.setText(ID);
         brandForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(0));
         modelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(1));
