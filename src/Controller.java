@@ -22,8 +22,6 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-
-
 public class Controller {
 
    private boolean userLoggedIn = false ;
