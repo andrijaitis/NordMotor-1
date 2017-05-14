@@ -90,7 +90,7 @@ public class Repair {
 
                 String sql = "UPDATE nordic_rv " +
                         "SET "         +
-                        "status    = " +"'" + "Out of service" +"'" + " " +
+                        "status    = " +"'" + "Out_of_service" +"'" + " " +
                         "WHERE rvID= "      + repairMHid  +";"        ;
 
                 System.out.println(sql);
