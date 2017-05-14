@@ -35,9 +35,6 @@ public class MotorhomeModification {
                     +"'"+ theMileage   +"'   "
                     +");                     ";
 
-
-
-
             System.out.println(sql);
             stmt.executeUpdate(sql);
             con.close();
@@ -55,8 +52,14 @@ public class MotorhomeModification {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "UPDATE `nordic_rv` SET `status` = "  +"'" +availability + "'"+", " + "mark = " +"'" +  brand +"'"+ ", " +
-             "model = " +"'" + model +"'"+ ", " + "beds = "  + "'"+ beds +"'" +", " +  "price = " +"'"+ price +"'" +  " WHERE rvID=" + ID+";";
+            String sql = "UPDATE nordic_rv " +
+                         "SET "         +
+                         "status    = " +"'" + availability +"'" + ", " +
+                         "mark      = " +"'" + brand        +"'" + ", " +
+                         "model     = " +"'" + model        +"'" + ", " +
+                         "beds      = " +"'" + beds         +"'" + ", " +
+                         "price     = " +"'" + price        +"'" + "  " +
+                         "WHERE rvID= " + ID +               ";"        ;
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -65,15 +68,12 @@ public class MotorhomeModification {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 
     public void DeleteMotorHome(String ID) {
         try {
-            String sql = "DELETE FROM `nordic_rv` WHERE `nordic_rv`.`rvID` ="+ ID;
+            String sql = "DELETE FROM `nordic_rv`   " +
+                         "WHERE `nordic_rv`.`rvID` =" + ID;
 
             System.out.println(sql);
 
@@ -87,14 +87,20 @@ public class MotorhomeModification {
     }
 
     public java.util.List<String> Load(String ID) {
-        String P; // called P with no reason
 
       java.util.List<String> MH = new ArrayList<String>();
 
         try {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `status`, `mark`,`model`,`price`,`beds` FROM `nordic_rv` WHERE `rvID`=" + ID);
+            ResultSet rs = stmt.executeQuery("SELECT      " +
+                                                 "`status`  , " +
+                                                 "`mark`    , " +
+                                                 "`model`   , " +
+                                                 "`price`   , " +
+                                                 "`beds`      " +
+                                                 "FROM `nordic_rv` " +
+                                                 "WHERE `rvID`  =  " + ID);
 
             while (rs.next()) {
 

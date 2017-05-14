@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="904.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="967.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
-    <Accordion layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="909.0">
+    <Accordion layoutX="0.0" layoutY="0.0" prefHeight="718.0" prefWidth="966.0">
       <panes>
         <TitledPane fx:id="startSceenPan" animated="false" text="Start Screen">
           <content>
@@ -76,7 +76,10 @@
                         <Text layoutX="213.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
                         <Text layoutX="200.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                         <Button layoutX="541.0" layoutY="195.0" mnemonicParsing="false" onAction="#LoginAction" text="Login" />
-                        <Label fx:id="statusBar" layoutX="172.0" layoutY="485.0" prefHeight="17.0" prefWidth="356.0" />
+                        <Label fx:id="statusBarForLogin" layoutX="183.0" layoutY="266.0" prefHeight="33.0" prefWidth="474.0" textFill="RED">
+                           <font>
+                              <Font name="Times New Roman Bold" size="29.0" />
+                           </font></Label>
                         <Text layoutX="267.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
                      </children>
                   </AnchorPane>
@@ -147,15 +150,13 @@
                 <GridPane gridLinesVisible="true" layoutX="298.0" layoutY="157.0" prefHeight="160.0" prefWidth="185.0">
                   <children>
                     <Label text="Select the amount of extras" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="extraItemsTxtField" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Button mnemonicParsing="false" onAction="#addExtaItemAction" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="listOfExtraItemsComBox" onMouseClicked="#extraItemCatalogComBox" prefWidth="150.0" GridPane.rowIndex="2" />
+                    <Button mnemonicParsing="false" onAction="#addExtaItemAction" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="listOfExtraItemsComBox" onMouseClicked="#extraItemCatalogComBox" prefWidth="150.0" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="185.0" />
                   </columnConstraints>
                   <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -307,7 +308,7 @@
                     <Font name="System Bold" size="25.0" />
                   </font>
                 </Label>
-                <ComboBox fx:id="repairListForMH" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#loadActionForRepair" prefWidth="281.0" promptText="Select the motorhome">
+                <ComboBox fx:id="repairListOFMHforMechanic" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#loadActionForRepair" prefWidth="281.0" promptText="Select the motorhome">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -352,19 +353,23 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane gridLinesVisible="true" layoutX="530.0" layoutY="149.0" prefHeight="191.0" prefWidth="227.0">
+                <GridPane gridLinesVisible="true" layoutX="530.0" layoutY="149.0" prefHeight="222.0" prefWidth="227.0">
                   <children>
                     <Label font="$x1" text="Oil" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Label font="$x1" text="Water" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Label font="$x1" text="Tire pressure" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <Button mnemonicParsing="false" text="ok" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <Label font="$x1" text="Water" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Button mnemonicParsing="false" onAction="#checkUpForMechanic" text="ok" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                     <Label font="$x1" text="Repairs" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <CheckBox mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <CheckBox mnemonicParsing="false" text="Needed" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <CheckBox fx:id="oilCheck" mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <CheckBox fx:id="waterCheck" mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <CheckBox fx:id="cleanCheck" mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <CheckBox fx:id="repairNeededCheck" mnemonicParsing="false" text="Needed" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Label font="$x1" text="Cleaning" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Fuel refill:" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" fx:id="x12" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="fuelCheck" layoutX="124.0" layoutY="13.0" mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
@@ -372,7 +377,7 @@
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -472,12 +477,12 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <GridPane gridLinesVisible="false" layoutX="434.0" layoutY="395.0" prefWidth="350.0">
+                <GridPane gridLinesVisible="false" layoutX="433.0" layoutY="400.0" prefWidth="350.0">
                   <children>
                     <TextField fx:id="updateID" prefWidth="200.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Button mnemonicParsing="false" onAction="#motorHomeModsDeleteMH" prefWidth="81.0" text="DELETE" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Button mnemonicParsing="false" onAction="#motorHomeModLoad" prefWidth="87.0" text="Load" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" onAction="#motorHomeModLoad" prefWidth="87.0" text="Load" GridPane.columnIndex="2" />
                     <Button mnemonicParsing="false" onAction="#motorHomeModsUpdatingMH" prefWidth="87.0" text="Save" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                    <Button mnemonicParsing="false" onAction="#motorHomeModsDeleteMH" prefWidth="81.0" text="DELETE" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -497,8 +502,9 @@
                            <font>
                               <Font name="System Bold" size="20.0" fx:id="x8" />
                            </font></Label>
-                        <Label fx:id="statusBarForSuccessesfullyAddingMH" layoutX="35.0" layoutY="394.0" text="Status: " />
+                        <Label fx:id="statusBarForSuccessesfullyAddingMH" layoutX="35.0" layoutY="394.0" text="Status: " textFill="RED" />
                         <Button layoutX="784.0" layoutY="68.0" mnemonicParsing="false" onAction="#RefreshMH" prefHeight="31.0" prefWidth="72.0" text="Refresh" />
+                        <Label fx:id="statusBarForSuccessesfullyAddingMH1" layoutX="432.0" layoutY="374.0" text="Status: " textFill="RED" />
               </children>
             </AnchorPane>
           </content>

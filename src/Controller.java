@@ -27,9 +27,9 @@ public class Controller {
    private boolean userLoggedIn = false ;
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     @FXML
-    private Label statusBar;
+    private Label statusBarForLogin;
     @FXML
-    public javafx.scene.control.TextField log;
+    private javafx.scene.control.TextField log;
     @FXML
     private javafx.scene.control.TextField pas;
     @FXML
@@ -55,11 +55,9 @@ public class Controller {
     private javafx.scene.control.TextField addMileageTxtField;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
-    @FXML
-    private Label totalItems;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
     @FXML
-    private javafx.scene.control.TextField extraItemsTxtField;
+    private Label totalItems;
     @FXML
     private javafx.scene.control.TextArea extraItemsTxtArea;
     @FXML
@@ -67,7 +65,6 @@ public class Controller {
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
     private  javafx.scene.control.ComboBox reserverCombo;
-
     @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
     @FXML
@@ -95,7 +92,7 @@ public class Controller {
     private ComboBox updateAvailability;
     //Repair CLASS variables >>>>>>>>>> for loading up the motorhome for the mechanic
     @FXML
-    private javafx.scene.control.ComboBox repairListForMH;
+    private javafx.scene.control.ComboBox repairListOFMHforMechanic;
     @FXML
     private javafx.scene.control.TextField idForMechanic;
     @FXML
@@ -108,12 +105,25 @@ public class Controller {
     private javafx.scene.control.TextField fuelForMechanic;
     @FXML
     private javafx.scene.control.TextField mileageForMechanic;
+    //check boxes
+    @FXML
+    private javafx.scene.control.CheckBox oilCheck;
+    @FXML
+    private javafx.scene.control.CheckBox fuelCheck;
+    @FXML
+    private javafx.scene.control.CheckBox waterCheck;
+    @FXML
+    private javafx.scene.control.CheckBox cleanCheck;
+    @FXML
+    private javafx.scene.control.CheckBox repairNeededCheck;
+
 
     //Class instences
     MotorhomeModification motorhomeModification = new MotorhomeModification();
     AdminLogin adminLogin = new AdminLogin();
     Repair repair = new Repair();
 
+    @FXML
     public void LoginAction(ActionEvent actionEvent) {
 
         String LoginInput = log.getText();
@@ -122,7 +132,7 @@ public class Controller {
         boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
         System.out.println(status+ " aa");
         if (status == true) {
-            statusBar.setText("You are logged in");
+            statusBarForLogin.setText("You are logged in");
             userLoggedIn = status;
             //Enabale all the tabs after the login is correct
             startSceenPan.setDisable(false);
@@ -131,7 +141,7 @@ public class Controller {
             customerOrderFunctioPan.setDisable(false);
             repairPan.setDisable(false);
         } else {
-            statusBar.setText("Wrong password or username");
+            statusBarForLogin.setText("Wrong password or username");
             userLoggedIn = status;
         }
     }
@@ -176,6 +186,7 @@ public class Controller {
         String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);;
     }
+
     @FXML
     public void motorHomeModLoad(ActionEvent actionEvent){
         String Aidy = updateID.getText();
@@ -185,6 +196,7 @@ public class Controller {
         updatePrice.setText(motorhomeModification.Load(Aidy).get(3));
         updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
+
     @FXML
     public void RefreshMH(MouseEvent mouseEvent){
         listOfMHforUpdating.setValue(null);
@@ -223,9 +235,6 @@ public class Controller {
     public void addExtaItemAction(ActionEvent actionEvent){
 
         String item = (String) listOfExtraItemsComBox.getValue();
-
-
-
         String listString = "";
 
         for (String s : ReserveMH.addExtraShit(item)) {
@@ -303,17 +312,16 @@ public class Controller {
     @FXML
     public void loadActionForRepair(MouseEvent mouseEvent){
         //loads all the information into the combobox
-        repairListForMH.setValue(null);
         System.out.println("the fucker has to refreshhhhh");
         ObservableList<String> list = FXCollections.observableArrayList();
         String listString = "";
-        repairListForMH.setItems(repair.refreshItForTheMechanic());
+        repairListOFMHforMechanic.setItems(repair.refreshItForTheMechanic());
     }
     //FROM REPAIR CLASS ###############################
     @FXML
     public void setAllValuesForMechanic(ActionEvent actionEvent){
         //set the text into the text fields from the combo box directly
-        String valuesFromComBox = (String) repairListForMH.getValue();
+        String valuesFromComBox = (String) repairListOFMHforMechanic.getValue();
         String ID = valuesFromComBox.substring(0,1);
         System.out.println(valuesFromComBox);
 
@@ -321,9 +329,27 @@ public class Controller {
         brandForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(0));
         modelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(1));
         bedForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(2));
-        fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3));
-        mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4));
+        fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3)+ " [L]");
+        mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4)+ " [km]");
     }
+    //FROM REPAIR CLASS ###############################
+    @FXML
+    public void checkUpForMechanic(ActionEvent actionEvent) {
 
+        String  repairMHid       = idForMechanic.getText();
+        boolean oilSituation     = oilCheck.isSelected();
+        boolean fuelSituation    = fuelCheck.isSelected();
+        boolean waterSituation   = waterCheck.isSelected();
+        boolean cleanSituation   = cleanCheck.isSelected();
+        boolean repairsSituation = repairNeededCheck.isSelected();
+
+        repair.serviceComplete(oilSituation,fuelSituation,waterSituation,cleanSituation,repairsSituation, repairMHid);
+
+        oilCheck.setSelected(false);
+        fuelCheck.setSelected(false);
+        waterCheck.setSelected(false);
+        cleanCheck.setSelected(false);
+        repairNeededCheck.setSelected(false);
+    }
 
 }

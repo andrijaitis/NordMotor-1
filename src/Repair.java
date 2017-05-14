@@ -22,7 +22,6 @@ public class Repair {
 
             while (rs.next()) {
 
-               // MH.add(rs.getString(1));
                 MH.add(rs.getString(1));
                 MH.add(rs.getString(2));
                 MH.add(rs.getString(3));
@@ -52,7 +51,8 @@ public class Repair {
 
             while (rs.next()) {
                 members.add(
-                        rs.getString(1) + " "+
+                                rs.getString(1) + " <"+
+                                rs.getString(2) + "> "+
                                 rs.getString(3) + " "+
                                 rs.getString(4) + " "+
                                 rs.getString(5) + " "+
@@ -80,4 +80,47 @@ public class Repair {
             return list2;
         }
     }
+    //we look at all the check boxes of they are checked
+    public void serviceComplete(boolean oilSituation, boolean fuelSituation, boolean waterSituation, boolean cleanSituation, boolean repairsSituation, String repairMHid) {
+
+        if(repairsSituation == true){
+            try {
+                Connection con = DBConnection.getConnection();
+                Statement stmt = con.createStatement();
+
+                String sql = "UPDATE nordic_rv " +
+                        "SET "         +
+                        "status    = " +"'" + "Out of service" +"'" + " " +
+                        "WHERE rvID= "      + repairMHid  +";"        ;
+
+                System.out.println(sql);
+                stmt.executeUpdate(sql);
+                con.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(oilSituation == true && fuelSituation == true && waterSituation == true && cleanSituation == true){
+
+            try {
+                Connection con = DBConnection.getConnection();
+                Statement stmt = con.createStatement();
+
+                String sql = "UPDATE nordic_rv " +
+                        "SET "         +
+                        "status    = " +"'" + "Available" +"'" + ", " +
+                        "fuel      = "      + 100         +      "  " +
+                        "WHERE rvID= "      + repairMHid  +";"        ;
+
+                System.out.println(sql);
+                stmt.executeUpdate(sql);
+                con.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        }
+
 }
