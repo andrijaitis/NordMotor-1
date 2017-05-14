@@ -54,6 +54,8 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField addMileageTxtField;
     @FXML
+    private javafx.scene.control.TextField finalPrice;
+    @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
     @FXML
     private Label totalItems;
@@ -290,12 +292,25 @@ public class Controller {
             whichSeason.setFont(Font.font ("Verdana", 17));
 
         }else{
+
+
+
             int startDay   = Integer.parseInt(startDateDAYTxtField.getText());
             int startMonth = Integer.parseInt(startDateMONTHTxtField.getText());
             int endDay     = Integer.parseInt(endDateDAYTxtField.getText());
             int endMonth   = Integer.parseInt(endDateMONTHTxtField.getText());
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
+            int seasonPercentage =ReserveMH.season(whichSeason.getText());
+            String price = (String) reserverCombo.getValue();
+            int extraItemPrice = ReserveMH.items.size() *10; //price for extra shiy
+            String[] arr = price.split(" ");
+            int motorhomePrice = Integer.parseInt(arr[5]);
+            int seasonPrice= ((motorhomePrice) / 100 * seasonPercentage ) +extraItemPrice + motorhomePrice;
+            finalPrice.setText(Integer.toString(seasonPrice));//bybis
+            System.out.println(seasonPercentage);
+
+
         }
         //----------------------------------------------------------------
     }
@@ -324,6 +339,12 @@ public class Controller {
         fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3));
         mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4));
     }
+
+    @FXML
+    public  void saveOrder(ActionEvent actionEvent){
+        System.out.println("SMD");
+    }
+
 
 
 }

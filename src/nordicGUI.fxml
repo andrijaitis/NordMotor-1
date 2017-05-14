@@ -164,7 +164,7 @@
                 <GridPane gridLinesVisible="true" layoutX="749.0" layoutY="158.0" prefHeight="129.0">
                   <children>
                     <Label text="Final Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="finalPrice" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Button mnemonicParsing="false" onAction="#calculatePriceAction" prefWidth="93.0" text="Sum up" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                   </children>
                   <columnConstraints>

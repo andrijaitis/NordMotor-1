@@ -130,8 +130,8 @@ public class MotorhomeModification {
                         rs.getString(2) + " "+
                         rs.getString(3) + " "+
                         rs.getString(4) + " "+
-                        rs.getString(5) + "[B]"+
-                        rs.getString(6) + "[€]");
+                        rs.getString(5) + "[B] "+
+                        rs.getString(6) + " [€] ");
             }
             con.close();
 
