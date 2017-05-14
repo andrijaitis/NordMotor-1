@@ -37,49 +37,6 @@ public class Repair {
         return MH;
     }
 
-    public ObservableList<String> refreshItForTheMechanic(){
-
-
-        java.util.List<String> members = new ArrayList<String>();
-
-        try {
-            Connection con = DBConnection.getConnection();
-
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * " +
-                    "FROM nordic_rv");
-
-            while (rs.next()) {
-                members.add(
-                                rs.getString(1) + " <"+
-                                rs.getString(2) + "> "+
-                                rs.getString(3) + " "+
-                                rs.getString(4) + " "+
-                                rs.getString(5) + " "+
-                                rs.getString(7) + "[L] "+
-                                rs.getString(8) + "[km]");
-
-                // System.out.println(rs.getString(4));
-            }
-            con.close();
-
-            ObservableList<String> list = FXCollections.observableArrayList();
-
-
-            String listString = "";
-
-            for (String s : members) {
-                listString += list.add(s);
-            }
-            return list;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            ObservableList<String> list2 = FXCollections.observableArrayList();
-            list2.add("Failed to load");
-            return list2;
-        }
-    }
     //we look at all the check boxes of they are checked
     public void serviceComplete(boolean oilSituation, boolean fuelSituation, boolean waterSituation, boolean cleanSituation, boolean repairsSituation, String repairMHid) {
 

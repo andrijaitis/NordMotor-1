@@ -181,7 +181,6 @@ public class Controller {
     }
 
     @FXML
-
     public void localValueComboBoxes(MouseEvent mouseEvent){
         //make the beds only available from 2 to 6 in the combo box
         ObservableList<String> beds = FXCollections.observableArrayList();
@@ -216,7 +215,6 @@ public class Controller {
     public void motorHomeModsDeleteMH(ActionEvent actionEvent) {
         String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);
-
     }
 
     @FXML
@@ -228,10 +226,6 @@ public class Controller {
         updatePrice.setText(motorhomeModification.Load(Aidy).get(3));
         updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
-
-
-
-
     //FROM RESERVEMH CLASS
     @FXML
     public void extraItemCatalogComBox(MouseEvent mouseEvent) {
@@ -263,9 +257,7 @@ public class Controller {
         extraItemsTxtArea.setText("");
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
-
     }
-
 
     @FXML
     public void removeLastExtraItem(ActionEvent actionEvent) {
@@ -325,13 +317,6 @@ public class Controller {
         }
     //----------------------------------------------------------------
 }
-    //FROM REPAIR CLASS ###############################
-    @FXML
-    public void loadActionForRepair(MouseEvent mouseEvent){
-        //loads all the information into the combobox
-
-        repairListOFMHforMechanic.setItems(repair.refreshItForTheMechanic());
-    }
     //FROM REPAIR CLASS ###############################
     @FXML
     public void setAllValuesForMechanic(ActionEvent actionEvent){
