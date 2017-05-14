@@ -24,7 +24,12 @@ import javafx.scene.text.Font;
 
 public class Controller {
 
+
     private boolean userLoggedIn = false;
+
+    @FXML
+    private  javafx.scene.control.ComboBox startScreenComBox;
+
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     @FXML
     private Label statusBarForLogin;
@@ -71,21 +76,6 @@ public class Controller {
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
     private javafx.scene.control.ComboBox reserverCombo;
-
-
-   /* @FXML
-    private javafx.scene.control.TextField startDateDAYTxtField;
-    @FXML
-    private javafx.scene.control.TextField startDateMONTHTxtField;
-    @FXML
-    private javafx.scene.control.TextField endDateDAYTxtField;
-    @FXML
-    private javafx.scene.control.TextField endDateMONTHTxtField;
-    @FXML
-    private javafx.scene.control.TextField startDateYEARtxtField;
-    @FXML
-    private javafx.scene.control.TextField endDateYEARtxtField;*/
-
 
     @FXML
     private javafx.scene.control.ComboBox startDateDAYTxtField;
@@ -152,6 +142,7 @@ public class Controller {
     MotorhomeModification motorhomeModification = new MotorhomeModification();
     AdminLogin adminLogin = new AdminLogin();
     Repair repair = new Repair();
+    UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
 
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
@@ -197,6 +188,10 @@ public class Controller {
 
         addBedComBox.setItems(beds);
         updateBeds.setItems(beds);
+        //make mh unaivalable or available
+        ObservableList<String> availability = FXCollections.observableArrayList();
+        availability.addAll("Available","Unavailable");
+        updateAvailability.setItems(availability);
     }
 
     @FXML
@@ -230,25 +225,13 @@ public class Controller {
         updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
 
-    @FXML
-    public void RefreshMH(MouseEvent mouseEvent) {
-        listOfMHforUpdating.setValue(null);
-        System.out.println("rehreshing");
-        ObservableList<String> list = FXCollections.observableArrayList();
-
-        String listString = "";
-        listOfMHforUpdating.setItems(motorhomeModification.refresh());
 
 
-        ObservableList<String> availability = FXCollections.observableArrayList();
-        availability.addAll("Available", "Unavailable");
-        updateAvailability.setItems(availability);
-
-    }
 
     //FROM RESERVEMH CLASS ###############################
     @FXML
-    public void reserveMHLoad(MouseEvent mouseEvent) {
+    public void reserveMHLoad(MouseEvent mouseEvent){
+
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
 
@@ -358,9 +341,7 @@ public class Controller {
     @FXML
     public void loadActionForRepair(MouseEvent mouseEvent){
         //loads all the information into the combobox
-        System.out.println("the fucker has to refreshhhhh");
-        ObservableList<String> list = FXCollections.observableArrayList();
-        String listString = "";
+
         repairListOFMHforMechanic.setItems(repair.refreshItForTheMechanic());
     }
     //FROM REPAIR CLASS ###############################
@@ -436,6 +417,7 @@ public class Controller {
     }
 
     @FXML
+
     public  void loadDay(MouseEvent mouseEvent){
         ObservableList<String> days = FXCollections.observableArrayList();
 
@@ -448,5 +430,13 @@ public class Controller {
 
     }
 
+    public  void ultimateLoadMotorhomeListForComboBox(MouseEvent mouseEvent){
 
+        startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
+        listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
+        repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
+        reserverCombo.setItems(ultCBref.myUltimateRefresh("Update"));
+
+
+    }
 }
