@@ -116,46 +116,4 @@ public class MotorhomeModification {
         }
         return MH;
     }
-
-
-    public  ObservableList<String> refresh(){
-
-
-        java.util.List<String> members = new ArrayList<String>();
-
-        try {
-            Connection con = DBConnection.getConnection();
-
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * " +
-                    "FROM nordic_rv");
-
-            while (rs.next()) {
-                members.add(
-                        rs.getString(1) + " "+
-                        rs.getString(2) + " "+
-                        rs.getString(3) + " "+
-                        rs.getString(4) + " "+
-                        rs.getString(5) + "[B] "+
-                        rs.getString(6) + " [€] ");
-            }
-            con.close();
-
-            ObservableList<String> list = FXCollections.observableArrayList();
-
-
-            String listString = "";
-
-            for (String s : members) {
-                listString += list.add(s);
-            }
-            return list;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            ObservableList<String> list2 = FXCollections.observableArrayList();
-            list2.add("Failed to load");
-            return list2;
-        }
-    }
 }

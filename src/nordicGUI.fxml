@@ -41,10 +41,10 @@
                     <Font name="System Bold" size="19.0" />
                   </font>
                 </Button>
-                <GridPane gridLinesVisible="true" layoutX="251.0" layoutY="219.0" prefHeight="153.0" prefWidth="351.0">
+                <GridPane gridLinesVisible="true" layoutX="251.0" layoutY="219.0" prefHeight="153.0" prefWidth="461.0">
                   <children>
                     <Label font="$x1" prefWidth="325.0" text="Status | beds | mark | model" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="startScreenComBox" onMouseClicked="#ultimateLoadMotorhomeListForComboBox" prefWidth="351.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <ComboBox fx:id="startScreenComBox" onMouseClicked="#ultimateLoadMotorhomeListForComboBox" prefHeight="31.0" prefWidth="469.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -103,7 +103,7 @@
                     <TextField fx:id="addPriceTxtField" prefWidth="200.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <TextField fx:id="addModelTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <TextField fx:id="addBrandTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                              <ComboBox fx:id="addBedComBox" onMouseClicked="#bedFrom2To6" prefHeight="31.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="addBedComBox" onAction="#localValueComboBoxes" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Mileage:" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="17.0" fx:id="x21" />
@@ -132,7 +132,7 @@
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Label font="$x2" text="Availability" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                     <TextField fx:id="updatePrice" prefWidth="196.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="updateBeds" onMouseClicked="#bedFrom2To6" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <ComboBox fx:id="updateBeds" onMouseClicked="#localValueComboBoxes" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -141,7 +141,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="updateAvailability" onMouseClicked="#bedFrom2To6" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <ComboBox fx:id="updateAvailability" onMouseClicked="#localValueComboBoxes" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -273,7 +273,7 @@
                   <children>
                     <Label text="Select the amount of extras" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Button mnemonicParsing="false" onAction="#addExtaItemAction" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                              <ComboBox fx:id="listOfExtraItemsComBox" onMouseClicked="#extraItemCatalogComBox" prefWidth="150.0" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="listOfExtraItemsComBox" onMouseClicked="#localValueComboBoxes" prefWidth="150.0" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="185.0" />

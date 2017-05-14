@@ -164,17 +164,20 @@ public class Controller {
         statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ " has been saved!");
     }
     @FXML
-    public void bedFrom2To6(MouseEvent mouseEvent){
+    public void localValueComboBoxes(MouseEvent mouseEvent){
         //make the beds only available from 2 to 6 in the combo box
         ObservableList<String> beds = FXCollections.observableArrayList();
         beds.addAll("2","3","4","5","6");
-
         addBedComBox.setItems(beds);
         updateBeds.setItems(beds);
         //make mh unaivalable or available
         ObservableList<String> availability = FXCollections.observableArrayList();
         availability.addAll("Available","Unavailable");
         updateAvailability.setItems(availability);
+        //select the extra items you want
+        ObservableList<String> extraItems = FXCollections.observableArrayList();
+        extraItems.addAll("Baby seat", "Bike rack", "Table");
+        listOfExtraItemsComBox.setItems(extraItems);
     }
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
@@ -193,7 +196,7 @@ public class Controller {
     @FXML
     public void motorHomeModsDeleteMH(ActionEvent actionEvent){
         String deleteID = updateID.getText();
-        motorhomeModification.DeleteMotorHome(deleteID);;
+        motorhomeModification.DeleteMotorHome(deleteID);
     }
 
     @FXML
@@ -205,41 +208,6 @@ public class Controller {
         updatePrice.setText(motorhomeModification.Load(Aidy).get(3));
         updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
-    /*
-    @FXML///IIIIIIIIIIIIIIIIIIIIIEEEEEEEEEEEEEEEEEEEEEEEELAVENT################################################################
-    public void RefreshMH(MouseEvent mouseEvent){
-        listOfMHforUpdating.setValue(null);
-        System.out.println("rehreshing");
-        ObservableList<String> list = FXCollections.observableArrayList();
-
-        String listString = "";
-        listOfMHforUpdating.setItems(motorhomeModification.refresh());
-
-
-        ObservableList<String> availability = FXCollections.observableArrayList();
-        availability.addAll("Available","Unavailable");
-        updateAvailability.setItems(availability);
-
-    }
-    */
-
-    //FROM RESERVEMH CLASS ###############################
-    @FXML
-    public void reserveMHLoad(MouseEvent mouseEvent){
-        System.out.println("rehreshing");
-        ObservableList<String> list = FXCollections.observableArrayList();
-
-        reserverCombo.setItems(motorhomeModification.refresh());
-
-    }
-    //FROM RESERVEMH CLASS
-    @FXML
-    public void extraItemCatalogComBox(MouseEvent mouseEvent){
-        ObservableList<String> extraItems = FXCollections.observableArrayList();
-        extraItems.addAll("Baby seat", "Bike rack", "Table");
-        listOfExtraItemsComBox.setItems(extraItems);
-    }
-
 
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent){
@@ -250,13 +218,11 @@ public class Controller {
         for (String s : ReserveMH.addExtraShit(item)) {
             listString += s + "\n";
             System.out.println();
-
         }
         extraItemsTxtArea.setText(listString);
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
         System.out.println(sizes);
-
     }
 
     @FXML
@@ -265,10 +231,7 @@ public class Controller {
         extraItemsTxtArea.setText("");
        String sizes = Integer.toString(ReserveMH.items.size());
        totalItems.setText(sizes);
-
     }
-
-
 
     @FXML
     public void removeLastExtraItem(ActionEvent actionEvent){
@@ -284,7 +247,6 @@ public class Controller {
         extraItemsTxtArea.setText(listString);
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
-
     }
 
     public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent){
@@ -310,8 +272,6 @@ public class Controller {
 
         }else{
 
-
-
             int startDay   = Integer.parseInt(startDateDAYTxtField.getText());
             int startMonth = Integer.parseInt(startDateMONTHTxtField.getText());
             int endDay     = Integer.parseInt(endDateDAYTxtField.getText());
@@ -326,8 +286,6 @@ public class Controller {
             int seasonPrice= ((motorhomePrice) / 100 * seasonPercentage ) +extraItemPrice + motorhomePrice;
             finalPrice.setText(Integer.toString(seasonPrice));//bybis
             System.out.println(seasonPercentage);
-
-
         }
         //----------------------------------------------------------------
     }
@@ -376,16 +334,13 @@ public class Controller {
     public  void saveOrder(ActionEvent actionEvent){
         System.out.println("SMD");
     }
-
     @FXML
     public  void ultimateLoadMotorhomeListForComboBox(MouseEvent mouseEvent){
-
 
         startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
         listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
         repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
         reserverCombo.setItems(ultCBref.myUltimateRefresh("Update"));
-
 
     }
 }
