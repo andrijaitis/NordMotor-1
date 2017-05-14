@@ -66,15 +66,14 @@ public class ReserveMH {
     }
 
     public static void saveOrder(String startYear, String startMonth, String startDay, String endYear, String endMotnh,
-                                 String 	endDay, String season, String 	itemAmount, String cost, String signiture
-
-    ) {//fix this to be a double and int
+                                 String 	endDay, String season, String 	itemAmount, String cost, String signiture,
+                                 String reservedID    ) {
 
         try {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture`)" +
+            String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture` , `reservedID`)" +
                     "VALUES " +
                     "(NULL, "
                     +"'"+ startYear  +"'  ,"
@@ -86,7 +85,8 @@ public class ReserveMH {
                     +"'"+ season   +"',   "
                     +"'"+ itemAmount +"',   "
                     +"'"+ cost   +"',   "
-                    +"'"+ signiture  +"'   "
+                    +"'"+ signiture  +"',   "
+                    +"'"+ reservedID  +"'   "
                     +");                     ";
 
 

@@ -66,6 +66,8 @@ public class Controller {
     private javafx.scene.control.TextField finalPrice;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    @FXML
+    private javafx.scene.control.Label statusBarForReserver;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
     @FXML
     private Label totalItems;
@@ -292,10 +294,15 @@ public class Controller {
     public  void calculatePriceAction(ActionEvent actionEvent){
         //Checks which season it is--------------------------------------
        System.out.println(startDateMONTHTxtField.getValue());
-        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null){
+       if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
+           System.out.println(" Ble cyka you need normal value");
+           whichSeason.setText("Fill all the dates!");
+           whichSeason.setFont(Font.font ("Verdana", 17));
+
+       }else if ( reserverCombo.getValue() == null){
             System.out.println(" Ble cyka you need normal value");
-            whichSeason.setText("Fill all the dates!");
-            whichSeason.setFont(Font.font ("Verdana", 17));
+           whichSeason.setFont(Font.font ("Verdana", 17));
+            statusBarForReserver.setText("Please check if MH selected");
 
         }else{
 
@@ -314,6 +321,7 @@ public class Controller {
             int seasonPrice= ((motorhomePrice) / 100 * seasonPercentage ) +extraItemPrice + motorhomePrice;
             finalPrice.setText(Integer.toString(seasonPrice));//bybis
             System.out.println(seasonPercentage);
+            statusBarForReserver.setText("Price was calculated  Total: "+ seasonPrice);
         }
     //----------------------------------------------------------------
 }
@@ -353,18 +361,24 @@ public class Controller {
     }
     @FXML
     public  void saveOrderAction(ActionEvent actionEvent){
-        String startYear = (String) startDateYEARtxtField.getValue();
-        String startMonth = (String)startDateMONTHTxtField.getValue();
-        String startDay =(String) startDateDAYTxtField.getValue();
-        String endYear =(String) endDateYEARtxtField.getValue();
-        String endMonth =(String) endDateMONTHTxtField.getValue();
-        String endDay =(String) endDateDAYTxtField.getValue();
-        String Season = whichSeason.getText();
-        String itemAmount= totalItems.getText();
-        String cost= finalPrice.getText();
-        String signiture= singitureTxtField.getText();
-         ReserveMH.saveOrder(startYear,startMonth,startDay,endYear,endMonth,endDay,Season,itemAmount,cost,signiture);
-        System.out.println("SMD");
+       if (singitureTxtField.getText().isEmpty() ||finalPrice.getText().isEmpty()){
+           statusBarForReserver.setText("Please Check final price or signature u DIP");
+           } else {
+           String startYear = (String) startDateYEARtxtField.getValue();
+           String startMonth = (String) startDateMONTHTxtField.getValue();
+           String startDay = (String) startDateDAYTxtField.getValue();
+           String endYear = (String) endDateYEARtxtField.getValue();
+           String endMonth = (String) endDateMONTHTxtField.getValue();
+           String endDay = (String) endDateDAYTxtField.getValue();
+           String Season = whichSeason.getText();
+           String itemAmount = totalItems.getText();
+           String cost = finalPrice.getText();
+           String signiture = singitureTxtField.getText();
+           String reservedID= (String)reserverCombo.getValue();
+           String reservedID2 = reservedID.substring(0, 1);
+           ReserveMH.saveOrder(startYear, startMonth, startDay, endYear, endMonth, endDay, Season, itemAmount, cost, signiture,reservedID2 );
+           statusBarForReserver.setText("Your oder " + signiture+" was successful");
+       }
 
     }
 
@@ -382,7 +396,7 @@ public class Controller {
     public  void loadMonth(MouseEvent mouseEvent){
         ObservableList<String> months = FXCollections.observableArrayList();
 
-         for ( int i = 0; i < 13; i++) {
+         for ( int i = 1; i < 13; i++) {
             months.add(Integer.toString(i));
         }
 
@@ -396,7 +410,7 @@ public class Controller {
     public  void loadDay(MouseEvent mouseEvent){
         ObservableList<String> days = FXCollections.observableArrayList();
 
-        for ( int i = 0; i < 32; i++) {
+        for ( int i = 1; i < 32; i++) {
             days.add(Integer.toString(i));
         }
 

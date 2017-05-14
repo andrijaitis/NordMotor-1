@@ -322,6 +322,11 @@
                         <Button layoutX="641.0" layoutY="297.0" mnemonicParsing="false" onAction="#setItemsToNull" text="Clear" />
                         <Button layoutX="507.0" layoutY="297.0" mnemonicParsing="false" onAction="#removeLastExtraItem" text="Remove Last" />
                         <Label fx:id="totalItems" layoutX="651.0" layoutY="128.0" text="Label" />
+                        <Label fx:id="statusBarForReserver" layoutX="216.0" layoutY="460.0" prefHeight="33.0" prefWidth="474.0" textFill="RED">
+                           <font>
+                              <Font name="Times New Roman Bold" size="29.0" />
+                           </font>
+                        </Label>
               </children>
             </AnchorPane>
           </content>
