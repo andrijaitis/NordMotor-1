@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 
 public class Controller {
 
-   private boolean userLoggedIn = false ;
+    private boolean userLoggedIn = false;
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     @FXML
     private Label statusBarForLogin;
@@ -45,8 +45,12 @@ public class Controller {
     //MotorhomeModification CLASS variables >>>>>>>>>> for adding a MH
     @FXML
     private javafx.scene.control.TextField addBrandTxtField;
+
+
     @FXML
     private javafx.scene.control.TextField addModelTxtField;
+
+
     @FXML
     private javafx.scene.control.TextField addPriceTxtField;
     @FXML
@@ -63,11 +67,13 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextArea extraItemsTxtArea;
     @FXML
-    private  javafx.scene.control.ComboBox listOfExtraItemsComBox;
+    private javafx.scene.control.ComboBox listOfExtraItemsComBox;
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
-    private  javafx.scene.control.ComboBox reserverCombo;
-    @FXML
+    private javafx.scene.control.ComboBox reserverCombo;
+
+
+   /* @FXML
     private javafx.scene.control.TextField startDateDAYTxtField;
     @FXML
     private javafx.scene.control.TextField startDateMONTHTxtField;
@@ -75,6 +81,28 @@ public class Controller {
     private javafx.scene.control.TextField endDateDAYTxtField;
     @FXML
     private javafx.scene.control.TextField endDateMONTHTxtField;
+    @FXML
+    private javafx.scene.control.TextField startDateYEARtxtField;
+    @FXML
+    private javafx.scene.control.TextField endDateYEARtxtField;*/
+
+
+    @FXML
+    private javafx.scene.control.ComboBox startDateDAYTxtField;
+    @FXML
+    private javafx.scene.control.ComboBox startDateMONTHTxtField;
+    @FXML
+    private javafx.scene.control.ComboBox endDateDAYTxtField;
+    @FXML
+    private javafx.scene.control.ComboBox endDateMONTHTxtField;
+    @FXML
+    private javafx.scene.control.ComboBox startDateYEARtxtField;
+    @FXML
+    private javafx.scene.control.ComboBox endDateYEARtxtField;
+
+
+    @FXML
+    private javafx.scene.control.TextField singitureTxtField;
     @FXML
     private javafx.scene.control.TextField whichSeason;
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating existing values for database
@@ -132,7 +160,7 @@ public class Controller {
         String PassInput = pas.getText();
 
         boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
-        System.out.println(status+ " aa");
+        System.out.println(status + " aa");
         if (status == true) {
             statusBarForLogin.setText("You are logged in");
             userLoggedIn = status;
@@ -149,28 +177,30 @@ public class Controller {
     }
 
     @FXML
-    public void motorHomeModsAddingMH(ActionEvent actionEvent){
+    public void motorHomeModsAddingMH(ActionEvent actionEvent) {
         //add a motorhome to the data base
-        String theBrand   = addBrandTxtField.getText();
-        String theModel   = addModelTxtField.getText();
-        String thePrice   = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theBed     = (String) addBedComBox.getValue();
+        String theBrand = addBrandTxtField.getText();
+        String theModel = addModelTxtField.getText();
+        String thePrice = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
+        String theBed = (String) addBedComBox.getValue();
         String theMileage = addMileageTxtField.getText();
 
-        motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed,theMileage);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! "+theBrand+ " " +theModel+ " has been saved!");
+        motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
+        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
     }
+
     @FXML
-    public void bedFrom2To6(MouseEvent mouseEvent){
+    public void bedFrom2To6(MouseEvent mouseEvent) {
         //make the beds only available from 2 to 6 in the combo box
         ObservableList<String> beds = FXCollections.observableArrayList();
-        beds.addAll("2","3","4","5","6");
+        beds.addAll("2", "3", "4", "5", "6");
 
         addBedComBox.setItems(beds);
         updateBeds.setItems(beds);
     }
+
     @FXML
-    public void motorHomeModsUpdatingMH(ActionEvent actionEvent){
+    public void motorHomeModsUpdatingMH(ActionEvent actionEvent) {
         //updates existing motorhomes
         String beds = (String) updateBeds.getValue();
         String availability = (String) updateAvailability.getValue();
@@ -180,17 +210,18 @@ public class Controller {
         String model = updateModel.getText();
         String price = updatePrice.getText();
 
-        motorhomeModification.updatingMotorHomne(ID,brand,model,price,beds,availability);
+        motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
     }
 
     @FXML
-    public void motorHomeModsDeleteMH(ActionEvent actionEvent){
+    public void motorHomeModsDeleteMH(ActionEvent actionEvent) {
         String deleteID = updateID.getText();
-        motorhomeModification.DeleteMotorHome(deleteID);;
+        motorhomeModification.DeleteMotorHome(deleteID);
+        ;
     }
 
     @FXML
-    public void motorHomeModLoad(ActionEvent actionEvent){
+    public void motorHomeModLoad(ActionEvent actionEvent) {
         String Aidy = updateID.getText();
         updateAvailability.setValue(motorhomeModification.Load(Aidy).get(0));
         updateMark.setText(motorhomeModification.Load(Aidy).get(1));
@@ -200,7 +231,7 @@ public class Controller {
     }
 
     @FXML
-    public void RefreshMH(MouseEvent mouseEvent){
+    public void RefreshMH(MouseEvent mouseEvent) {
         listOfMHforUpdating.setValue(null);
         System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -210,23 +241,24 @@ public class Controller {
 
 
         ObservableList<String> availability = FXCollections.observableArrayList();
-        availability.addAll("Available","Unavailable");
+        availability.addAll("Available", "Unavailable");
         updateAvailability.setItems(availability);
 
     }
 
     //FROM RESERVEMH CLASS ###############################
     @FXML
-    public void reserveMHLoad(MouseEvent mouseEvent){
-         System.out.println("rehreshing");
+    public void reserveMHLoad(MouseEvent mouseEvent) {
+        System.out.println("rehreshing");
         ObservableList<String> list = FXCollections.observableArrayList();
 
         reserverCombo.setItems(motorhomeModification.refresh());
 
     }
+
     //FROM RESERVEMH CLASS
     @FXML
-    public void extraItemCatalogComBox(MouseEvent mouseEvent){
+    public void extraItemCatalogComBox(MouseEvent mouseEvent) {
         ObservableList<String> extraItems = FXCollections.observableArrayList();
         extraItems.addAll("Baby seat", "Bike rack", "Table");
         listOfExtraItemsComBox.setItems(extraItems);
@@ -234,7 +266,7 @@ public class Controller {
 
 
     @FXML
-    public void addExtaItemAction(ActionEvent actionEvent){
+    public void addExtaItemAction(ActionEvent actionEvent) {
 
         String item = (String) listOfExtraItemsComBox.getValue();
         String listString = "";
@@ -252,19 +284,18 @@ public class Controller {
     }
 
     @FXML
-    public void setItemsToNull(ActionEvent actionEvent){
+    public void setItemsToNull(ActionEvent actionEvent) {
         ReserveMH.items.clear();
         extraItemsTxtArea.setText("");
-       String sizes = Integer.toString(ReserveMH.items.size());
-       totalItems.setText(sizes);
+        String sizes = Integer.toString(ReserveMH.items.size());
+        totalItems.setText(sizes);
 
     }
 
 
-
     @FXML
-    public void removeLastExtraItem(ActionEvent actionEvent){
-        ReserveMH.items.remove(ReserveMH.items.size()-1);
+    public void removeLastExtraItem(ActionEvent actionEvent) {
+        ReserveMH.items.remove(ReserveMH.items.size() - 1);
         extraItemsTxtArea.setText("");
         String listString = "";
 
@@ -279,10 +310,10 @@ public class Controller {
 
     }
 
-    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent){
+    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
 
         String valuesFromComBox = (String) listOfMHforUpdating.getValue();
-        String ID = valuesFromComBox.substring(0,1);
+        String ID = valuesFromComBox.substring(0, 1);
         System.out.println(valuesFromComBox);
 
         updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
@@ -292,10 +323,11 @@ public class Controller {
         updateBeds.setValue(motorhomeModification.Load(ID).get(4));
         updateID.setText(ID);
     }
-    @FXML
+   @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
         //Checks which season it is--------------------------------------
-        if (startDateMONTHTxtField.getText().isEmpty() || startDateDAYTxtField.getText().isEmpty() || endDateMONTHTxtField.getText().isEmpty() || endDateDAYTxtField.getText().isEmpty()){
+       System.out.println(startDateMONTHTxtField.getValue());
+        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null){
             System.out.println(" Ble cyka you need normal value");
             whichSeason.setText("Fill all the dates!");
             whichSeason.setFont(Font.font ("Verdana", 17));
@@ -303,11 +335,10 @@ public class Controller {
         }else{
 
 
-
-            int startDay   = Integer.parseInt(startDateDAYTxtField.getText());
-            int startMonth = Integer.parseInt(startDateMONTHTxtField.getText());
-            int endDay     = Integer.parseInt(endDateDAYTxtField.getText());
-            int endMonth   = Integer.parseInt(endDateMONTHTxtField.getText());
+            int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
+            int startMonth = Integer.parseInt( (String) startDateMONTHTxtField.getValue());
+            int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
+            int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
             int seasonPercentage =ReserveMH.season(whichSeason.getText());
@@ -321,8 +352,8 @@ public class Controller {
 
 
         }
-        //----------------------------------------------------------------
-    }
+    //----------------------------------------------------------------
+}
     //FROM REPAIR CLASS ###############################
     @FXML
     public void loadActionForRepair(MouseEvent mouseEvent){
@@ -367,10 +398,55 @@ public class Controller {
         repairNeededCheck.setSelected(false);
     }
     @FXML
-    public  void saveOrder(ActionEvent actionEvent){
+    public  void saveOrderAction(ActionEvent actionEvent){
+        String startYear = (String) startDateYEARtxtField.getValue();
+        String startMonth = (String)startDateMONTHTxtField.getValue();
+        String startDay =(String) startDateDAYTxtField.getValue();
+        String endYear =(String) endDateYEARtxtField.getValue();
+        String endMonth =(String) endDateMONTHTxtField.getValue();
+        String endDay =(String) endDateDAYTxtField.getValue();
+        String Season = whichSeason.getText();
+        String itemAmount= totalItems.getText();
+        String cost= finalPrice.getText();
+        String signiture= singitureTxtField.getText();
+         ReserveMH.saveOrder(startYear,startMonth,startDay,endYear,endMonth,endDay,Season,itemAmount,cost,signiture);
         System.out.println("SMD");
+
+    }
+@FXML
+    public  void loadYear(MouseEvent mouseEvent){
+    ObservableList<String> years = FXCollections.observableArrayList();
+    years.addAll("2017","2018","2019","2020","2021");
+
+    startDateYEARtxtField.setItems(years);
+    endDateYEARtxtField.setItems(years);
+
+}
+    @FXML
+    public  void loadMonth(MouseEvent mouseEvent){
+        ObservableList<String> months = FXCollections.observableArrayList();
+
+         for ( int i = 0; i < 13; i++) {
+            months.add(Integer.toString(i));
+        }
+
+        startDateMONTHTxtField.setItems(months);
+        endDateMONTHTxtField.setItems(months);
+
     }
 
+    @FXML
+    public  void loadDay(MouseEvent mouseEvent){
+        ObservableList<String> days = FXCollections.observableArrayList();
+
+        for ( int i = 0; i < 32; i++) {
+            days.add(Integer.toString(i));
+        }
+
+        startDateDAYTxtField.setItems(days);
+        endDateDAYTxtField.setItems(days);
+
+    }
 
 
 }

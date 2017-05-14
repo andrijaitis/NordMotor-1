@@ -1,8 +1,12 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by Mantas_MSI on 5/12/2017.
@@ -46,6 +50,7 @@ public class ReserveMH {
 
         return items;
     }
+
      public static int season(String Season) {
          System.out.println(Season);
         if (Season.equals("Middle season")){
@@ -54,9 +59,44 @@ public class ReserveMH {
         }else if (Season.equals("Peak season")){
             return 60;
         } else {
-            return 1;
+            return 0;
         }
 
+
+    }
+
+    public static void saveOrder(String startYear, String startMonth, String startDay, String endYear, String endMotnh,
+                                 String 	endDay, String season, String 	itemAmount, String cost, String signiture
+
+    ) {//fix this to be a double and int
+
+        try {
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture`)" +
+                    "VALUES " +
+                    "(NULL, "
+                    +"'"+ startYear  +"'  ,"
+                    +"'"+ startMonth +"'  ,"
+                    +"'"+ startDay   +"'  ,"
+                    +"'"+ endYear    +"'  ,"
+                    +"'"+ endMotnh   +"'  ,"
+                    +"'"+ endDay   +"',   "
+                    +"'"+ season   +"',   "
+                    +"'"+ itemAmount +"',   "
+                    +"'"+ cost   +"',   "
+                    +"'"+ signiture  +"'   "
+                    +");                     ";
+
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
