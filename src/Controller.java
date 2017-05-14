@@ -136,13 +136,20 @@ public class Controller {
     private javafx.scene.control.CheckBox cleanCheck;
     @FXML
     private javafx.scene.control.CheckBox repairNeededCheck;
-
+    //UltimateComboboxRefresher CLASS variables >>>>>>>>>> for loading up customers
+    @FXML
+    private javafx.scene.control.ComboBox pickUpCustomer;
+    @FXML
+    private javafx.scene.control.ComboBox turnInCustomer;
+    @FXML
+    private javafx.scene.control.ComboBox cancelReservationCustomer;
 
     //Class instences
     MotorhomeModification motorhomeModification = new MotorhomeModification();
     AdminLogin adminLogin = new AdminLogin();
     Repair repair = new Repair();
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
+    CustomerOrder cusOrder = new CustomerOrder();
 
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
@@ -209,22 +216,13 @@ public class Controller {
         String price = updatePrice.getText();
 
         motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
+        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
     }
 
     @FXML
     public void motorHomeModsDeleteMH(ActionEvent actionEvent) {
         String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);
-    }
-
-    @FXML
-    public void motorHomeModLoad(ActionEvent actionEvent) {
-        String Aidy = updateID.getText();
-        updateAvailability.setValue(motorhomeModification.Load(Aidy).get(0));
-        updateMark.setText(motorhomeModification.Load(Aidy).get(1));
-        updateModel.setText(motorhomeModification.Load(Aidy).get(2));
-        updatePrice.setText(motorhomeModification.Load(Aidy).get(3));
-        updateBeds.setValue(motorhomeModification.Load(Aidy).get(4));
     }
     //FROM RESERVEMH CLASS
     @FXML
@@ -392,7 +390,6 @@ public class Controller {
     }
 
     @FXML
-
     public  void loadDay(MouseEvent mouseEvent){
         ObservableList<String> days = FXCollections.observableArrayList();
 
@@ -404,14 +401,25 @@ public class Controller {
         endDateDAYTxtField.setItems(days);
 
     }
-
-    public  void ultimateLoadMotorhomeListForComboBox(MouseEvent mouseEvent){
-
+    //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
+    @FXML
+    public  void ultimateMotorhomeListForComboboxReresher(MouseEvent mouseEvent){
 
         startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
         listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
         repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
         reserverCombo.setItems(ultCBref.myUltimateRefresh("Update"));
-
     }
+    //Ultimate refresher for comebo boxes that gets their value directly from data base for customer names a.k.a. signature
+    @FXML
+    public void ultimateCustomerListComboboxRefresher(MouseEvent mouseEvent){
+    pickUpCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
+    turnInCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
+    cancelReservationCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
+    }
+    @FXML
+    public void customerPickUp(ActionEvent actionEvent){
+        cusOrder.pickUp();
+    }
+
 }
