@@ -12,8 +12,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("nordicGUI.fxml"));
-        primaryStage.setTitle("Nordic Motor Homes System");
-        primaryStage.setScene(new Scene(root, 900, 700));
+        primaryStage.setTitle("Nordic Motorhomes System");
+        primaryStage.setScene(new Scene(root, 900, 800));
         primaryStage.show();
     }
 
