@@ -4,6 +4,6 @@
 public class CustomerOrder {
 
     public void pickUp(){
-
+    //sql command here to change from avalable to in use
     }
 }

@@ -78,7 +78,6 @@ public class Controller {
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
     private javafx.scene.control.ComboBox reserverCombo;
-
     @FXML
     private javafx.scene.control.ComboBox startDateDAYTxtField;
     @FXML
@@ -91,8 +90,6 @@ public class Controller {
     private javafx.scene.control.ComboBox startDateYEARtxtField;
     @FXML
     private javafx.scene.control.ComboBox endDateYEARtxtField;
-
-
     @FXML
     private javafx.scene.control.TextField singitureTxtField;
     @FXML
@@ -145,6 +142,8 @@ public class Controller {
     private javafx.scene.control.ComboBox turnInCustomer;
     @FXML
     private javafx.scene.control.ComboBox cancelReservationCustomer;
+    @FXML
+    private  javafx.scene.control.TextArea receiptTxtArea;
 
     //Class instences
     MotorhomeModification motorhomeModification = new MotorhomeModification();
