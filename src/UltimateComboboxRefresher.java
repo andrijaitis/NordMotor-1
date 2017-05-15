@@ -42,7 +42,7 @@ public class UltimateComboboxRefresher {
                 }
                 //update motorhome info
                 if(tab == "Update") {
-                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use")) {
+                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use") && !rs.getString(2).equals("Reserved_MH")) {
                         members.add(
                                 rs.getString(1) + " " +
                                         rs.getString(2) + " " +
@@ -54,7 +54,7 @@ public class UltimateComboboxRefresher {
                 }
                 //repair motorhomes
                 if(tab == "Repair") {
-                    if (!rs.getString(2).equals("Available") && !rs.getString(2).equals("In_use")) {
+                    if (!rs.getString(2).equals("Available") && !rs.getString(2).equals("In_use") && !rs.getString(2).equals("Reserved_MH")) {
                         members.add(
                                 rs.getString(1) + " <" +
                                         rs.getString(2) + "> " +
@@ -67,7 +67,7 @@ public class UltimateComboboxRefresher {
                 }
                 //reserve a motorhome
                 if(tab == "Reserve") {
-                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use")) {
+                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use") && !rs.getString(2).equals("Reserved_MH")) {
                         members.add(
                                 rs.getString(1) + " " +
                                         rs.getString(2) + " " +
@@ -107,13 +107,34 @@ public class UltimateComboboxRefresher {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT signiture " +
+            ResultSet rs = stmt.executeQuery("SELECT signiture, situation " +
                     "FROM reserve");
 
             while (rs.next()) {
-                //Start Screen
-                    members.add(
-                            rs.getString(1) );
+                    if(tab.equals("pickUp")){
+                        if(!rs.getString(2).equals("Finished")){
+                            members.add(
+                                    rs.getString(1) + " " +
+                                            rs.getString(2));
+                        }
+                    }
+
+                    if(tab.equals("turnIn")){
+                        if(!rs.getString(2).equals("Reserved")){
+                            members.add(
+                                rs.getString(1) + " " +
+                                rs.getString(2));
+                        }
+
+
+                    }
+                    //once vidas pushed
+                    /*
+                    if(tab.equals("cancel")){
+
+                    }
+                     */
+
                 }
 
             con.close();

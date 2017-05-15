@@ -22,6 +22,8 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import static java.sql.JDBCType.NULL;
+
 public class Controller {
 
 
@@ -142,8 +144,14 @@ public class Controller {
     private javafx.scene.control.ComboBox turnInCustomer;
     @FXML
     private javafx.scene.control.ComboBox cancelReservationCustomer;
+    //CustomerOrder CLASS variables >>>>>>>>>> for seeing returned mileage and fuel
+    @FXML
+    private  javafx.scene.control.TextField turnInMileage;
+    @FXML
+    private  javafx.scene.control.TextField turnInFuel;
     @FXML
     private  javafx.scene.control.TextArea receiptTxtArea;
+
 
     //Class instences
     MotorhomeModification motorhomeModification = new MotorhomeModification();
@@ -376,7 +384,7 @@ public class Controller {
            ReserveMH.saveOrder(startYear, startMonth, startDay, endYear, endMonth, endDay, Season, itemAmount, cost, signiture,reservedID2 );
            statusBarForReserver.setText("Your oder " + signiture+" was successful");
        }
-
+       reserverCombo.setValue("");
     }
 
 @FXML
@@ -426,14 +434,31 @@ public class Controller {
     //Ultimate refresher for comebo boxes that gets their value directly from data base for customer names a.k.a. signature
     @FXML
     public void ultimateCustomerListComboboxRefresher(MouseEvent mouseEvent){
-    pickUpCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
-    turnInCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
+    pickUpCustomer.setItems(ultCBref.customerOrder("pickUp"));
+    turnInCustomer.setItems(ultCBref.customerOrder("turnIn"));
     cancelReservationCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
     }
     @FXML
     public void customerPickUp(ActionEvent actionEvent){
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
+    }
+
+    @FXML
+    public void customerTurnIn(ActionEvent actionEvent){
+
+        ;
+
+        if(turnInCustomer.getSelectionModel().isEmpty()){
+            receiptTxtArea.setText("Pick a name from combo box you dip");
+        }else{
+            String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
+            int currentMileage = Integer.parseInt( turnInMileage.getText());
+            int currentFuel = Integer.parseInt(turnInFuel.getText());
+
+            cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
+        }
+
     }
 
 }

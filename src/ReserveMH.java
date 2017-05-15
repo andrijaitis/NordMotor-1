@@ -67,13 +67,13 @@ public class ReserveMH {
 
     public static void saveOrder(String startYear, String startMonth, String startDay, String endYear, String endMotnh,
                                  String 	endDay, String season, String 	itemAmount, String cost, String signiture,
-                                 String reservedID    ) {
+                                 String mhReservedID    ) {
 
         try {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture` , `reservedID`)" +
+            String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture` , `reservedID`, `situation`)" +
                     "VALUES " +
                     "(NULL, "
                     +"'"+ startYear  +"'  ,"
@@ -81,17 +81,25 @@ public class ReserveMH {
                     +"'"+ startDay   +"'  ,"
                     +"'"+ endYear    +"'  ,"
                     +"'"+ endMotnh   +"'  ,"
-                    +"'"+ endDay   +"',   "
-                    +"'"+ season   +"',   "
-                    +"'"+ itemAmount +"',   "
-                    +"'"+ cost   +"',   "
-                    +"'"+ signiture  +"',   "
-                    +"'"+ reservedID  +"'   "
-                    +");                     ";
+                    +"'"+ endDay     +"'  ,"
+                    +"'"+ season     +"'  ,"
+                    +"'"+ itemAmount +"'  ,"
+                    +"'"+ cost       +"'  ,"
+                    +"'"+ signiture  +"'  ,"
+                    +"'"+ mhReservedID +"'  ,"
+                    +"'"+ "Reserved" +"'   "
+                    +");                   ";
 
+            String sqlChangeStatus =    "UPDATE nordic_rv " +
+                                        "SET "         +
+                                        "status           = " + "'" + "Reserved_MH" + "'" + " " +
+                                        "WHERE rvID = " + "'" + mhReservedID  + "'" + ";" ;
 
             System.out.println(sql);
+            System.out.println(sqlChangeStatus);
+
             stmt.executeUpdate(sql);
+            stmt.executeUpdate(sqlChangeStatus);
             con.close();
 
         } catch (SQLException e) {
