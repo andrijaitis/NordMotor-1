@@ -49,7 +49,9 @@ public class CustomerOrder {
         DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
         Date date = new Date();
         String cancelationDate = (String) dateFormat.format(date);
-        String OrderDate = StartDate(signature);
+        String OrderDate =  (Reservation(signature).get(4) + " " + Reservation(signature).get(3) + " " + Reservation(signature).get(2));
+        //String OrderDate = "2017 05 27";
+        System.out.println(OrderDate);
 
         try {
 
@@ -64,64 +66,55 @@ public class CustomerOrder {
         return "0";
     }
 
-    public String StartDate(String customerName) {
 
+
+    public java.util.List<String> Reservation(String customerName) {
+        java.util.List<String> list = new ArrayList<String>();
         try {
 
             System.out.println(customerName);
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `startDay`,`startMonth`,`startYear` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
+            ResultSet rs = stmt.executeQuery("SELECT `cost` ,`signiture` , `startDay`,`startMonth`,`startYear` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
             while (rs.next()) {
-                System.out.println(rs.getString(3) + " " + rs.getString(1) + " " + rs.getString(2));
-                String date = rs.getString(3) + " " + rs.getString(1) + " " + rs.getString(2);
+                list.add(rs.getString(1));
+                list.add(rs.getString(2));
+                list.add(rs.getString(3));
+                list.add(rs.getString(4));
+                list.add(rs.getString(5));
+
+
                 con.close();
-                return date;
+                return list;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "1999 11 11"; //means something is wrong u DIP
+        return list; //means something is wrong u DIP
 
     }
-
-    public String cost(String customerName) {
-
-        try {
-
-            System.out.println(customerName);
-            Connection con = DBConnection.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `cost` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
-            while (rs.next()) {
-                String cost = rs.getString(1);
-                con.close();
-                return cost;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "999999"; //means something is wrong u DIP
-
-    }
-    //int seasonPrice= ((motorhomePrice) / 100 * seasonPercentage ) +extraItemPrice + motorhomePrice;
 
     public int penalty(int days,int cost ) {
         int refund = 0;
         if (50 < days) {
             refund = cost / 100 * 20;
+            System.out.println("20%");
             return refund;
         } else if (50 < days) {
             refund = cost / 100 * 50;
+            System.out.println("50%");
             return refund;
         } else if (49 > days && days > 15) {
             refund = cost / 100 * 80;
+            System.out.println("80%");
             return refund;
         } else if (days >= 15) {
             refund = cost / 100 * 95;
+            System.out.println("90%");
             return refund;
         } else if (days >= 1) {
             refund = cost / 100 * 95;
+            System.out.println("95%");
             return refund;
         } else {
             return refund;
