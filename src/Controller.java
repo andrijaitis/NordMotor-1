@@ -160,7 +160,7 @@ public class Controller {
         String PassInput = pas.getText();
 
         boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
-        System.out.println(status + " aa");
+        System.out.println(status);
         if (status == true) {
             statusBarForLogin.setText("You are logged in");
             userLoggedIn = status;
