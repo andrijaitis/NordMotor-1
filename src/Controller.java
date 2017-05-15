@@ -56,7 +56,8 @@ public class Controller {
 
     @FXML
     private javafx.scene.control.TextField addModelTxtField;
-
+    @FXML
+    private javafx.scene.control.Label daysCounter;
 
     @FXML
     private javafx.scene.control.TextField addPriceTxtField;
@@ -443,6 +444,30 @@ public class Controller {
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
     }
+    @FXML
+    public void orderCancelation(ActionEvent actionEvent){
+        String Signature = (String) cancelReservationCustomer.getValue();
+        int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(Signature));
+
+
+        int kaina = Integer.parseInt(cusOrder.Reservation(Signature).get(0));
+        System.out.println(daysBeforeStart);
+        daysCounter.setText(cusOrder.dateDffCounter(Signature));
+        int refund = cusOrder.penalty(daysBeforeStart,kaina);
+        int sugrazinta = kaina - refund;
+        System.out.println("Days beror start "+daysBeforeStart);
+        System.out.println("Kaina " + kaina);
+        System.out.println("penalty" +  refund);
+        System.out.println("Sugrazinta suma" + sugrazinta);
+
+        receiptTxtArea.setText(
+               "Days berore start "+daysBeforeStart +" " + "\n" +
+                "Price                 " + kaina + "\n" +
+                "Penalty               " +  refund +" " + "\n" +
+                "Returned ammount  " + sugrazinta + "\n"
+        );
+
+             }
 
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
