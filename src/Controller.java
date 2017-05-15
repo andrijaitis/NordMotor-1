@@ -421,7 +421,7 @@ public class Controller {
         startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
         listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
         repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
-        reserverCombo.setItems(ultCBref.myUltimateRefresh("Update"));
+        reserverCombo.setItems(ultCBref.myUltimateRefresh("Reserve"));
     }
     //Ultimate refresher for comebo boxes that gets their value directly from data base for customer names a.k.a. signature
     @FXML
@@ -432,7 +432,8 @@ public class Controller {
     }
     @FXML
     public void customerPickUp(ActionEvent actionEvent){
-        cusOrder.pickUp();
+        String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
+        cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
     }
 
 }

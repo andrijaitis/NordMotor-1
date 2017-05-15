@@ -26,37 +26,58 @@ public class UltimateComboboxRefresher {
             while (rs.next()) {
                 //Start Screen
                 if(tab == "SS") {
-                    members.add(
-                                    rs.getString(1) + " "+
-                                    rs.getString(2) + " "+
-                                    rs.getString(3) + " "+
-                                    rs.getString(4) + " "+
-                                    rs.getString(5) + "[B] "+
-                                    rs.getString(6) + " [€] "+
-                                    rs.getString(7) + " [L] "+
-                                    rs.getString(8) + " [km] ");
+
+                        members.add(
+                                rs.getString(1) + " "+
+                                        rs.getString(2) + " "+
+                                        rs.getString(3) + " "+
+                                        rs.getString(4) + " "+
+                                        rs.getString(5) + "[B] "+
+                                        rs.getString(6) + " [€] "+
+                                        rs.getString(7) + " [L] "+
+                                        rs.getString(8) + " [km] ");
+
+
+
                 }
                 //update motorhome info
                 if(tab == "Update") {
-                    members.add(
-                                    rs.getString(1) + " "+
-                                    rs.getString(2) + " "+
-                                    rs.getString(3) + " "+
-                                    rs.getString(4) + " "+
-                                    rs.getString(5) + "[B] "+
-                                    rs.getString(6) + " [€] ");
+                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use")) {
+                        members.add(
+                                rs.getString(1) + " " +
+                                        rs.getString(2) + " " +
+                                        rs.getString(3) + " " +
+                                        rs.getString(4) + " " +
+                                        rs.getString(5) + "[B] " +
+                                        rs.getString(6) + " [€] ");
+                    }
                 }
                 //repair motorhomes
                 if(tab == "Repair") {
-                    members.add(
-                                    rs.getString(1) + " <"+
-                                    rs.getString(2) + "> "+
-                                    rs.getString(3) + " "+
-                                    rs.getString(4) + " "+
-                                    rs.getString(5) + " "+
-                                    rs.getString(7) + "[L] "+
-                                    rs.getString(8) + "[km]");
+                    if (!rs.getString(2).equals("Available") && !rs.getString(2).equals("In_use")) {
+                        members.add(
+                                rs.getString(1) + " <" +
+                                        rs.getString(2) + "> " +
+                                        rs.getString(3) + " " +
+                                        rs.getString(4) + " " +
+                                        rs.getString(5) + " " +
+                                        rs.getString(7) + "[L] " +
+                                        rs.getString(8) + "[km]");
+                    }
                 }
+                //reserve a motorhome
+                if(tab == "Reserve") {
+                    if (!rs.getString(2).equals("Out_of_service") && !rs.getString(2).equals("Unavailable") && !rs.getString(2).equals("In_use")) {
+                        members.add(
+                                rs.getString(1) + " " +
+                                        rs.getString(2) + " " +
+                                        rs.getString(3) + " " +
+                                        rs.getString(4) + " " +
+                                        rs.getString(5) + "[B] " +
+                                        rs.getString(6) + " [€] ");
+                    }
+                }
+
             }
             con.close();
 
