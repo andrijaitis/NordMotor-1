@@ -135,6 +135,26 @@ public class CustomerOrder {
         return "0";
     }
 
+    public String dayCounterStartEnd (String startDate, String endDate) {
+        String days;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+
+        //String startDate =  (Reservation(signature).get(4) + " " + Reservation(signature).get(3) + " " + Reservation(signature).get(2));
+        //String endDate =  (Reservation(signature).get(7) + " " + Reservation(signature).get(6) + " " + Reservation(signature).get(5));
+
+        try {
+
+            Date date1 = dateFormat.parse(startDate);
+            Date date2 = dateFormat.parse(endDate);
+            long difference = date2.getTime() - date1.getTime();
+            days = Long.toString(TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS));
+            return days;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "0";
+    }
+
 
 
     public java.util.List<String> Reservation(String customerName) {
@@ -144,13 +164,17 @@ public class CustomerOrder {
             System.out.println(customerName);
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `cost` ,`signiture` , `startDay`,`startMonth`,`startYear` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
+            ResultSet rs = stmt.executeQuery("SELECT `cost` ,`signiture` , `startDay`,`startMonth`,`startYear` , `endDay`,`endMotnh`,`endYear` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
             while (rs.next()) {
                 list.add(rs.getString(1));
                 list.add(rs.getString(2));
                 list.add(rs.getString(3));
                 list.add(rs.getString(4));
                 list.add(rs.getString(5));
+                list.add(rs.getString(6));
+                list.add(rs.getString(7));
+                list.add(rs.getString(8));
+
 
 
                 con.close();

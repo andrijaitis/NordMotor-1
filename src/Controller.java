@@ -310,12 +310,25 @@ public class Controller {
            whichSeason.setFont(Font.font ("Verdana", 17));
             statusBarForReserver.setText("Please check if MH selected");
 
-        }else{
 
-            int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
-            int startMonth = Integer.parseInt( (String) startDateMONTHTxtField.getValue());
-            int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
-            int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
+
+        }else{
+           //String StartDate = "2017 05 15";
+           //String EndDate = "2017 05 20";
+
+
+
+           int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
+           int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
+           int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
+
+           int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
+           int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
+           int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
+
+           String StartDate = startYear+ " "+ startMonth+" "+ startDay;
+           String EndDate = endYear+ " "+ endMonth+" "+ endDay;
+           int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
 
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
@@ -324,10 +337,13 @@ public class Controller {
             int extraItemPrice = ReserveMH.items.size() *10; //price for extra shiy
             String[] arr = price.split(" ");
             int motorhomePrice = Integer.parseInt(arr[5]);
-            int seasonPrice= ((motorhomePrice) / 100 * seasonPercentage ) +extraItemPrice + motorhomePrice;
-            finalPrice.setText(Integer.toString(seasonPrice));//bybis
+            int motorhomePriceforDay =motorhomePrice/30;
+            int seasonPrice= (((motorhomePriceforDay *howManyDays) )/ 100 *  seasonPercentage);
+            int lastPrice = seasonPrice + (motorhomePriceforDay *howManyDays) + extraItemPrice;
+            finalPrice.setText(Integer.toString(lastPrice));//
             System.out.println(seasonPercentage);
             statusBarForReserver.setText("Price was calculated  Total: "+ seasonPrice);
+           System.out.println(howManyDays);
         }
     //----------------------------------------------------------------
 }
@@ -465,6 +481,7 @@ public class Controller {
                 "Price                 " + kaina + "\n" +
                 "Penalty               " +  refund +" " + "\n" +
                 "Returned ammount  " + sugrazinta + "\n"
+
         );
 
              }
