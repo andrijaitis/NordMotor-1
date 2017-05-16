@@ -29,8 +29,8 @@ public class MotorhomeModification {
                     +"'"+ "Available"  +"'  ,"
                     +"'"+ theBrand     +"'  ,"
                     +"'"+ theModel     +"'  ,"
-                    +"'"+ thePrice     +"'  ,"
                     +"'"+ theBed       +"'  ,"
+                    +"'"+ thePrice     +"'  ,"
                     +100               +"   ,"
                     +"'"+ theMileage   +"'   "
                     +");                     ";

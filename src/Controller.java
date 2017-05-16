@@ -286,7 +286,7 @@ public class Controller {
     public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
 
         String valuesFromComBox = (String) listOfMHforUpdating.getValue();
-        String ID = valuesFromComBox.substring(0, 1);
+        String ID = valuesFromComBox.substring(0, 2);
         System.out.println(valuesFromComBox);
 
         updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
@@ -336,7 +336,7 @@ public class Controller {
     public void setAllValuesForMechanic(ActionEvent actionEvent){
         //set the text into the text fields from the combo box directly
         String valuesFromComBox = (String) repairListOFMHforMechanic.getValue();
-        String ID = valuesFromComBox.substring(0,1);
+        String ID = valuesFromComBox.substring(0,2);
         System.out.println(valuesFromComBox);
 
         idForMechanic.setText(ID);
@@ -443,6 +443,7 @@ public class Controller {
     public void customerPickUp(ActionEvent actionEvent){
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
+        receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
     }
     @FXML
     public void orderCancelation(ActionEvent actionEvent){
@@ -482,6 +483,8 @@ public class Controller {
             int currentFuel = Integer.parseInt(turnInFuel.getText());
 
             cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
+            receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoTurnIns);
+
         }
 
     }
