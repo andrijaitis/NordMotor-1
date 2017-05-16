@@ -28,8 +28,8 @@ public class UltimateComboboxRefresher {
                 if(tab == "SS") {
 
                         members.add(
-                                rs.getString(1) + " "+
-                                        rs.getString(2) + " "+
+                                rs.getString(1) + " <"+
+                                        rs.getString(2) + "> "+
                                         rs.getString(3) + " "+
                                         rs.getString(4) + " "+
                                         rs.getString(5) + "[B] "+
@@ -114,21 +114,26 @@ public class UltimateComboboxRefresher {
                     if(tab.equals("pickUp")){
                         if(!rs.getString(2).equals("Finished")){
                             members.add(
-                                    rs.getString(1) + " " +
-                                            rs.getString(2));
+                                   // rs.getString(1) + " " +
+                                            rs.getString(1));
                         }
                     }
 
                     if(tab.equals("turnIn")){
-                        if(!rs.getString(2).equals("Reserved")){
+                        if(!rs.getString(2).equals("Reserved") && !rs.getString(2).equals("Finished")){
                             members.add(
-                                rs.getString(1) + " " +
-                                rs.getString(2));
+                               // rs.getString(1) + " " +
+                                rs.getString(1));
                         }
-
-
                     }
                     //once vidas pushed
+                    if(tab.equals("cancel")){
+                        if(!rs.getString(2).equals("Finished") && !rs.getString(2).equals("In_use")){
+                            members.add(
+                                    // rs.getString(1) + " " +
+                                    rs.getString(1));
+                        }
+                    }
                     /*
                     if(tab.equals("cancel")){
 

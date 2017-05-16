@@ -36,14 +36,14 @@
                   </font>
                 </Label>
                 <Label font="$x1" layoutX="14.0" layoutY="122.0" prefHeight="73.0" prefWidth="709.0" text="Other practical information.The different kind of extra that you can buy with your reservation of a Motorhome are:bike racks, bed linen, child seats, picnic tables and chairs, each cost a extra 10€" wrapText="true" />
-                <Button layoutX="734.0" layoutY="412.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="OFF" textFill="RED">
+                <Button layoutX="732.0" layoutY="386.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="OFF" textFill="RED">
                   <font>
                     <Font name="System Bold" size="19.0" />
                   </font>
                 </Button>
                 <GridPane gridLinesVisible="true" layoutX="251.0" layoutY="219.0" prefHeight="153.0" prefWidth="461.0">
                   <children>
-                    <Label font="$x1" prefWidth="325.0" text="Status | beds | mark | model" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label font="$x1" prefHeight="27.0" prefWidth="432.0" text="ID | Status | mark | model | beds | price | fuel | mileage" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <ComboBox fx:id="startScreenComBox" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="469.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -103,7 +103,7 @@
                     <TextField fx:id="addPriceTxtField" prefWidth="200.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <TextField fx:id="addModelTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <TextField fx:id="addBrandTxtField" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                              <ComboBox fx:id="addBedComBox" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="addBedComBox" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Mileage:" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="17.0" fx:id="x21" />
@@ -132,7 +132,7 @@
                     <Label font="$x2" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Label font="$x2" text="Availability" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                     <TextField fx:id="updatePrice" prefWidth="196.0" promptText="€€€" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="updateBeds" onMouseClicked="#localValueComboBoxes" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <ComboBox fx:id="updateBeds" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -141,7 +141,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox fx:id="updateAvailability" onMouseClicked="#localValueComboBoxes" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <ComboBox fx:id="updateAvailability" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />

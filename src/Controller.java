@@ -437,7 +437,7 @@ public class Controller {
     public void ultimateCustomerListComboboxRefresher(MouseEvent mouseEvent){
     pickUpCustomer.setItems(ultCBref.customerOrder("pickUp"));
     turnInCustomer.setItems(ultCBref.customerOrder("turnIn"));
-    cancelReservationCustomer.setItems(ultCBref.customerOrder("IRELAVENT_DATA_BUT_NEEDED_TO_WORK"));
+    cancelReservationCustomer.setItems(ultCBref.customerOrder("cancel"));
     }
     @FXML
     public void customerPickUp(ActionEvent actionEvent){
