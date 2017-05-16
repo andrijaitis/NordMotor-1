@@ -21,18 +21,20 @@ public class AdminLogin {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `ID` = 1");
+            //ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `ID` = 1");
+            ResultSet rs = stmt.executeQuery("SELECT `userName`,`status` FROM users WHERE STRCMP( `password` ,MD5('"+pick+"')) = 0");
 
             while (rs.next()) {
-
+                System.out.println(rs.getString(2));
                 Login =   rs.getString(1);
                 Pass =   rs.getString(2);
-                System.out.println( " UserInput " + peck + " " + pick);
-                System.out.println(" SQL " + Login + " " + Pass);
+                System.out.println(Pass+  "dfdgfdgfdfgdfg");
 
-                if(peck.equals(Login) && pick.equals(Pass)){
+                if(peck.equals(Login) && Pass.equals("true")){
+
                     return true;
                 } else {
+
                     return false;
                 }
             }
