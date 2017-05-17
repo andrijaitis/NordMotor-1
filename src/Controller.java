@@ -151,6 +151,8 @@ public class Controller {
     @FXML
     private  javafx.scene.control.TextField turnInFuel;
     @FXML
+    private  javafx.scene.control.Label mileageBeforeTrip;
+    @FXML
     private  javafx.scene.control.TextArea receiptTxtArea;
 
 
@@ -490,8 +492,6 @@ public class Controller {
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
 
-        ;
-
         if(turnInCustomer.getSelectionModel().isEmpty()){
             receiptTxtArea.setText("Pick a name from combo box you dip");
         }else{
@@ -503,7 +503,17 @@ public class Controller {
             receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoTurnIns);
 
         }
+    }
+    @FXML
+    public void setCurentMileageTurnIn(ActionEvent actionEvent){
+
+        String a;
+        String customer = (String) turnInCustomer.getValue();
+        a = cusOrder.mileagaBeforeTheTrip(customer);
+        mileageBeforeTrip.setText("Before trip mileage: "+a+" [km]");
+
 
     }
+
 
 }

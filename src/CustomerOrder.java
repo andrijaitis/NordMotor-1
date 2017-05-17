@@ -215,6 +215,35 @@ public class CustomerOrder {
 
     }
 
+    //side method to get the current mileage before the trip
+    public String mileagaBeforeTheTrip(String customer){
+
+        String mileage = " ";
+
+        try {
+            Connection con = DBConnection.getConnection();
+            //this one is for finding mileage and fuel and cost --------------------------------------------------------
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT mileage " +
+                    "FROM  nordic_rv, reserve " +
+                    "WHERE reservedID = rvID AND signiture ="+ "'"+ customer + "'"  + ";"
+            );
+
+            while (rs.next()) {
+                mileage = rs.getString(1);
+            }
+
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return mileage;
+    }
+
 
 
 }

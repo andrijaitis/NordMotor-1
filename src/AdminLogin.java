@@ -25,7 +25,6 @@ public class AdminLogin {
             ResultSet rs = stmt.executeQuery("SELECT `userName`,`status` FROM users WHERE STRCMP( `password` ,MD5('"+pick+"')) = 0");
 
             while (rs.next()) {
-                System.out.println(rs.getString(2));
                 Login =   rs.getString(1);
                 Pass =   rs.getString(2);
                 System.out.println(Pass);
