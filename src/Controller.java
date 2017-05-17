@@ -339,7 +339,7 @@ public class Controller {
             int extraItemPrice = ReserveMH.items.size() *10; //price for extra shiy
             String[] arr = price.split(" ");
             int motorhomePrice = Integer.parseInt(arr[5]);
-            int motorhomePriceforDay =motorhomePrice/30;
+            int motorhomePriceforDay =motorhomePrice;
             int seasonPrice= (((motorhomePriceforDay *howManyDays) )/ 100 *  seasonPercentage);
             int lastPrice = seasonPrice + (motorhomePriceforDay *howManyDays) + extraItemPrice;
             finalPrice.setText(Integer.toString(lastPrice));//
