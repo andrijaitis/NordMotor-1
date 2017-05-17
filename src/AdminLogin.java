@@ -28,9 +28,9 @@ public class AdminLogin {
                 System.out.println(rs.getString(2));
                 Login =   rs.getString(1);
                 Pass =   rs.getString(2);
-                System.out.println(Pass+  "dfdgfdgfdfgdfg");
+                System.out.println(Pass);
 
-                if(peck.equals(Login) && Pass.equals("true")){
+                if(peck.equals(Login) && Pass.equals("b326b5062b2f0e69046810717534cb09")){
 
                     return true;
                 } else {
