@@ -125,7 +125,7 @@ public class UltimateComboboxRefresher {
                         }
                     }
                     if(tab.equals("cancel")){
-                        if(!rs.getString(2).equals("Finished") && !rs.getString(2).equals("In_use")){
+                        if(!rs.getString(2).equals("Canceled") && !rs.getString(2).equals("In_use")){
                             members.add(
                                     rs.getString(1));
                         }

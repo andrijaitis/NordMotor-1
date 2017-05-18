@@ -120,7 +120,7 @@ public class CustomerOrder {
             String sql =    "UPDATE reserve, nordic_rv " +
                     "SET "         +
                     "status    = " +"'" + "Available"   +"'" + ", " +
-                    "situation = " +"'" + "Cancelled" +"'" + "  " +
+                    "situation = " +"'" + "Canceled" +"'" + "  " +
                     "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
 
 

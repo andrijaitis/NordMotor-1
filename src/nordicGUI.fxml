@@ -401,8 +401,8 @@
                 </GridPane>
                 <GridPane gridLinesVisible="true" layoutX="101.0" layoutY="363.0" prefHeight="90.0" prefWidth="414.0">
                   <children>
-                    <Label text="Whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="cancelReservationCustomer" onMouseClicked="#ultimateCustomerListComboboxRefresher" prefWidth="200.0" promptText="whomst'd've" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Whomst'd've cancel" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="cancelReservationCustomer" onMouseClicked="#ultimateCustomerListComboboxRefresher" prefWidth="200.0" promptText="Customer" GridPane.columnIndex="0" GridPane.rowIndex="1">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
