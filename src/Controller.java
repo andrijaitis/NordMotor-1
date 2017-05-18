@@ -204,7 +204,7 @@ public class Controller {
             statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
 
         } catch (NumberFormatException e) {
-            statusBarForSuccessesfullyAddingMH.setText("Please use integer values");
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
 
            }
 
@@ -252,7 +252,7 @@ public class Controller {
 
 
         } catch (NumberFormatException e) {
-            statusBarForSuccessesfullyAddingMH.setText("Please use integer values");
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
 
         }
 
@@ -335,6 +335,17 @@ public class Controller {
     }
    @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
+       int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
+       int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
+       int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
+
+       int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
+       int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
+       int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
+       String StartDate = startYear+ " "+ startMonth+" "+ startDay;
+       String EndDate = endYear+ " "+ endMonth+" "+ endDay;
+       int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
+
         //Checks which season it is--------------------------------------
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
@@ -347,25 +358,21 @@ public class Controller {
            whichSeason.setFont(Font.font ("Verdana", 17));
             statusBarForReserver.setText("Please check if MH selected");
 
+       }else if (howManyDays <= 0){
+           System.out.println(" Ble cyka you need normal value");
+           whichSeason.setFont(Font.font ("Verdana", 17));
+           statusBarForReserver.setText("choose normal date kurwa");
 
-
-        }else{
+       }else{
            //String StartDate = "2017 05 15";
            //String EndDate = "2017 05 20";
 
 
 
-           int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
-           int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
-           int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
 
-           int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
-           int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
-           int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
 
-           String StartDate = startYear+ " "+ startMonth+" "+ startDay;
-           String EndDate = endYear+ " "+ endMonth+" "+ endDay;
-           int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
+
+
 
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
