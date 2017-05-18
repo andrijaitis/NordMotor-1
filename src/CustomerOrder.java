@@ -158,6 +158,24 @@ public class CustomerOrder {
         }
         return "0";
     }
+    public String currentDaytoStartDate(String startDate) {
+        String days;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+        Date date = new Date();
+        String todayDate = (String) dateFormat.format(date);
+
+        try {
+
+            Date date1 = dateFormat.parse(todayDate);
+            Date date2 = dateFormat.parse(startDate);
+            long difference = date2.getTime() - date1.getTime();
+            days = Long.toString(TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS));
+            return days;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "0";
+    }
 
     public String dayCounterStartEnd (String startDate, String endDate) {
         String days;

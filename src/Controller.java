@@ -163,6 +163,7 @@ public class Controller {
     Repair repair = new Repair();
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
     CustomerOrder cusOrder = new CustomerOrder();
+    ReserveMH reserveMH = new ReserveMH();
 
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
@@ -346,6 +347,8 @@ public class Controller {
        String EndDate = endYear+ " "+ endMonth+" "+ endDay;
        int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
 
+
+
         //Checks which season it is--------------------------------------
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
@@ -362,6 +365,10 @@ public class Controller {
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("choose normal date kurwa");
+       }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(StartDate)) < 0){
+           System.out.println(" Ble cyka you need normal value");
+           whichSeason.setFont(Font.font ("Verdana", 17));
+           statusBarForReserver.setText("Ble cyka you cant travel time kurwa");
 
        }else{
            //String StartDate = "2017 05 15";
@@ -388,6 +395,7 @@ public class Controller {
             System.out.println(seasonPercentage);
             statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
            System.out.println(howManyDays);
+           System.out.println(cusOrder.currentDaytoStartDate(StartDate) + "u dipppppppp");
         }
     //----------------------------------------------------------------
 }
