@@ -148,8 +148,8 @@ public class CustomerOrder {
 
         try {
 
-            Date date2 = dateFormat.parse(cancelationDate);
-            Date date1 = dateFormat.parse(OrderDate);
+            Date date1 = dateFormat.parse(cancelationDate);
+            Date date2 = dateFormat.parse(OrderDate);
             long difference = date2.getTime() - date1.getTime();
             days = Long.toString(TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS));
             return days;
@@ -217,23 +217,19 @@ public class CustomerOrder {
             refund = cost / 100 * 20;
             System.out.println("20%");
             return refund;
-        } else if (50 < days) {
+        } else if (50 < days && 15 < days) {
             refund = cost / 100 * 50;
             System.out.println("50%");
             return refund;
-        } else if (49 > days && days > 15) {
+        } else if (days < 15 && days > 1) {
             refund = cost / 100 * 80;
             System.out.println("80%");
             return refund;
-        } else if (days >= 15) {
-            refund = cost / 100 * 95;
-            System.out.println("90%");
-            return refund;
-        } else if (days >= 1) {
+        } else if (days <= 1) {
             refund = cost / 100 * 95;
             System.out.println("95%");
             return refund;
-        } else {
+              } else {
             return refund;
         }
 

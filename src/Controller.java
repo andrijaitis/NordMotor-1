@@ -248,17 +248,25 @@ public class Controller {
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent) {
 
-        String item = (String) listOfExtraItemsComBox.getValue();
-        String listString = "";
 
-        for (String s : ReserveMH.addExtraShit(item)) {
-            listString += s + "\n";
-            System.out.println();
+        String item = (String) listOfExtraItemsComBox.getValue();
+
+
+
+        if (listOfExtraItemsComBox.getValue()== null) {
+            statusBarForReserver.setText("Check if you selected extra item u DIP");
+        } else {
+            String listString = "";
+
+            for (String s : ReserveMH.addExtraShit(item)) {
+                listString += s + "\n";
+                System.out.println();
+            }
+            extraItemsTxtArea.setText(listString);
+            String sizes = Integer.toString(ReserveMH.items.size());
+            totalItems.setText(sizes);
+            System.out.println(sizes);
         }
-        extraItemsTxtArea.setText(listString);
-        String sizes = Integer.toString(ReserveMH.items.size());
-        totalItems.setText(sizes);
-        System.out.println(sizes);
     }
 
     @FXML
@@ -344,7 +352,7 @@ public class Controller {
             int lastPrice = seasonPrice + (motorhomePriceforDay *howManyDays) + extraItemPrice;
             finalPrice.setText(Integer.toString(lastPrice));//
             System.out.println(seasonPercentage);
-            statusBarForReserver.setText("Price was calculated  Total: "+ seasonPrice);
+            statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
            System.out.println(howManyDays);
         }
     //----------------------------------------------------------------
@@ -473,14 +481,10 @@ public class Controller {
 
             cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
-
-            String Signature = (String) cancelReservationCustomer.getValue();
-            int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(Signature));
-
-
-            int kaina = Integer.parseInt(cusOrder.Reservation(Signature).get(0));
+            int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
+            int kaina = Integer.parseInt(cusOrder.Reservation(nameOfTheGuyWhoCancel).get(0));
             System.out.println(daysBeforeStart);
-            daysCounter.setText(cusOrder.dateDffCounter(Signature));
+            daysCounter.setText(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
             int refund = cusOrder.penalty(daysBeforeStart, kaina);
             int sugrazinta = kaina - refund;
             System.out.println("Days beror start " + daysBeforeStart);
