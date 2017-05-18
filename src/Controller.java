@@ -22,6 +22,7 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import static java.sql.JDBCType.INTEGER;
 import static java.sql.JDBCType.NULL;
 
 public class Controller {
@@ -188,15 +189,27 @@ public class Controller {
 
     @FXML
     public void motorHomeModsAddingMH(ActionEvent actionEvent) {
-        //add a motorhome to the data base
-        String theBrand = addBrandTxtField.getText();
-        String theModel = addModelTxtField.getText();
         String thePrice = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theBed = (String) addBedComBox.getValue();
         String theMileage = addMileageTxtField.getText();
 
-        motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+        try {
+            Integer.parseInt(addPriceTxtField.getText());
+            Integer.parseInt(addMileageTxtField.getText());
+            String theBrand = addBrandTxtField.getText();
+            String theModel = addModelTxtField.getText();
+            String theBed = (String) addBedComBox.getValue();
+
+
+            motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
+            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+
+        } catch (NumberFormatException e) {
+            statusBarForSuccessesfullyAddingMH.setText("Please use integer values");
+
+           }
+
+
+
     }
 
     @FXML
@@ -219,16 +232,30 @@ public class Controller {
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent) {
         //updates existing motorhomes
-        String beds = (String) updateBeds.getValue();
-        String availability = (String) updateAvailability.getValue();
-
-        String ID = updateID.getText();
-        String brand = updateMark.getText();
-        String model = updateModel.getText();
         String price = updatePrice.getText();
 
-        motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
+        try {
+            Integer.parseInt(updatePrice.getText());
+            String beds = (String) updateBeds.getValue();
+            String availability = (String) updateAvailability.getValue();
+
+            String ID = updateID.getText();
+            String brand = updateMark.getText();
+            String model = updateModel.getText();
+
+
+            motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
+            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
+
+
+
+
+
+        } catch (NumberFormatException e) {
+            statusBarForSuccessesfullyAddingMH.setText("Please use integer values");
+
+        }
+
     }
 
     @FXML
