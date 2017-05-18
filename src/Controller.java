@@ -464,30 +464,42 @@ public class Controller {
         receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
     }
     @FXML
-    public void orderCancelation(ActionEvent actionEvent){
-        String Signature = (String) cancelReservationCustomer.getValue();
-        int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(Signature));
+    public void orderCancelation(ActionEvent actionEvent) {
+
+        if (cancelReservationCustomer.getSelectionModel().isEmpty()) {
+            receiptTxtArea.setText("Pick a name from combo box you dip");
+        } else {
+            String nameOfTheGuyWhoCancel = (String) cancelReservationCustomer.getValue();
+
+            cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
 
-        int kaina = Integer.parseInt(cusOrder.Reservation(Signature).get(0));
-        System.out.println(daysBeforeStart);
-        daysCounter.setText(cusOrder.dateDffCounter(Signature));
-        int refund = cusOrder.penalty(daysBeforeStart,kaina);
-        int sugrazinta = kaina - refund;
-        System.out.println("Days beror start "+daysBeforeStart);
-        System.out.println("Kaina " + kaina);
-        System.out.println("penalty" +  refund);
-        System.out.println("Sugrazinta suma" + sugrazinta);
+            String Signature = (String) cancelReservationCustomer.getValue();
+            int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(Signature));
 
-        receiptTxtArea.setText(
-               "Days berore start "+daysBeforeStart +" " + "\n" +
-                "Price                 " + kaina + "\n" +
-                "Penalty               " +  refund +" " + "\n" +
-                "Returned ammount  " + sugrazinta + "\n"
 
-        );
+            int kaina = Integer.parseInt(cusOrder.Reservation(Signature).get(0));
+            System.out.println(daysBeforeStart);
+            daysCounter.setText(cusOrder.dateDffCounter(Signature));
+            int refund = cusOrder.penalty(daysBeforeStart, kaina);
+            int sugrazinta = kaina - refund;
+            System.out.println("Days beror start " + daysBeforeStart);
+            System.out.println("Kaina " + kaina);
+            System.out.println("penalty" + refund);
+            System.out.println("Sugrazinta suma" + sugrazinta);
 
-             }
+            receiptTxtArea.setText(
+
+                    "Days berore start " + daysBeforeStart + " " + "\n" +
+                            "Price                 " + kaina + "\n" +
+                            "Penalty               " + refund + " " + "\n" +
+                            "Guy who cancelled   " + nameOfTheGuyWhoCancel + " " + "\n" +
+                            "Returned amount  " + sugrazinta + "\n"
+
+            );
+
+        }
+    }
 
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){

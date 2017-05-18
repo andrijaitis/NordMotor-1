@@ -108,9 +108,33 @@ public class CustomerOrder {
         }
     }
 
-    public void orderCancelation() {
+    public void orderCancelation(String nameOfTheGuyWhoCanceled) {
 
 
+        try {
+            Connection con = DBConnection.getConnection();
+            //this one is for finding mileage and fuel and cost --------------------------------------------------------
+            Statement stmt = con.createStatement();
+
+            //this one updates milege and fuel and cost
+            String sql =    "UPDATE reserve, nordic_rv " +
+                    "SET "         +
+                    "status    = " +"'" + "Available"   +"'" + ", " +
+                    "situation = " +"'" + "Cancelled" +"'" + "  " +
+                    "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
+
+
+
+            System.out.println(sql);
+
+            stmt.executeUpdate(sql);
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ObservableList<String> list2 = FXCollections.observableArrayList();
+            list2.add("Failed to load");
+        }
     }
 
     public String dateDffCounter(String signature) {
@@ -124,8 +148,8 @@ public class CustomerOrder {
 
         try {
 
-            Date date1 = dateFormat.parse(cancelationDate);
-            Date date2 = dateFormat.parse(OrderDate);
+            Date date2 = dateFormat.parse(cancelationDate);
+            Date date1 = dateFormat.parse(OrderDate);
             long difference = date2.getTime() - date1.getTime();
             days = Long.toString(TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS));
             return days;
