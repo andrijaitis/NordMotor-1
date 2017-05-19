@@ -405,41 +405,80 @@ public class Controller {
        }
        reserverCombo.setValue("");
     }
+    @FXML
+    public  void lalalalaal(ActionEvent actionEvent) {
 
-@FXML
-    public  void loadYear(MouseEvent mouseEvent){
-    ObservableList<String> years = FXCollections.observableArrayList();
-    years.addAll("2017","2018","2019","2020","2021");
+        String compareDataStart = " ";
+        int a = 0;
 
-    startDateYEARtxtField.setItems(years);
-    endDateYEARtxtField.setItems(years);
+        ObservableList<Integer> years = FXCollections.observableArrayList();
+        years.addAll(2017,2018,2019);
 
-}
+        ObservableList<String> empty = FXCollections.observableArrayList();
+        empty.addAll(" ");
+
+        a =   (Integer ) startDateYEARtxtField.getValue();
+
+
+
+        System.out.println(" this shit is: "+compareDataStart);
+
+        if(a >= 2017){
+            endDateYEARtxtField.setItems(years);
+        }else{
+            endDateYEARtxtField.setItems(empty);
+
+        }
+
+    }
 
     @FXML
-    public  void loadMonth(MouseEvent mouseEvent){
-        ObservableList<String> months = FXCollections.observableArrayList();
+    public  void datesForReserve(MouseEvent mouseEvent){
+        //year
+        String compareDataEnd;
 
-         for ( int i = 1; i < 13; i++) {
+
+        ObservableList<Integer> years = FXCollections.observableArrayList();
+        years.addAll(2017,2018,2019);
+
+        startDateYEARtxtField.setItems(years);
+        //startDateYEARtxtField.setSelected Index(0);
+
+
+
+        //compareDataEnd   =   (String )endDateYEARtxtField.getValue();
+
+        int b = 0;
+
+       // b = Integer.parseInt(compareDataEnd);
+
+
+
+
+
+
+
+
+
+
+
+
+        //month
+        ObservableList<String> months = FXCollections.observableArrayList();
+        for ( int i = 1; i < 13; i++) {
             months.add(Integer.toString(i));
         }
 
         startDateMONTHTxtField.setItems(months);
         endDateMONTHTxtField.setItems(months);
-
-    }
-
-    @FXML
-    public  void loadDay(MouseEvent mouseEvent){
+        //days
         ObservableList<String> days = FXCollections.observableArrayList();
-
         for ( int i = 1; i < 32; i++) {
             days.add(Integer.toString(i));
         }
 
         startDateDAYTxtField.setItems(days);
         endDateDAYTxtField.setItems(days);
-
     }
     //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
     @FXML
@@ -500,7 +539,7 @@ public class Controller {
             int currentFuel = Integer.parseInt(turnInFuel.getText());
 
             cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
-            receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoTurnIns);
+            receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
 
         }
     }
@@ -511,8 +550,6 @@ public class Controller {
         String customer = (String) turnInCustomer.getValue();
         a = cusOrder.mileagaBeforeTheTrip(customer);
         mileageBeforeTrip.setText("Before trip mileage: "+a+" [km]");
-
-
     }
 
 

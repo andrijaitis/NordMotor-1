@@ -32,7 +32,8 @@ public class CustomerOrder {
             String sql =    "UPDATE reserve, nordic_rv " +
                             "SET "         +
                             "status    = " +"'" + "In_use"   +"'" + ", " +
-                            "situation = " +"'" + "Using_it" +"'" + "  " +
+                            "situation = " +"'" + "Using_it" +"'" +
+                                "  " +
                             "WHERE reservedID = rvID AND signiture = " + "'" +customerName +    "'"+           ";"        ;
 
 
@@ -44,8 +45,6 @@ public class CustomerOrder {
             e.printStackTrace();
         }
     }
-
-
 
     public void turnIn(String nameOfTheGuyWhoTurnIns, int currentMileage, int currentFuel) {
 
