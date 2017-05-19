@@ -15,6 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Nordic Motorhomes System");
         primaryStage.setScene(new Scene(root, 900, 800));
         primaryStage.show();
+        //inga
     }
 
 

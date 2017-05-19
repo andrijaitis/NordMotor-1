@@ -22,6 +22,7 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import static java.sql.JDBCType.INTEGER;
 import static java.sql.JDBCType.NULL;
 
 public class Controller {
@@ -162,6 +163,7 @@ public class Controller {
     Repair repair = new Repair();
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
     CustomerOrder cusOrder = new CustomerOrder();
+    ReserveMH reserveMH = new ReserveMH();
 
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
@@ -188,15 +190,27 @@ public class Controller {
 
     @FXML
     public void motorHomeModsAddingMH(ActionEvent actionEvent) {
-        //add a motorhome to the data base
-        String theBrand = addBrandTxtField.getText();
-        String theModel = addModelTxtField.getText();
         String thePrice = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theBed = (String) addBedComBox.getValue();
         String theMileage = addMileageTxtField.getText();
 
-        motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+        try {
+            Integer.parseInt(addPriceTxtField.getText());
+            Integer.parseInt(addMileageTxtField.getText());
+            String theBrand = addBrandTxtField.getText();
+            String theModel = addModelTxtField.getText();
+            String theBed = (String) addBedComBox.getValue();
+
+
+            motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
+            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+
+        } catch (NumberFormatException e) {
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
+
+           }
+
+
+
     }
 
     @FXML
@@ -219,16 +233,30 @@ public class Controller {
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent) {
         //updates existing motorhomes
-        String beds = (String) updateBeds.getValue();
-        String availability = (String) updateAvailability.getValue();
-
-        String ID = updateID.getText();
-        String brand = updateMark.getText();
-        String model = updateModel.getText();
         String price = updatePrice.getText();
 
-        motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
-        statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
+        try {
+            Integer.parseInt(updatePrice.getText());
+            String beds = (String) updateBeds.getValue();
+            String availability = (String) updateAvailability.getValue();
+
+            String ID = updateID.getText();
+            String brand = updateMark.getText();
+            String model = updateModel.getText();
+
+
+            motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
+            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
+
+
+
+
+
+        } catch (NumberFormatException e) {
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
+
+        }
+
     }
 
     @FXML
@@ -248,17 +276,25 @@ public class Controller {
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent) {
 
-        String item = (String) listOfExtraItemsComBox.getValue();
-        String listString = "";
 
-        for (String s : ReserveMH.addExtraShit(item)) {
-            listString += s + "\n";
-            System.out.println();
+        String item = (String) listOfExtraItemsComBox.getValue();
+
+
+
+        if (listOfExtraItemsComBox.getValue()== null) {
+            statusBarForReserver.setText("Check if you selected extra item u DIP");
+        } else {
+            String listString = "";
+
+            for (String s : ReserveMH.addExtraShit(item)) {
+                listString += s + "\n";
+                System.out.println();
+            }
+            extraItemsTxtArea.setText(listString);
+            String sizes = Integer.toString(ReserveMH.items.size());
+            totalItems.setText(sizes);
+            System.out.println(sizes);
         }
-        extraItemsTxtArea.setText(listString);
-        String sizes = Integer.toString(ReserveMH.items.size());
-        totalItems.setText(sizes);
-        System.out.println(sizes);
     }
 
     @FXML
@@ -300,6 +336,19 @@ public class Controller {
     }
    @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
+       int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
+       int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
+       int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
+
+       int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
+       int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
+       int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
+       String StartDate = startYear+ " "+ startMonth+" "+ startDay;
+       String EndDate = endYear+ " "+ endMonth+" "+ endDay;
+       int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
+
+
+
         //Checks which season it is--------------------------------------
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
@@ -312,25 +361,25 @@ public class Controller {
            whichSeason.setFont(Font.font ("Verdana", 17));
             statusBarForReserver.setText("Please check if MH selected");
 
+       }else if (howManyDays <= 0){
+           System.out.println(" Ble cyka you need normal value");
+           whichSeason.setFont(Font.font ("Verdana", 17));
+           statusBarForReserver.setText("choose normal date kurwa");
+       }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(StartDate)) < 0){
+           System.out.println(" Ble cyka you need normal value");
+           whichSeason.setFont(Font.font ("Verdana", 17));
+           statusBarForReserver.setText("Ble cyka you cant travel time kurwa");
 
-
-        }else{
+       }else{
            //String StartDate = "2017 05 15";
            //String EndDate = "2017 05 20";
 
 
 
-           int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
-           int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
-           int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
 
-           int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
-           int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
-           int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
 
-           String StartDate = startYear+ " "+ startMonth+" "+ startDay;
-           String EndDate = endYear+ " "+ endMonth+" "+ endDay;
-           int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
+
+
 
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
@@ -339,13 +388,14 @@ public class Controller {
             int extraItemPrice = ReserveMH.items.size() *10; //price for extra shiy
             String[] arr = price.split(" ");
             int motorhomePrice = Integer.parseInt(arr[5]);
-            int motorhomePriceforDay =motorhomePrice/30;
+            int motorhomePriceforDay =motorhomePrice;
             int seasonPrice= (((motorhomePriceforDay *howManyDays) )/ 100 *  seasonPercentage);
             int lastPrice = seasonPrice + (motorhomePriceforDay *howManyDays) + extraItemPrice;
             finalPrice.setText(Integer.toString(lastPrice));//
             System.out.println(seasonPercentage);
-            statusBarForReserver.setText("Price was calculated  Total: "+ seasonPrice);
+            statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
            System.out.println(howManyDays);
+           System.out.println(cusOrder.currentDaytoStartDate(StartDate) + "u dipppppppp");
         }
     //----------------------------------------------------------------
 }
@@ -503,30 +553,38 @@ public class Controller {
         receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
     }
     @FXML
-    public void orderCancelation(ActionEvent actionEvent){
-        String Signature = (String) cancelReservationCustomer.getValue();
-        int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(Signature));
+    public void orderCancelation(ActionEvent actionEvent) {
 
+        if (cancelReservationCustomer.getSelectionModel().isEmpty()) {
+            receiptTxtArea.setText("Pick a name from combo box you dip");
+        } else {
+            String nameOfTheGuyWhoCancel = (String) cancelReservationCustomer.getValue();
 
-        int kaina = Integer.parseInt(cusOrder.Reservation(Signature).get(0));
-        System.out.println(daysBeforeStart);
-        daysCounter.setText(cusOrder.dateDffCounter(Signature));
-        int refund = cusOrder.penalty(daysBeforeStart,kaina);
-        int sugrazinta = kaina - refund;
-        System.out.println("Days beror start "+daysBeforeStart);
-        System.out.println("Kaina " + kaina);
-        System.out.println("penalty" +  refund);
-        System.out.println("Sugrazinta suma" + sugrazinta);
+            cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
-        receiptTxtArea.setText(
-               "Days berore start "+daysBeforeStart +" " + "\n" +
-                "Price                 " + kaina + "\n" +
-                "Penalty               " +  refund +" " + "\n" +
-                "Returned ammount  " + sugrazinta + "\n"
+            int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
+            int kaina = Integer.parseInt(cusOrder.Reservation(nameOfTheGuyWhoCancel).get(0));
+            System.out.println(daysBeforeStart);
+            daysCounter.setText(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
+            int refund = cusOrder.penalty(daysBeforeStart, kaina);
+            int sugrazinta = kaina - refund;
+            System.out.println("Days beror start " + daysBeforeStart);
+            System.out.println("Kaina " + kaina);
+            System.out.println("penalty" + refund);
+            System.out.println("Sugrazinta suma" + sugrazinta);
 
-        );
+            receiptTxtArea.setText(
 
-             }
+                    "Days berore start " + daysBeforeStart + " " + "\n" +
+                            "Price                 " + kaina + "\n" +
+                            "Penalty               " + refund + " " + "\n" +
+                            "Guy who cancelled   " + nameOfTheGuyWhoCancel + " " + "\n" +
+                            "Returned amount  " + sugrazinta + "\n"
+
+            );
+
+        }
+    }
 
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
