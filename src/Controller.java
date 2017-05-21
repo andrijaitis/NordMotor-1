@@ -39,7 +39,7 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField log;
     @FXML
-    private javafx.scene.control.TextField pas;
+    private javafx.scene.control.PasswordField pas;
     @FXML
     private javafx.scene.control.TitledPane startSceenPan;
     @FXML
@@ -364,11 +364,11 @@ public class Controller {
        }else if (howManyDays <= 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("choose normal date kurwa");
+           statusBarForReserver.setText("Choose normal date");
        }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(StartDate)) < 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("Ble cyka you cant travel time kurwa");
+           statusBarForReserver.setText("You cant travel time m8");
 
        }else{
            //String StartDate = "2017 05 15";
