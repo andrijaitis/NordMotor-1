@@ -67,9 +67,11 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField addMileageTxtField;
     @FXML
-    private javafx.scene.control.TextField finalPrice;
+    private javafx.scene.control.Label finalPrice;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    @FXML
+    private javafx.scene.control.Label statusBarForService;
     @FXML
     private javafx.scene.control.Label statusBarForReserver;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
@@ -102,7 +104,7 @@ public class Controller {
     @FXML
     private ComboBox listOfMHforUpdating;
     @FXML
-    private javafx.scene.control.TextField updateID;
+    private javafx.scene.control.Label updateID;
     @FXML
     private javafx.scene.control.TextField updateMark;
     @FXML
