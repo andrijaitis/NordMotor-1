@@ -22,11 +22,12 @@ public class AdminLogin {
 
             Statement stmt = con.createStatement();
             //ResultSet rs = stmt.executeQuery("SELECT `userName`,`password` FROM `users` WHERE `ID` = 1");
-            ResultSet rs = stmt.executeQuery("SELECT `userName`,`status` FROM users WHERE STRCMP( `password` ,MD5('"+pick+"')) = 0");
+            ResultSet rs = stmt.executeQuery("SELECT `userName`,`status` FROM users WHERE STRCMP( `password` ,MD5('"+pick+"')) = 0");//x' OR 1=1;#      MD5(1234+asdfg)
 
             while (rs.next()) {
                 Login =   rs.getString(1);
                 Pass =   rs.getString(2);
+
                 System.out.println(Pass);
 
                 if(peck.equals(Login) && Pass.equals("b326b5062b2f0e69046810717534cb09")){

@@ -609,6 +609,10 @@ public class Controller {
         a = cusOrder.mileagaBeforeTheTrip(customer);
         mileageBeforeTrip.setText("Before trip mileage: "+a+" [km]");
     }
+    @FXML
+    public  void turnOffProgram(ActionEvent actionEvent){
+        System.exit(1);
+    }
 
 
 }
