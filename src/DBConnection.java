@@ -10,10 +10,10 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    private final static String URL = "jdbc:mysql://52.59.174.229:3306/";
-    private final static String DB_NAME = "nordic_motor";
-    private final static String USER = "thom131c";
-    private final static String PASS = "mantas";
+    private final static String URL = "jdbc:mysql://sql11.freemysqlhosting.net:3306/";
+    private final static String DB_NAME = "sql11175872";
+    private final static String USER = "sql11175872";
+    private final static String PASS = "JYrq7ab6W9";
 
     public static Connection getConnection() {
         try {

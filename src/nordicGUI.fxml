@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Accordion?>
@@ -18,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="967.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="967.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
     <Accordion layoutX="0.0" layoutY="0.0" prefHeight="718.0" prefWidth="966.0">
       <panes>
@@ -86,7 +91,7 @@
                   </AnchorPane>
               </content>
             </TitledPane>
-        <TitledPane fx:id="motorhomeModPan" animated="false" disable="true" text="Add/Update">
+        <TitledPane fx:id="motorhomeModPan" animated="false" text="Add/Update">
           <content>
             <AnchorPane id="AddCSS" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -208,7 +213,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="reservePan" animated="false" disable="true" text="Reserver">
+        <TitledPane fx:id="reservePan" animated="false" text="Reserver">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -332,7 +337,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="customerOrderFunctioPan" animated="false" disable="true" text="Pick up/Turn in/Cancel reservation">
+        <TitledPane fx:id="customerOrderFunctioPan" animated="false" text="Pick up/Turn in/Cancel reservation">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -431,7 +436,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="repairPan" animated="false" disable="true" text="Service and repair">
+        <TitledPane fx:id="repairPan" animated="false" text="Service and repair">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
