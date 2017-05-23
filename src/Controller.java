@@ -119,17 +119,17 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox repairListOFMHforMechanic;
     @FXML
-    private javafx.scene.control.TextField idForMechanic;
+    private javafx.scene.control.Label idForMechanic;
     @FXML
-    private javafx.scene.control.TextField brandForMechanic;
+    private javafx.scene.control.Label brandForMechanic;
     @FXML
-    private javafx.scene.control.TextField modelForMechanic;
+    private javafx.scene.control.Label modelForMechanic;
     @FXML
-    private javafx.scene.control.TextField bedForMechanic;
+    private javafx.scene.control.Label bedForMechanic;
     @FXML
-    private javafx.scene.control.TextField fuelForMechanic;
+    private javafx.scene.control.Label fuelForMechanic;
     @FXML
-    private javafx.scene.control.TextField mileageForMechanic;
+    private javafx.scene.control.Label mileageForMechanic;
     //check boxes
     @FXML
     private javafx.scene.control.CheckBox oilCheck;
@@ -434,6 +434,7 @@ public class Controller {
         waterCheck.setSelected(false);
         cleanCheck.setSelected(false);
         repairNeededCheck.setSelected(false);
+        statusBarForService.setText("Service information for this motorhome was saved");
     }
     @FXML
     public  void saveOrderAction(ActionEvent actionEvent){
