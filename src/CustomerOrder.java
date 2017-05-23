@@ -249,7 +249,6 @@ public class CustomerOrder {
               } else {
             return refund;
         }
-
     }
 //JOptionPane.showMEssageDialog(null, "Go away");
     //side method to get the current mileage before the trip
@@ -269,8 +268,6 @@ public class CustomerOrder {
             while (rs.next()) {
                 mileage = rs.getString(1);
             }
-
-
             con.close();
 
         } catch (SQLException e) {

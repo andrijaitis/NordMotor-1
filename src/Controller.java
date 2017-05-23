@@ -66,9 +66,11 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField addMileageTxtField;
     @FXML
-    private javafx.scene.control.TextField finalPrice;
+    private javafx.scene.control.Label finalPrice;
     @FXML
     private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    @FXML
+    private javafx.scene.control.Label statusBarForService;
     @FXML
     private javafx.scene.control.Label statusBarForReserver;
     //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
@@ -101,7 +103,7 @@ public class Controller {
     @FXML
     private ComboBox listOfMHforUpdating;
     @FXML
-    private javafx.scene.control.TextField updateID;
+    private javafx.scene.control.Label updateID;
     @FXML
     private javafx.scene.control.TextField updateMark;
     @FXML
@@ -116,17 +118,17 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox repairListOFMHforMechanic;
     @FXML
-    private javafx.scene.control.TextField idForMechanic;
+    private javafx.scene.control.Label idForMechanic;
     @FXML
-    private javafx.scene.control.TextField brandForMechanic;
+    private javafx.scene.control.Label brandForMechanic;
     @FXML
-    private javafx.scene.control.TextField modelForMechanic;
+    private javafx.scene.control.Label modelForMechanic;
     @FXML
-    private javafx.scene.control.TextField bedForMechanic;
+    private javafx.scene.control.Label bedForMechanic;
     @FXML
-    private javafx.scene.control.TextField fuelForMechanic;
+    private javafx.scene.control.Label fuelForMechanic;
     @FXML
-    private javafx.scene.control.TextField mileageForMechanic;
+    private javafx.scene.control.Label mileageForMechanic;
     //check boxes
     @FXML
     private javafx.scene.control.CheckBox oilCheck;
@@ -154,6 +156,7 @@ public class Controller {
     private  javafx.scene.control.Label mileageBeforeTrip;
     @FXML
     private  javafx.scene.control.TextArea receiptTxtArea;
+    private int globalBeforeTripMileage =0;
 
 
     //Class instences
@@ -319,16 +322,16 @@ public class Controller {
     public  void calculatePriceAction(ActionEvent actionEvent){
        int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
        int startMonth = Integer.parseInt( (String)startDateMONTHTxtField.getValue());
-       int startYear     = Integer.parseInt((String)startDateYEARtxtField.getValue());
+       int startYear  = Integer.parseInt( (String)startDateYEARtxtField.getValue());
 
-       int endDay     = Integer.parseInt((String)endDateDAYTxtField.getValue());
-       int endMonth   = Integer.parseInt((String)endDateMONTHTxtField.getValue());
+       int endDay    = Integer.parseInt((String)endDateDAYTxtField.getValue());
+       int endMonth  = Integer.parseInt((String)endDateMONTHTxtField.getValue());
        int endYear   = Integer.parseInt((String)endDateYEARtxtField.getValue());
-       String StartDate = startYear+ " "+ startMonth+" "+ startDay;
-       String EndDate = endYear+ " "+ endMonth+" "+ endDay;
-       int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
 
-        //Checks which season it is--------------------------------------
+       String startDate = startYear + " " + startMonth + " " + startDay ;
+       String endDate   = endYear   + " " + endMonth   + " " + endDay   ;
+       int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(startDate,endDate)) ;
+
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
            System.out.println(" Ble cyka you need normal value");
@@ -344,10 +347,10 @@ public class Controller {
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("Choose normal date");
-       }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(StartDate)) < 0){
+       }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(startDate)) < 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("You cant travel time m8");
+           statusBarForReserver.setText("You cant travel time m88888: "+startDate);
 
        }else{
 
@@ -365,7 +368,7 @@ public class Controller {
             System.out.println(seasonPercentage);
             statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
            System.out.println(howManyDays);
-           System.out.println(cusOrder.currentDaytoStartDate(StartDate) + "u dipppppppp");
+           System.out.println(cusOrder.currentDaytoStartDate(startDate) + "u dipppppppp");
         }
 }
     //Repair combobox MH list to set the values in Text fields
@@ -401,6 +404,7 @@ public class Controller {
         waterCheck.setSelected(false);
         cleanCheck.setSelected(false);
         repairNeededCheck.setSelected(false);
+        statusBarForService.setText("Service information for this motorhome was saved");
     }
     //saves the reserved order
     @FXML
@@ -425,64 +429,17 @@ public class Controller {
        }
        reserverCombo.setValue("");
     }
-    //lbdhfsdhfvsdhfvsdhfvadhfndvfhwdfvhsdfvsdhjfvsdhfvshfvsdhfvsdhfsdvhfdfbsdhfbsdhfsh vdsvfhjafytafdatyf
-    @FXML
-    public  void lalalalaal(ActionEvent actionEvent) {
-
-        String compareDataStart = " ";
-        int a = 0;
-
-        ObservableList<Integer> years = FXCollections.observableArrayList();
-        years.addAll(2017,2018,2019);
-
-        ObservableList<String> empty = FXCollections.observableArrayList();
-        empty.addAll(" ");
-
-        a =   (Integer ) startDateYEARtxtField.getValue();
-
-
-
-        System.out.println(" this shit is: "+compareDataStart);
-
-        if(a >= 2017){
-            endDateYEARtxtField.setItems(years);
-        }else{
-            endDateYEARtxtField.setItems(empty);
-
-        }
-
-    }
 
     @FXML
     public  void datesForReserve(MouseEvent mouseEvent){
         //year
         String compareDataEnd;
 
-
-        ObservableList<Integer> years = FXCollections.observableArrayList();
-        years.addAll(2017,2018,2019);
+        ObservableList<String> years = FXCollections.observableArrayList();
+        years.addAll("2017","2018","2019","2020");
 
         startDateYEARtxtField.setItems(years);
-        //startDateYEARtxtField.setSelected Index(0);
-
-
-
-        //compareDataEnd   =   (String )endDateYEARtxtField.getValue();
-
-        int b = 0;
-
-       // b = Integer.parseInt(compareDataEnd);
-
-
-
-
-
-
-
-
-
-
-
+        endDateYEARtxtField.setItems(years);
 
         //month
         ObservableList<String> months = FXCollections.observableArrayList();
@@ -546,19 +503,18 @@ public class Controller {
 
             receiptTxtArea.setText(
 
-                    "Days berore start " + daysBeforeStart + " " + "\n" +
-                            "Price                 " + kaina + "\n" +
-                            "Penalty               " + refund + " " + "\n" +
-                            "Guy who cancelled   " + nameOfTheGuyWhoCancel + " " + "\n" +
-                            "Returned amount  " + sugrazinta + "\n"
-
+                            "Days berore start " + daysBeforeStart       + " " + "\n" +
+                            "Price             " + kaina                 + " " + "\n" +
+                            "Penalty           " + refund                + " " + "\n" +
+                            "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
+                            "Returned amount   " + sugrazinta            + "\n"
             );
-
         }
     }
 
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
+        System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
 
         if(turnInCustomer.getSelectionModel().isEmpty()){
             receiptTxtArea.setText("Pick a name from combo box you dip");
@@ -567,18 +523,26 @@ public class Controller {
             int currentMileage = Integer.parseInt( turnInMileage.getText());
             int currentFuel = Integer.parseInt(turnInFuel.getText());
 
-            cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
-            receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
-
+            if(currentMileage <= globalBeforeTripMileage){
+                turnInMileage.setText("Mileage too low!");
+            }else{
+                if(currentFuel <= 0 || currentFuel >=200){
+                    turnInFuel.setText("Fuel negative/too much");
+                }else{
+                    cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
+                    receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
+                }
+                           }
         }
     }
     @FXML
     public void setCurentMileageTurnIn(ActionEvent actionEvent){
 
-        String a;
+        String beforeTripMileage;
         String customer = (String) turnInCustomer.getValue();
-        a = cusOrder.mileagaBeforeTheTrip(customer);
-        mileageBeforeTrip.setText("Before trip mileage: "+a+" [km]");
+        beforeTripMileage = cusOrder.mileagaBeforeTheTrip(customer);
+        globalBeforeTripMileage = Integer.parseInt(beforeTripMileage) ;
+        mileageBeforeTrip.setText("Before trip mileage: "+beforeTripMileage+" [km]");
     }
     @FXML
     public  void turnOffProgram(ActionEvent actionEvent){
