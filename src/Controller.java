@@ -166,6 +166,7 @@ public class Controller {
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
     CustomerOrder cusOrder = new CustomerOrder();
     ReserveMH reserveMH = new ReserveMH();
+
     //Loging in to the system
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
@@ -227,6 +228,25 @@ public class Controller {
         ObservableList<String> extraItems = FXCollections.observableArrayList();
         extraItems.addAll("Baby seat", "Bike rack", "Table", "Umbrella");
         listOfExtraItemsComBox.setItems(extraItems);
+        //year
+        ObservableList<String> years = FXCollections.observableArrayList();
+        years.addAll("2017","2018","2019","2020");
+        startDateYEARtxtField.setItems(years);
+        endDateYEARtxtField.setItems(years);
+        //month
+        ObservableList<String> months = FXCollections.observableArrayList();
+        for ( int i = 1; i < 13; i++) {
+            months.add(Integer.toString(i));
+        }
+        startDateMONTHTxtField.setItems(months);
+        endDateMONTHTxtField.setItems(months);
+        //days
+        ObservableList<String> days = FXCollections.observableArrayList();
+        for ( int i = 1; i < 32; i++) {
+            days.add(Integer.toString(i));
+        }
+        startDateDAYTxtField.setItems(days);
+        endDateDAYTxtField.setItems(days);
     }
     //Update combobox MH list to set the values in Text fields
     @FXML
@@ -429,35 +449,6 @@ public class Controller {
        }
        reserverCombo.setValue("");
     }
-
-    @FXML
-    public  void datesForReserve(MouseEvent mouseEvent){
-        //year
-        String compareDataEnd;
-
-        ObservableList<String> years = FXCollections.observableArrayList();
-        years.addAll("2017","2018","2019","2020");
-
-        startDateYEARtxtField.setItems(years);
-        endDateYEARtxtField.setItems(years);
-
-        //month
-        ObservableList<String> months = FXCollections.observableArrayList();
-        for ( int i = 1; i < 13; i++) {
-            months.add(Integer.toString(i));
-        }
-
-        startDateMONTHTxtField.setItems(months);
-        endDateMONTHTxtField.setItems(months);
-        //days
-        ObservableList<String> days = FXCollections.observableArrayList();
-        for ( int i = 1; i < 32; i++) {
-            days.add(Integer.toString(i));
-        }
-
-        startDateDAYTxtField.setItems(days);
-        endDateDAYTxtField.setItems(days);
-    }
     //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
     @FXML
     public  void ultimateMotorhomeListForComboboxReresher(MouseEvent mouseEvent){
@@ -544,6 +535,7 @@ public class Controller {
         globalBeforeTripMileage = Integer.parseInt(beforeTripMileage) ;
         mileageBeforeTrip.setText("Before trip mileage: "+beforeTripMileage+" [km]");
     }
+    //Shuts down the system
     @FXML
     public  void turnOffProgram(ActionEvent actionEvent){
         System.exit(1);

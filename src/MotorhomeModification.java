@@ -26,14 +26,14 @@ public class MotorhomeModification {
             String sql = "INSERT INTO nordic_rv " +
                     "VALUES " +
                     "(NULL, "
-                    +"'"+ "Available"  +"'  ,"
-                    +"'"+ theBrand     +"'  ,"
-                    +"'"+ theModel     +"'  ,"
-                    +"'"+ theBed       +"'  ,"
-                    +"'"+ thePrice     +"'  ,"
-                    +100               +"   ,"
-                    +"'"+ theMileage   +"'   "
-                    +");                     ";
+                    +"'"+ "Unavailable" +"'  ,"
+                    +"'"+ theBrand      +"'  ,"
+                    +"'"+ theModel      +"'  ,"
+                    +"'"+ theBed        +"'  ,"
+                    +"'"+ thePrice      +"'  ,"
+                    +100                +"   ,"
+                    +"'"+ theMileage    +"'   "
+                    +");                      ";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);

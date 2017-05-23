@@ -239,9 +239,9 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="startDateDAYTxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="95.0" GridPane.columnIndex="2" />
-                                    <ComboBox fx:id="startDateMONTHTxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="95.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="startDateYEARtxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="97.0" />
+                                    <ComboBox fx:id="startDateDAYTxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="95.0" GridPane.columnIndex="2" />
+                                    <ComboBox fx:id="startDateMONTHTxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="95.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="startDateYEARtxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="97.0" />
                                  </children>
                               </GridPane>
                               <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="51.0" GridPane.rowIndex="2">
@@ -254,9 +254,9 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="endDateDAYTxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="94.0" GridPane.columnIndex="2" />
-                                    <ComboBox fx:id="endDateMONTHTxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="94.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="endDateYEARtxtField" onMouseClicked="#datesForReserve" prefHeight="31.0" prefWidth="97.0" />
+                                    <ComboBox fx:id="endDateDAYTxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="94.0" GridPane.columnIndex="2" />
+                                    <ComboBox fx:id="endDateMONTHTxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="94.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="endDateYEARtxtField" onMouseClicked="#localValueComboBoxes" prefHeight="31.0" prefWidth="97.0" />
                                  </children>
                               </GridPane>
                   </children>
