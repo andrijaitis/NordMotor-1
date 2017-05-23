@@ -4,6 +4,15 @@
 }
 .accordion
 {
-    -fx-background-color: black;
+    -fx-background-color: grey;
 }
-
+.text-field
+{
+    -fx-background-color: E4E1E1;
+}
+.combo-box {
+    -fx-background-color: E4E1E1;
+}
+.text-area {
+    -fx-background-color: E4E1E1;
+}

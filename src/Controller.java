@@ -32,14 +32,13 @@ public class Controller {
 
     @FXML
     private  javafx.scene.control.ComboBox startScreenComBox;
-
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     @FXML
     private Label statusBarForLogin;
     @FXML
     private javafx.scene.control.TextField log;
     @FXML
-    private javafx.scene.control.TextField pas;
+    private javafx.scene.control.PasswordField pas;
     @FXML
     private javafx.scene.control.TitledPane startSceenPan;
     @FXML
@@ -164,12 +163,12 @@ public class Controller {
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
     CustomerOrder cusOrder = new CustomerOrder();
     ReserveMH reserveMH = new ReserveMH();
-
+    //Loging in to the system
     @FXML
     public void LoginAction(ActionEvent actionEvent) {
 
         String LoginInput = log.getText();
-        String PassInput = pas.getText();
+        String PassInput  = pas.getText();
 
         boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
         System.out.println(status);
@@ -187,19 +186,19 @@ public class Controller {
             userLoggedIn = status;
         }
     }
-
+    //Adding a motorhome
     @FXML
     public void motorHomeModsAddingMH(ActionEvent actionEvent) {
-        String thePrice = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theMileage = addMileageTxtField.getText();
+        String thePrice     = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
+        String theMileage   = addMileageTxtField.getText();
 
         try {
-            Integer.parseInt(addPriceTxtField.getText());
-            Integer.parseInt(addMileageTxtField.getText());
+
             String theBrand = addBrandTxtField.getText();
             String theModel = addModelTxtField.getText();
-            String theBed = (String) addBedComBox.getValue();
-
+            Integer.parseInt(addPriceTxtField.getText());//not used####################
+            Integer.parseInt(addMileageTxtField.getText());//not used####################
+            String theBed   = (String) addBedComBox.getValue();
 
             motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
             statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
@@ -208,11 +207,8 @@ public class Controller {
             statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
 
            }
-
-
-
     }
-
+    //We use it to store stuff that is not database connected
     @FXML
     public void localValueComboBoxes(MouseEvent mouseEvent){
         //make the beds only available from 2 to 6 in the combo box
@@ -226,17 +222,31 @@ public class Controller {
         updateAvailability.setItems(availability);
         //select the extra items you want
         ObservableList<String> extraItems = FXCollections.observableArrayList();
-        extraItems.addAll("Baby seat", "Bike rack", "Table");
+        extraItems.addAll("Baby seat", "Bike rack", "Table", "Umbrella");
         listOfExtraItemsComBox.setItems(extraItems);
     }
+    //Update combobox MH list to set the values in Text fields
+    @FXML
+    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
 
+        String valuesFromComBox = (String) listOfMHforUpdating.getValue();
+        String ID = valuesFromComBox.substring(0, 2);
+        System.out.println(valuesFromComBox);
+
+        updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
+        updateMark.setText(motorhomeModification.Load(ID).get(1));
+        updateModel.setText(motorhomeModification.Load(ID).get(2));
+        updatePrice.setText(motorhomeModification.Load(ID).get(3));
+        updateBeds.setValue(motorhomeModification.Load(ID).get(4));
+        updateID.setText(ID);
+    }
+    //Updates existing motorhomes
     @FXML
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent) {
-        //updates existing motorhomes
-        String price = updatePrice.getText();
 
         try {
-            Integer.parseInt(updatePrice.getText());
+            Integer.parseInt(updatePrice.getText());//not used####################
+            String price = updatePrice.getText();
             String beds = (String) updateBeds.getValue();
             String availability = (String) updateAvailability.getValue();
 
@@ -249,40 +259,24 @@ public class Controller {
             statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
 
 
-
-
-
         } catch (NumberFormatException e) {
             statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
-
         }
-
     }
-
+    //Delete MH
     @FXML
     public void motorHomeModsDeleteMH(ActionEvent actionEvent) {
         String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);
     }
-    //FROM RESERVEMH CLASS
-    @FXML
-    public void extraItemCatalogComBox(MouseEvent mouseEvent) {
-        ObservableList<String> extraItems = FXCollections.observableArrayList();
-        extraItems.addAll("Baby seat", "Bike rack", "Table");
-        listOfExtraItemsComBox.setItems(extraItems);
-    }
-
-
+    //Add an extra item
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent) {
 
-
         String item = (String) listOfExtraItemsComBox.getValue();
 
-
-
         if (listOfExtraItemsComBox.getValue()== null) {
-            statusBarForReserver.setText("Check if you selected extra item u DIP");
+            statusBarForReserver.setText("Check if you selected extra items!");
         } else {
             String listString = "";
 
@@ -296,7 +290,7 @@ public class Controller {
             System.out.println(sizes);
         }
     }
-
+    //clear the list of extra items
     @FXML
     public void setItemsToNull(ActionEvent actionEvent) {
         ReserveMH.items.clear();
@@ -304,7 +298,7 @@ public class Controller {
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
     }
-
+    //Remove last extra item
     @FXML
     public void removeLastExtraItem(ActionEvent actionEvent) {
         ReserveMH.items.remove(ReserveMH.items.size() - 1);
@@ -320,20 +314,7 @@ public class Controller {
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
     }
-
-    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
-
-        String valuesFromComBox = (String) listOfMHforUpdating.getValue();
-        String ID = valuesFromComBox.substring(0, 2);
-        System.out.println(valuesFromComBox);
-
-        updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
-        updateMark.setText(motorhomeModification.Load(ID).get(1));
-        updateModel.setText(motorhomeModification.Load(ID).get(2));
-        updatePrice.setText(motorhomeModification.Load(ID).get(3));
-        updateBeds.setValue(motorhomeModification.Load(ID).get(4));
-        updateID.setText(ID);
-    }
+    //Calculates the price for reserving a MH
    @FXML
     public  void calculatePriceAction(ActionEvent actionEvent){
        int startDay   = Integer.parseInt( (String)startDateDAYTxtField.getValue());
@@ -346,8 +327,6 @@ public class Controller {
        String StartDate = startYear+ " "+ startMonth+" "+ startDay;
        String EndDate = endYear+ " "+ endMonth+" "+ endDay;
        int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(StartDate,EndDate)) ;
-
-
 
         //Checks which season it is--------------------------------------
        System.out.println(startDateMONTHTxtField.getValue());
@@ -364,22 +343,13 @@ public class Controller {
        }else if (howManyDays <= 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("choose normal date kurwa");
+           statusBarForReserver.setText("Choose normal date");
        }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(StartDate)) < 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("Ble cyka you cant travel time kurwa");
+           statusBarForReserver.setText("You cant travel time m8");
 
        }else{
-           //String StartDate = "2017 05 15";
-           //String EndDate = "2017 05 20";
-
-
-
-
-
-
-
 
             ReserveMH rmh = new ReserveMH();
             whichSeason.setText(rmh.season(startMonth));
@@ -397,9 +367,8 @@ public class Controller {
            System.out.println(howManyDays);
            System.out.println(cusOrder.currentDaytoStartDate(StartDate) + "u dipppppppp");
         }
-    //----------------------------------------------------------------
 }
-    //FROM REPAIR CLASS ###############################
+    //Repair combobox MH list to set the values in Text fields
     @FXML
     public void setAllValuesForMechanic(ActionEvent actionEvent){
         //set the text into the text fields from the combo box directly
@@ -414,7 +383,7 @@ public class Controller {
         fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3)+ " [L]");
         mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4)+ " [km]");
     }
-    //FROM REPAIR CLASS ###############################
+    //Check list checks if all the maintenance is done
     @FXML
     public void checkUpForMechanic(ActionEvent actionEvent) {
 
@@ -433,6 +402,7 @@ public class Controller {
         cleanCheck.setSelected(false);
         repairNeededCheck.setSelected(false);
     }
+    //saves the reserved order
     @FXML
     public  void saveOrderAction(ActionEvent actionEvent){
        if (singitureTxtField.getText().isEmpty() ||finalPrice.getText().isEmpty()){
@@ -455,6 +425,7 @@ public class Controller {
        }
        reserverCombo.setValue("");
     }
+    //lbdhfsdhfvsdhfvsdhfvadhfndvfhwdfvhsdfvsdhjfvsdhfvshfvsdhfvsdhfsdvhfdfbsdhfbsdhfsh vdsvfhjafytafdatyf
     @FXML
     public  void lalalalaal(ActionEvent actionEvent) {
 

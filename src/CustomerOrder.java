@@ -251,7 +251,7 @@ public class CustomerOrder {
         }
 
     }
-
+//JOptionPane.showMEssageDialog(null, "Go away");
     //side method to get the current mileage before the trip
     public String mileagaBeforeTheTrip(String customer){
 

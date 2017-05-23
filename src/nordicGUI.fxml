@@ -7,6 +7,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -68,10 +69,9 @@
         </TitledPane>
             <TitledPane animated="false" prefWidth="909.0" text="Login">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
                      <children>
                         <TextField fx:id="log" layoutX="267.0" layoutY="125.0" />
-                        <TextField fx:id="pas" layoutX="267.0" layoutY="195.0" />
                         <Text layoutX="197.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter administrator login and password" wrappingWidth="359.71875" />
                         <Text layoutX="213.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
                         <Text layoutX="200.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
@@ -81,6 +81,7 @@
                               <Font name="Times New Roman Bold" size="29.0" />
                            </font></Label>
                         <Text layoutX="267.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
+                        <PasswordField fx:id="pas" layoutX="267.0" layoutY="195.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -209,7 +210,7 @@
         </TitledPane>
         <TitledPane fx:id="reservePan" animated="false" text="Reserver">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
                 <Label layoutX="313.0" layoutY="37.0" text="Select motor home to reserve">
                            <font>
@@ -333,7 +334,7 @@
         </TitledPane>
         <TitledPane fx:id="customerOrderFunctioPan" animated="false" text="Pick up/Turn in/Cancel reservation">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
                 <Label layoutX="143.0" layoutY="60.0" text="Pick Up">
                   <font>
@@ -432,14 +433,14 @@
         </TitledPane>
         <TitledPane fx:id="repairPan" animated="false" text="Service and repair">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
                 <Label layoutX="389.0" layoutY="38.0" text="Chop shop">
                   <font>
                     <Font name="System Bold" size="25.0" />
                   </font>
                 </Label>
-                <ComboBox fx:id="repairListOFMHforMechanic" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefWidth="281.0" promptText="Select the motorhome">
+                <ComboBox fx:id="repairListOFMHforMechanic" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="342.0" promptText="Select the motorhome">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -471,8 +472,8 @@
                               <TextField fx:id="mileageForMechanic" layoutX="151.0" layoutY="118.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   </children>
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
