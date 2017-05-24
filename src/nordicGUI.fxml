@@ -163,7 +163,7 @@
                                 </rowConstraints>
                                  <children>
                           <Button mnemonicParsing="false" onAction="#motorHomeModsUpdatingMH" prefWidth="87.0" text="Save" GridPane.columnIndex="1" />
-                                    <Label fx:id="updateID" prefHeight="21.0" prefWidth="144.0" text="ID" />
+                                    <Label fx:id="updateID" prefHeight="21.0" prefWidth="144.0" text="ID:" />
                                  </children>
                               </GridPane>
                     <Button mnemonicParsing="false" onAction="#motorHomeModsDeleteMH" prefWidth="81.0" text="DELETE" GridPane.rowIndex="5" />
@@ -181,7 +181,7 @@
                               <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <ComboBox fx:id="listOfMHforUpdating" layoutX="433.0" layoutY="68.0" onAction="#setAllValuesFromComboboxToTextField" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="425.0" promptText="The motor houses">
+                <ComboBox fx:id="listOfMHforUpdating" layoutX="433.0" layoutY="68.0" onAction="#setAllValuesForUpdating" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="425.0" promptText="The motor houses">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -456,9 +456,9 @@
                 </ComboBox>
                 <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="211.0" prefWidth="390.0">
                   <children>
-                    <Label font="$x1" text="Brand" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Label font="$x1" text="Beds" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label font="$x1" text="Status" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label font="$x1" text="Brand" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                               <Label layoutX="10.0" layoutY="85.0" text="Fuel" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="18.0" fx:id="x11" />

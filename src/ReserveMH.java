@@ -2,10 +2,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -13,15 +19,6 @@ import java.util.List;
  */
 public class ReserveMH {
 
-    public ArrayList<String> addExtra(String item) {
-
-        java.util.ArrayList<String> members = new ArrayList<String>();
-
-        int i =-1;
-        members.add(i+1,item);
-
-        return members;
-    }
 
     public String season(int startMonth) {
     System.out.println(" starting month: " +startMonth);
@@ -74,24 +71,24 @@ public class ReserveMH {
             String sql = "INSERT INTO `reserve` (`ID`, `startYear`, `startMonth`, `startDay`, `endYear`, `endMotnh`, `endDay`, `season`, `itemAmount`, `cost`, `signiture` , `reservedID`, `situation`)" +
                     "VALUES " +
                     "(NULL, "
-                    +"'"+ startYear  +"'  ,"
-                    +"'"+ startMonth +"'  ,"
-                    +"'"+ startDay   +"'  ,"
-                    +"'"+ endYear    +"'  ,"
-                    +"'"+ endMotnh   +"'  ,"
-                    +"'"+ endDay     +"'  ,"
-                    +"'"+ season     +"'  ,"
-                    +"'"+ itemAmount +"'  ,"
-                    +"'"+ cost       +"'  ,"
-                    +"'"+ signiture  +"'  ,"
-                    +"'"+ mhReservedID +"'  ,"
-                    +"'"+ "Reserved" +"'   "
-                    +");                   ";
+                    + "'" + startYear + "'  ,"
+                    + "'" + startMonth + "'  ,"
+                    + "'" + startDay + "'  ,"
+                    + "'" + endYear + "'  ,"
+                    + "'" + endMotnh + "'  ,"
+                    + "'" + endDay + "'  ,"
+                    + "'" + season + "'  ,"
+                    + "'" + itemAmount + "'  ,"
+                    + "'" + cost + "'  ,"
+                    + "'" + signiture + "'  ,"
+                    + "'" + mhReservedID + "'  ,"
+                    + "'" + "Reserved" + "'   "
+                    + ");                   ";
 
-            String sqlChangeStatus =    "UPDATE nordic_rv " +
-                                        "SET "         +
-                                        "status           = " + "'" + "Reserved_MH" + "'" + " " +
-                                        "WHERE rvID = " + "'" + mhReservedID  + "'" + ";" ;
+            String sqlChangeStatus = "UPDATE nordic_rv " +
+                    "SET " +
+                    "status           = " + "'" + "Reserved_MH" + "'" + " " +
+                    "WHERE rvID = " + "'" + mhReservedID + "'" + ";";
 
             System.out.println(sql);
             System.out.println(sqlChangeStatus);
@@ -103,6 +100,76 @@ public class ReserveMH {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String dateDffCounter(String signature) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+        Date date = new Date();
+        String cancelationDate = (String) dateFormat.format(date);
+        String orderDate =  (reservation(signature).get(4) + " " + reservation(signature).get(3) + " " + reservation(signature).get(2));
+        System.out.println(orderDate);
+
+        return allTheDateCounter(dateFormat, cancelationDate, orderDate);
+    }
+    public String currentDaytoStartDate(String startDate) {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+        Date date = new Date();
+        String todayDate = (String) dateFormat.format(date);
+
+        return   allTheDateCounter(dateFormat, todayDate, startDate);
+    }
+
+    public String dayCounterStartEnd (String startDate, String endDate) {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+
+        return allTheDateCounter(dateFormat, startDate, endDate);
+    }
+
+    public String allTheDateCounter(DateFormat dateFormat, String myDateOne, String myDateTwo){
+        try {
+            String days;
+            Date date1 = dateFormat.parse(myDateOne);
+            Date date2 = dateFormat.parse(myDateTwo);
+            long difference = date2.getTime() - date1.getTime();
+            days = Long.toString(TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS));
+            return days;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "0";
+    }
+
+
+    public java.util.List<String> reservation(String customerName) {
+        java.util.List<String> list = new ArrayList<String>();
+        try {
+
+            System.out.println(customerName);
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT `cost` ,`signiture` , `startDay`,`startMonth`,`startYear` , `endDay`,`endMotnh`,`endYear` FROM reserve, nordic_rv  WHERE reservedID = rvID AND signiture =" + "'" + customerName + "'" + ";");
+            while (rs.next()) {
+                list.add(rs.getString(1));
+                list.add(rs.getString(2));
+                list.add(rs.getString(3));
+                list.add(rs.getString(4));
+                list.add(rs.getString(5));
+                list.add(rs.getString(6));
+                list.add(rs.getString(7));
+                list.add(rs.getString(8));
+
+
+
+                con.close();
+                return list;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list; //means something is wrong u DIP
 
     }
 }

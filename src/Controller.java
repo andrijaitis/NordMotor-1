@@ -29,11 +29,10 @@ import static java.sql.JDBCType.NULL;
 
 public class Controller {
 
-    private boolean userLoggedIn = false;
-
     @FXML
     private  javafx.scene.control.ComboBox startScreenComBox;
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
+    private boolean userLoggedIn = false;
     @FXML
     private javafx.scene.control.Label statusBarForLogin;
     @FXML
@@ -156,7 +155,6 @@ public class Controller {
     private  javafx.scene.control.TextArea receiptTxtArea;
     private int globalBeforeTripMileage = 0;
 
-
     //Class instences
     MotorhomeModification motorhomeModification = new MotorhomeModification();
     AdminLogin adminLogin = new AdminLogin();
@@ -164,6 +162,7 @@ public class Controller {
     UltimateComboboxRefresher ultCBref = new UltimateComboboxRefresher();
     CustomerOrder cusOrder = new CustomerOrder();
     ReserveMH reserveMH = new ReserveMH();
+    LoadInformationIntoFields loadInformation = new LoadInformationIntoFields();
 
     //We use it to store stuff that is not database connected
     @FXML
@@ -266,18 +265,18 @@ public class Controller {
     }
     //Update combobox MH list to set the values in Text fields
     @FXML
-    public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
+    public void setAllValuesForUpdating(ActionEvent actionEvent) {
 
         String valuesFromComBox = (String) listOfMHforUpdating.getValue();
         String ID = valuesFromComBox.substring(0, 2);
         System.out.println(valuesFromComBox);
 
-        updateAvailability.setValue(motorhomeModification.Load(ID).get(0));
-        updateMark.setText(motorhomeModification.Load(ID).get(1));
-        updateModel.setText(motorhomeModification.Load(ID).get(2));
-        updatePrice.setText(motorhomeModification.Load(ID).get(3));
-        updateBeds.setValue(motorhomeModification.Load(ID).get(4));
-        updateID.setText(ID);
+        updateAvailability.setValue(loadInformation.load(ID).get(0));
+        updateMark.setText(loadInformation.load(ID).get(1));
+        updateModel.setText(loadInformation.load(ID).get(2));
+        updatePrice.setText(loadInformation.load(ID).get(3));
+        updateBeds.setValue(loadInformation.load(ID).get(4));
+        updateID.setText(" ID: "+ID);
     }
     //Updates existing motorhomes
     @FXML
@@ -367,7 +366,7 @@ public class Controller {
 
        String startDate = startYear + " " + startMonth + " " + startDay ;
        String endDate   = endYear   + " " + endMonth   + " " + endDay   ;
-       int howManyDays = Integer.parseInt( cusOrder.dayCounterStartEnd(startDate,endDate)) ;
+       int howManyDays = Integer.parseInt( reserveMH.dayCounterStartEnd(startDate,endDate)) ;
 
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
@@ -384,7 +383,7 @@ public class Controller {
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("Choose normal date");
-       }else if (Integer.parseInt( cusOrder.currentDaytoStartDate(startDate)) < 0){
+       }else if (Integer.parseInt( reserveMH.currentDaytoStartDate(startDate)) < 0){
            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("You cant travel time m88888: "+startDate);
@@ -405,7 +404,7 @@ public class Controller {
             System.out.println(seasonPercentage);
             statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
            System.out.println(howManyDays);
-           System.out.println(cusOrder.currentDaytoStartDate(startDate) + "u dipppppppp");
+           System.out.println(reserveMH.currentDaytoStartDate(startDate) + "u dipppppppp");
         }
 }
     //saves the reserved order
@@ -442,11 +441,11 @@ public class Controller {
         System.out.println(valuesFromComBox);
 
         idForMechanic.setText(ID);
-        brandForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(0));
-        modelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(1));
-        bedForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(2));
-        fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3)+ " [L]");
-        mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4)+ " [km]");
+        brandForMechanic.setText(loadInformation.load(ID).get(0));
+        modelForMechanic.setText(loadInformation.load(ID).get(1));
+        bedForMechanic.setText(loadInformation.load(ID).get(2));
+        fuelForMechanic.setText(loadInformation.load(ID).get(3)+ " [L]");
+        mileageForMechanic.setText(loadInformation.load(ID).get(4)+ " [km]");
     }
     @FXML//Check list to checks  all the maintenance is done
     public void checkUpForMechanic(ActionEvent actionEvent) {
@@ -520,10 +519,10 @@ public class Controller {
 
             cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
-            int daysBeforeStart = Integer.parseInt(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
-            int kaina = Integer.parseInt(cusOrder.Reservation(nameOfTheGuyWhoCancel).get(0));
+            int daysBeforeStart = Integer.parseInt(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
+            int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoCancel).get(0));//////////////////////////////////////////
             System.out.println(daysBeforeStart);
-            daysCounter.setText(cusOrder.dateDffCounter(nameOfTheGuyWhoCancel));
+            daysCounter.setText(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
             int refund = cusOrder.penalty(daysBeforeStart, kaina);
             int sugrazinta = kaina - refund;
             System.out.println("Days beror start " + daysBeforeStart);

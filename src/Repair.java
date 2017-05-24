@@ -11,31 +11,6 @@ import java.util.ArrayList;
  * Created by Mantas_MSI on 5/13/2017.
  */
 public class Repair {
-    public java.util.List<String> loadItUpForTheMechanic(String ID) {
-
-        java.util.List<String> MH = new ArrayList<String>();
-
-        try {
-            Connection con = DBConnection.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT `mark`,`model`,`beds`, `fuel`, `mileage` FROM `nordic_rv` WHERE `rvID`=" + ID);
-
-            while (rs.next()) {
-
-                MH.add(rs.getString(1));
-                MH.add(rs.getString(2));
-                MH.add(rs.getString(3));
-                MH.add(rs.getString(4));
-                MH.add(rs.getString(5));
-
-            }
-
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return MH;
-    }
 
     //we look at all the check boxes of they are checked
     public void serviceComplete(boolean oilSituation, boolean fuelSituation, boolean waterSituation, boolean cleanSituation, boolean repairsSituation, String repairMHid) {
