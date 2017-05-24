@@ -42,10 +42,10 @@
                     <Font name="System Bold" size="19.0" />
                   </font>
                 </Button>
-                <GridPane gridLinesVisible="true" layoutX="251.0" layoutY="219.0" prefHeight="153.0" prefWidth="461.0">
+                <GridPane gridLinesVisible="true" layoutX="251.0" layoutY="219.0" prefHeight="153.0" prefWidth="553.0">
                   <children>
                     <Label font="$x1" prefHeight="27.0" prefWidth="432.0" text="ID | Status | mark | model | beds | price | fuel | mileage" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="startScreenComBox" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="469.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <ComboBox fx:id="startScreenComBox" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="569.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -443,7 +443,7 @@
                     <Font name="System Bold" size="25.0" />
                   </font>
                 </Label>
-                <ComboBox fx:id="repairListOFMHforMechanic" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="342.0" promptText="Select the motorhome">
+                <ComboBox fx:id="repairListOFMHforMechanic" layoutX="80.0" layoutY="99.0" onAction="#setAllValuesForMechanic" onMouseClicked="#ultimateMotorhomeListForComboboxReresher" prefHeight="31.0" prefWidth="393.0" promptText="Select the motorhome">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -452,7 +452,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="211.0" prefWidth="281.0">
+                <GridPane gridLinesVisible="true" layoutX="80.0" layoutY="149.0" prefHeight="211.0" prefWidth="390.0">
                   <children>
                     <Label font="$x1" text="Brand" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label font="$x1" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -467,17 +467,17 @@
                                     <Font size="18.0" fx:id="x111" />
                                  </font>
                               </Label>
-                              <Label fx:id="idForMechanic" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label fx:id="brandForMechanic" GridPane.columnIndex="1" />
-                              <Label fx:id="modelForMechanic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="bedForMechanic" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label fx:id="fuelForMechanic" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label fx:id="mileageForMechanic" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="idForMechanic" textFill="#0015ff" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="brandForMechanic" textFill="#0015ff" GridPane.columnIndex="1" />
+                              <Label fx:id="modelForMechanic" textFill="#0015ff" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="bedForMechanic" textFill="#0015ff" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="fuelForMechanic" textFill="#0015ff" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="mileageForMechanic" textFill="#0015ff" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID" GridPane.rowIndex="5" />
                   </children>
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="85.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="305.0" />
                   </columnConstraints>
                   <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

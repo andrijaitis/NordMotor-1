@@ -1,6 +1,8 @@
 /**
  * Created by Kompas on 2017-05-11.
  */
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import java.awt.*;
 import java.awt.Button;
@@ -193,22 +195,26 @@ public class Controller {
     //Adding a motorhome
     @FXML
     public void motorHomeModsAddingMH(ActionEvent actionEvent) {
-        String thePrice     = addPriceTxtField.getText(); /// Needs a fix to be a double not a fcking string
-        String theMileage   = addMileageTxtField.getText();
 
         try {
+                if(Integer.parseInt(addPriceTxtField.getText()) <= 0 || Integer.parseInt(addMileageTxtField.getText()) <= 0){
+                    statusBarForSuccessesfullyAddingMH.setText("Price or mileage can't be negative");
+                }else{
+                    String theBrand = addBrandTxtField.getText();
+                    String theModel = addModelTxtField.getText();
+                    int thePrice = Integer.parseInt(addPriceTxtField.getText());
+                    String theBed   = (String) addBedComBox.getValue();
+                    int theMileage = Integer.parseInt(addMileageTxtField.getText());//not used####################
 
-            String theBrand = addBrandTxtField.getText();
-            String theModel = addModelTxtField.getText();
-            Integer.parseInt(addPriceTxtField.getText());//not used####################
-            Integer.parseInt(addMileageTxtField.getText());//not used####################
-            String theBed   = (String) addBedComBox.getValue();
+                    motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
+                    statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+                }
 
-            motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
-            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+
+
 
         } catch (NumberFormatException e) {
-            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals or actual numbers");
 
            }
     }
@@ -277,9 +283,13 @@ public class Controller {
             String brand = updateMark.getText();
             String model = updateModel.getText();
 
+            if(Integer.parseInt(updatePrice.getText()) <= 0){
+                statusBarForSuccessesfullyAddingMH.setText("Price or mileage can't be negative");
+            }else{
+                motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
+                statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
+            }
 
-            motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
-            statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
 
 
         } catch (NumberFormatException e) {

@@ -15,7 +15,7 @@ import java.util.*;
 
 public class MotorhomeModification {
 
-    public static void addMotorHome(String theBrand, String theModel, String thePrice, String theBed, String theMileage) {//fix this to be a double and int
+    public static void addMotorHome(String theBrand, String theModel, int thePrice, String theBed, int theMileage) {//fix this to be a double and int
 
         System.out.println("Name ->" + theBrand + "<-");
 
