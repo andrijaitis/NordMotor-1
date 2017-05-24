@@ -29,14 +29,13 @@ import static java.sql.JDBCType.NULL;
 
 public class Controller {
 
-
     private boolean userLoggedIn = false;
 
     @FXML
     private  javafx.scene.control.ComboBox startScreenComBox;
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     @FXML
-    private Label statusBarForLogin;
+    private javafx.scene.control.Label statusBarForLogin;
     @FXML
     private javafx.scene.control.TextField log;
     @FXML
@@ -54,13 +53,8 @@ public class Controller {
     //MotorhomeModification CLASS variables >>>>>>>>>> for adding a MH
     @FXML
     private javafx.scene.control.TextField addBrandTxtField;
-
-
     @FXML
     private javafx.scene.control.TextField addModelTxtField;
-    @FXML
-    private javafx.scene.control.Label daysCounter;
-
     @FXML
     private javafx.scene.control.TextField addPriceTxtField;
     @FXML
@@ -68,20 +62,20 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField addMileageTxtField;
     @FXML
+    private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
+    //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
+    @FXML
     private javafx.scene.control.Label finalPrice;
     @FXML
-    private javafx.scene.control.Label statusBarForSuccessesfullyAddingMH;
-    @FXML
-    private javafx.scene.control.Label statusBarForService;
-    @FXML
-    private javafx.scene.control.Label statusBarForReserver;
-    //ReserveMH CLASS variables >>>>>>>>>> for adding extra item
+    private javafx.scene.control.Label daysCounter;
     @FXML
     private Label totalItems;
     @FXML
     private javafx.scene.control.TextArea extraItemsTxtArea;
     @FXML
     private javafx.scene.control.ComboBox listOfExtraItemsComBox;
+    @FXML
+    private javafx.scene.control.Label statusBarForReserver;
     //ReserveMH CLASS variables >>>>>>>>>> for finding which season it is
     @FXML
     private javafx.scene.control.ComboBox reserverCombo;
@@ -100,7 +94,7 @@ public class Controller {
     @FXML
     private javafx.scene.control.TextField singitureTxtField;
     @FXML
-    private javafx.scene.control.TextField whichSeason;
+    private javafx.scene.control.Label whichSeason;
     //MotorhomeModification CLASS variables >>>>>>>>>> for updating existing values for database
     @FXML
     private ComboBox listOfMHforUpdating;
@@ -131,7 +125,9 @@ public class Controller {
     private javafx.scene.control.Label fuelForMechanic;
     @FXML
     private javafx.scene.control.Label mileageForMechanic;
-    //check boxes
+    @FXML
+    private javafx.scene.control.Label statusBarForService;
+    //The mechanic check boxes
     @FXML
     private javafx.scene.control.CheckBox oilCheck;
     @FXML
@@ -158,7 +154,7 @@ public class Controller {
     private  javafx.scene.control.Label mileageBeforeTrip;
     @FXML
     private  javafx.scene.control.TextArea receiptTxtArea;
-    private int globalBeforeTripMileage =0;
+    private int globalBeforeTripMileage = 0;
 
 
     //Class instences
@@ -169,55 +165,6 @@ public class Controller {
     CustomerOrder cusOrder = new CustomerOrder();
     ReserveMH reserveMH = new ReserveMH();
 
-    //Loging in to the system
-    @FXML
-    public void LoginAction(ActionEvent actionEvent) {
-
-        String LoginInput = log.getText();
-        String PassInput  = pas.getText();
-
-        boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
-        System.out.println(status);
-        if (status == true) {
-            statusBarForLogin.setText("You are logged in");
-            userLoggedIn = status;
-            //Enabale all the tabs after the login is correct
-            startSceenPan.setDisable(false);
-            motorhomeModPan.setDisable(false);
-            reservePan.setDisable(false);
-            customerOrderFunctioPan.setDisable(false);
-            repairPan.setDisable(false);
-        } else {
-            statusBarForLogin.setText("Wrong password or username");
-            userLoggedIn = status;
-        }
-    }
-    //Adding a motorhome
-    @FXML
-    public void motorHomeModsAddingMH(ActionEvent actionEvent) {
-
-        try {
-                if(Integer.parseInt(addPriceTxtField.getText()) <= 0 || Integer.parseInt(addMileageTxtField.getText()) <= 0){
-                    statusBarForSuccessesfullyAddingMH.setText("Price or mileage can't be negative");
-                }else{
-                    String theBrand = addBrandTxtField.getText();
-                    String theModel = addModelTxtField.getText();
-                    int thePrice = Integer.parseInt(addPriceTxtField.getText());
-                    String theBed   = (String) addBedComBox.getValue();
-                    int theMileage = Integer.parseInt(addMileageTxtField.getText());//not used####################
-
-                    motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
-                    statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
-                }
-
-
-
-
-        } catch (NumberFormatException e) {
-            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals or actual numbers");
-
-           }
-    }
     //We use it to store stuff that is not database connected
     @FXML
     public void localValueComboBoxes(MouseEvent mouseEvent){
@@ -254,6 +201,69 @@ public class Controller {
         startDateDAYTxtField.setItems(days);
         endDateDAYTxtField.setItems(days);
     }
+    //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
+    @FXML
+    public  void ultimateMotorhomeListForComboboxReresher(MouseEvent mouseEvent){
+
+        startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
+        listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
+        repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
+        reserverCombo.setItems(ultCBref.myUltimateRefresh("Reserve"));
+    }
+    //Ultimate refresher for comebo boxes that gets their value directly from data base for customer names a.k.a. signature
+    @FXML
+    public void ultimateCustomerListComboboxRefresher(MouseEvent mouseEvent){
+        pickUpCustomer.setItems(ultCBref.customerOrder("pickUp"));
+        turnInCustomer.setItems(ultCBref.customerOrder("turnIn"));
+        cancelReservationCustomer.setItems(ultCBref.customerOrder("cancel"));
+    }
+    //Loging in to the system
+    @FXML
+    public void LoginAction(ActionEvent actionEvent) {
+
+        String LoginInput = log.getText();
+        String PassInput  = pas.getText();
+
+        boolean status = adminLogin.LoginStatus(LoginInput, PassInput);
+        System.out.println(status);
+        if (status == true) {
+            statusBarForLogin.setText("You are logged in");
+            userLoggedIn = status;
+            //Enabale all the tabs after the login is correct
+            startSceenPan.setDisable(false);
+            motorhomeModPan.setDisable(false);
+            reservePan.setDisable(false);
+            customerOrderFunctioPan.setDisable(false);
+            repairPan.setDisable(false);
+        } else {
+            statusBarForLogin.setText("Wrong password or username");
+            userLoggedIn = status;
+        }
+    }
+    // Login tab END======================================================================================================
+
+    //Adding a motorhome
+    @FXML
+    public void motorHomeModsAddingMH(ActionEvent actionEvent) {
+
+        try {
+                if(Integer.parseInt(addPriceTxtField.getText()) <= 0 || Integer.parseInt(addMileageTxtField.getText()) <= 0){
+                    statusBarForSuccessesfullyAddingMH.setText("Price or mileage can't be negative");
+                }else{
+                    String theBrand = addBrandTxtField.getText();
+                    String theModel = addModelTxtField.getText();
+                    int thePrice = Integer.parseInt(addPriceTxtField.getText());
+                    String theBed   = (String) addBedComBox.getValue();
+                    int theMileage = Integer.parseInt(addMileageTxtField.getText());
+
+                    motorhomeModification.addMotorHome(theBrand, theModel, thePrice, theBed, theMileage);
+                    statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + theBrand + " " + theModel + " has been saved!");
+                }
+        } catch (NumberFormatException e) {
+            statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals or actual numbers");
+
+           }
+    }
     //Update combobox MH list to set the values in Text fields
     @FXML
     public void setAllValuesFromComboboxToTextField(ActionEvent actionEvent) {
@@ -289,9 +299,6 @@ public class Controller {
                 motorhomeModification.updatingMotorHomne(ID, brand, model, price, beds, availability);
                 statusBarForSuccessesfullyAddingMH.setText("Status: Congratulations! " + brand + " " + model + " has been updated!");
             }
-
-
-
         } catch (NumberFormatException e) {
             statusBarForSuccessesfullyAddingMH.setText("Please use number values without decimals");
         }
@@ -302,6 +309,8 @@ public class Controller {
         String deleteID = updateID.getText();
         motorhomeModification.DeleteMotorHome(deleteID);
     }
+    // Motorhome modification tab END====================================================================================================
+
     //Add an extra item
     @FXML
     public void addExtaItemAction(ActionEvent actionEvent) {
@@ -323,16 +332,14 @@ public class Controller {
             System.out.println(sizes);
         }
     }
-    //clear the list of extra items
-    @FXML
+    @FXML //clear the whole list of extra items
     public void setItemsToNull(ActionEvent actionEvent) {
         ReserveMH.items.clear();
         extraItemsTxtArea.setText("");
         String sizes = Integer.toString(ReserveMH.items.size());
         totalItems.setText(sizes);
     }
-    //Remove last extra item
-    @FXML
+    @FXML//Remove last extra item
     public void removeLastExtraItem(ActionEvent actionEvent) {
         ReserveMH.items.remove(ReserveMH.items.size() - 1);
         extraItemsTxtArea.setText("");
@@ -401,6 +408,31 @@ public class Controller {
            System.out.println(cusOrder.currentDaytoStartDate(startDate) + "u dipppppppp");
         }
 }
+    //saves the reserved order
+    @FXML
+    public  void saveOrderAction(ActionEvent actionEvent){
+        if (singitureTxtField.getText().isEmpty() ||finalPrice.getText().isEmpty()){
+            statusBarForReserver.setText("Please Check final price or signature u DIP");
+        } else {
+            String startYear = (String) startDateYEARtxtField.getValue();
+            String startMonth = (String) startDateMONTHTxtField.getValue();
+            String startDay = (String) startDateDAYTxtField.getValue();
+            String endYear = (String) endDateYEARtxtField.getValue();
+            String endMonth = (String) endDateMONTHTxtField.getValue();
+            String endDay = (String) endDateDAYTxtField.getValue();
+            String Season = whichSeason.getText();
+            String itemAmount = totalItems.getText();
+            String cost = finalPrice.getText();
+            String signiture = singitureTxtField.getText();
+            String reservedID= (String)reserverCombo.getValue();
+            String reservedID2 = reservedID.substring(0, 1);
+            ReserveMH.saveOrder(startYear, startMonth, startDay, endYear, endMonth, endDay, Season, itemAmount, cost, signiture,reservedID2 );
+            statusBarForReserver.setText("Your oder " + signiture+" was successful");
+        }
+        reserverCombo.setValue("");
+    }
+    // Reserve a motorhome tab END====================================================================================================
+
     //Repair combobox MH list to set the values in Text fields
     @FXML
     public void setAllValuesForMechanic(ActionEvent actionEvent){
@@ -416,8 +448,7 @@ public class Controller {
         fuelForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(3)+ " [L]");
         mileageForMechanic.setText(repair.loadItUpForTheMechanic(ID).get(4)+ " [km]");
     }
-    //Check list checks if all the maintenance is done
-    @FXML
+    @FXML//Check list to checks  all the maintenance is done
     public void checkUpForMechanic(ActionEvent actionEvent) {
 
         String  repairMHid       = idForMechanic.getText();
@@ -436,50 +467,48 @@ public class Controller {
         repairNeededCheck.setSelected(false);
         statusBarForService.setText("Service information for this motorhome was saved");
     }
-    //saves the reserved order
-    @FXML
-    public  void saveOrderAction(ActionEvent actionEvent){
-       if (singitureTxtField.getText().isEmpty() ||finalPrice.getText().isEmpty()){
-           statusBarForReserver.setText("Please Check final price or signature u DIP");
-           } else {
-           String startYear = (String) startDateYEARtxtField.getValue();
-           String startMonth = (String) startDateMONTHTxtField.getValue();
-           String startDay = (String) startDateDAYTxtField.getValue();
-           String endYear = (String) endDateYEARtxtField.getValue();
-           String endMonth = (String) endDateMONTHTxtField.getValue();
-           String endDay = (String) endDateDAYTxtField.getValue();
-           String Season = whichSeason.getText();
-           String itemAmount = totalItems.getText();
-           String cost = finalPrice.getText();
-           String signiture = singitureTxtField.getText();
-           String reservedID= (String)reserverCombo.getValue();
-           String reservedID2 = reservedID.substring(0, 1);
-           ReserveMH.saveOrder(startYear, startMonth, startDay, endYear, endMonth, endDay, Season, itemAmount, cost, signiture,reservedID2 );
-           statusBarForReserver.setText("Your oder " + signiture+" was successful");
-       }
-       reserverCombo.setValue("");
-    }
-    //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
-    @FXML
-    public  void ultimateMotorhomeListForComboboxReresher(MouseEvent mouseEvent){
+    // Repair tab END====================================================================================================
 
-        startScreenComBox.setItems(ultCBref.myUltimateRefresh("SS"));
-        listOfMHforUpdating.setItems(ultCBref.myUltimateRefresh("Update"));
-        repairListOFMHforMechanic.setItems(ultCBref.myUltimateRefresh("Repair"));
-        reserverCombo.setItems(ultCBref.myUltimateRefresh("Reserve"));
-    }
-    //Ultimate refresher for comebo boxes that gets their value directly from data base for customer names a.k.a. signature
-    @FXML
-    public void ultimateCustomerListComboboxRefresher(MouseEvent mouseEvent){
-    pickUpCustomer.setItems(ultCBref.customerOrder("pickUp"));
-    turnInCustomer.setItems(ultCBref.customerOrder("turnIn"));
-    cancelReservationCustomer.setItems(ultCBref.customerOrder("cancel"));
-    }
+    //Customer picks up his reserved motorhome
     @FXML
     public void customerPickUp(ActionEvent actionEvent){
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
         receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
+    }
+
+    //When the customer wants to turn in his mh
+    @FXML
+    public void customerTurnIn(ActionEvent actionEvent){
+        System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
+
+        if(turnInCustomer.getSelectionModel().isEmpty()){
+            receiptTxtArea.setText("Pick a name from combo box you dip");
+        }else{
+            String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
+            int currentMileage = Integer.parseInt( turnInMileage.getText());
+            int currentFuel = Integer.parseInt(turnInFuel.getText());
+
+            if(currentMileage <= globalBeforeTripMileage){
+                turnInMileage.setText("Mileage too low!");
+            }else{
+                if(currentFuel <= 0 || currentFuel >=200){
+                    turnInFuel.setText("Fuel negative/too much");
+                }else{
+                    cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
+                    receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
+                }
+                           }
+        }
+    }
+    @FXML//and adition to turn in to see that was the mileage before the trip
+    public void setCurentMileageTurnIn(ActionEvent actionEvent){
+
+        String beforeTripMileage;
+        String customer = (String) turnInCustomer.getValue();
+        beforeTripMileage = cusOrder.mileagaBeforeTheTrip(customer);
+        globalBeforeTripMileage = Integer.parseInt(beforeTripMileage) ;
+        mileageBeforeTrip.setText("Before trip mileage: "+beforeTripMileage+" [km]");
     }
     @FXML
     public void orderCancelation(ActionEvent actionEvent) {
@@ -504,7 +533,7 @@ public class Controller {
 
             receiptTxtArea.setText(
 
-                            "Days berore start " + daysBeforeStart       + " " + "\n" +
+                    "Days berore start " + daysBeforeStart       + " " + "\n" +
                             "Price             " + kaina                 + " " + "\n" +
                             "Penalty           " + refund                + " " + "\n" +
                             "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
@@ -512,44 +541,11 @@ public class Controller {
             );
         }
     }
+    // Customer order tab END====================================================================================================
 
-    @FXML
-    public void customerTurnIn(ActionEvent actionEvent){
-        System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
-
-        if(turnInCustomer.getSelectionModel().isEmpty()){
-            receiptTxtArea.setText("Pick a name from combo box you dip");
-        }else{
-            String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
-            int currentMileage = Integer.parseInt( turnInMileage.getText());
-            int currentFuel = Integer.parseInt(turnInFuel.getText());
-
-            if(currentMileage <= globalBeforeTripMileage){
-                turnInMileage.setText("Mileage too low!");
-            }else{
-                if(currentFuel <= 0 || currentFuel >=200){
-                    turnInFuel.setText("Fuel negative/too much");
-                }else{
-                    cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
-                    receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
-                }
-                           }
-        }
-    }
-    @FXML
-    public void setCurentMileageTurnIn(ActionEvent actionEvent){
-
-        String beforeTripMileage;
-        String customer = (String) turnInCustomer.getValue();
-        beforeTripMileage = cusOrder.mileagaBeforeTheTrip(customer);
-        globalBeforeTripMileage = Integer.parseInt(beforeTripMileage) ;
-        mileageBeforeTrip.setText("Before trip mileage: "+beforeTripMileage+" [km]");
-    }
     //Shuts down the system
     @FXML
     public  void turnOffProgram(ActionEvent actionEvent){
         System.exit(1);
     }
-
-
 }
