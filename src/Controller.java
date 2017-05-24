@@ -479,9 +479,14 @@ public class Controller {
     //When the customer wants to turn in his mh
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
-        System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
 
-        if(turnInCustomer.getSelectionModel().isEmpty()){
+
+
+       try {
+
+                System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
+
+                if(turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0 ){
             receiptTxtArea.setText("Pick a name from combo box you dip");
         }else{
             String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
@@ -495,11 +500,19 @@ public class Controller {
                     turnInFuel.setText("Fuel negative/too much");
                 }else{
                     cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
+                    System.out.println("u dipppppppp");
                     receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
                 }
                            }
         }
-    }
+
+       } catch (NumberFormatException e) {
+           receiptTxtArea.setText("u focken dip");
+
+       }
+
+}
+
     @FXML//and adition to turn in to see that was the mileage before the trip
     public void setCurentMileageTurnIn(ActionEvent actionEvent){
 
