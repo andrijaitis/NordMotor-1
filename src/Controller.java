@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import static java.sql.JDBCType.INTEGER;
 import static java.sql.JDBCType.NULL;
 
-public class Controller {
+public class Controller implements Initializable{
 
     @FXML
     private  javafx.scene.control.ComboBox startScreenComBox;
@@ -141,6 +141,8 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox pickUpCustomer;
     @FXML
+    private javafx.scene.control.ComboBox pickupLocation;
+    @FXML
     private javafx.scene.control.ComboBox turnInCustomer;
     @FXML
     private javafx.scene.control.ComboBox cancelReservationCustomer;
@@ -199,6 +201,7 @@ public class Controller {
         }
         startDateDAYTxtField.setItems(days);
         endDateDAYTxtField.setItems(days);
+
     }
     //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
     @FXML
@@ -559,5 +562,17 @@ public class Controller {
     @FXML
     public  void turnOffProgram(ActionEvent actionEvent){
         System.exit(1);
+    }
+
+    @FXML
+    public void choosePickUpLocation(MouseEvent mouseEvent) {
+
+        pickupLocation.getItems().addAll("Test", "Test2");
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
