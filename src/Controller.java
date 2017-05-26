@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import static java.sql.JDBCType.INTEGER;
 import static java.sql.JDBCType.NULL;
 
-public class Controller implements Initializable{
+public class Controller {
 
     @FXML
     private  javafx.scene.control.ComboBox startScreenComBox;
@@ -81,6 +81,7 @@ public class Controller implements Initializable{
     @FXML
     private javafx.scene.control.ComboBox startDateDAYTxtField;
     @FXML
+    private javafx.scene.control.ComboBox dropoffLocation;
     private javafx.scene.control.ComboBox startDateMONTHTxtField;
     @FXML
     private javafx.scene.control.ComboBox endDateDAYTxtField;
@@ -567,12 +568,17 @@ public class Controller implements Initializable{
     @FXML
     public void choosePickUpLocation(MouseEvent mouseEvent) {
 
-        pickupLocation.getItems().addAll("Test", "Test2");
+        ObservableList<String> locations = FXCollections.observableArrayList();
+        locations.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        pickupLocation.setItems(locations);
+      // pickupLocation.getItems().addAll("Hotel", "Airport", "Office", "Train Station");
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    @FXML
+    public void chooseDropOffLocation(MouseEvent mouseEvent) {
+        ObservableList<String> locationaser = FXCollections.observableArrayList();
+        locationaser.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        dropoffLocation.setItems(locationaser);
+       }
 }
