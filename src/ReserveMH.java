@@ -161,15 +161,13 @@ public class ReserveMH {
                 list.add(rs.getString(7));
                 list.add(rs.getString(8));
 
-
-
                 con.close();
                 return list;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list; //means something is wrong u DIP
+        return list; //means something is wrong
 
     }
 }

@@ -7,21 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.util.ArrayList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import java.util.Calendar;
-import java.text.ParseException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 
 
 /**
  * Created by Mantas_MSI on 5/14/2017.
  */
+
 public class CustomerOrder {
 
     public void pickUp(String customerName) {
@@ -36,7 +27,6 @@ public class CustomerOrder {
                                 "  " +
                             "WHERE reservedID = rvID AND signiture = " + "'" +customerName +    "'"+           ";"        ;
 
-
             System.out.println(sql);
             stmt.executeUpdate(sql);
             con.close();
@@ -46,11 +36,15 @@ public class CustomerOrder {
         }
     }
 
-    public void turnIn(String nameOfTheGuyWhoTurnIns, int currentMileage, int currentFuel) {
+    public int turnIn(String nameOfTheGuyWhoTurnIns, int currentMileage, int currentFuel) {
 
         String dataBaseMileage = " ";
         String dataBaseFuel    = " ";
         String dataBaseCost    = " ";
+
+        int distenceOfTheJourney = 0;
+        int fourHundredKMfree    = 0;
+        int lessThenHalfFuel     = 0;
 
         try {
             Connection con = DBConnection.getConnection();
@@ -68,9 +62,7 @@ public class CustomerOrder {
 
             }
             //----------------------------------------------------------------------------------------------------------
-            int distenceOfTheJourney = 0;
-            int fourHundredKMfree    = 0;
-            int lessThenHalfFuel     = 0;
+
 
             if( (Integer.parseInt(dataBaseFuel)/2) > currentFuel){
                 lessThenHalfFuel =  70;
@@ -94,7 +86,6 @@ public class CustomerOrder {
                          "cost      = " + "'" + fourHundredKMfree +"'" + "  " +
                          "WHERE rvID = reservedID AND signiture =  "   + "'" + nameOfTheGuyWhoTurnIns + "'"+    ";"        ;
 
-
             System.out.println(sql);
 
             stmt.executeUpdate(sql);
@@ -102,9 +93,9 @@ public class CustomerOrder {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ObservableList<String> list2 = FXCollections.observableArrayList();
-            list2.add("Failed to load");
         }
+
+        return fourHundredKMfree;
     }
 
     public void orderCancelation(String nameOfTheGuyWhoCanceled) {
@@ -121,8 +112,6 @@ public class CustomerOrder {
                     "status    = " +"'" + "Available"   +"'" + ", " +
                     "situation = " +"'" + "Canceled" +"'" + "  " +
                     "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
-
-
 
             System.out.println(sql);
 

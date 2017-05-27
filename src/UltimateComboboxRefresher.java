@@ -36,9 +36,6 @@ public class UltimateComboboxRefresher {
                                         rs.getString(6) + " [€] "+
                                         rs.getString(7) + " [L] "+
                                         rs.getString(8) + " [km] ");
-
-
-
                 }
                 //update motorhome info
                 if(tab == "Update") {
@@ -82,7 +79,6 @@ public class UltimateComboboxRefresher {
             con.close();
 
             ObservableList<String> list = FXCollections.observableArrayList();
-
 
             String listString = "";
 

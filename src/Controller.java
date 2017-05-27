@@ -1,31 +1,15 @@
 /**
  * Created by Kompas on 2017-05-11.
  */
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import java.awt.*;
-import java.awt.Button;
-import java.awt.TextField;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-import static java.sql.JDBCType.INTEGER;
-import static java.sql.JDBCType.NULL;
 
 public class Controller {
 
@@ -283,7 +267,6 @@ public class Controller {
     public void motorHomeModsUpdatingMH(ActionEvent actionEvent) {
 
         try {
-            Integer.parseInt(updatePrice.getText());//not used####################
             String price = updatePrice.getText();
             String beds = (String) updateBeds.getValue();
             String availability = (String) updateAvailability.getValue();
@@ -347,7 +330,6 @@ public class Controller {
         for (String s : ReserveMH.items) {
             listString += s + "\n";
             System.out.println();
-
         }
         extraItemsTxtArea.setText(listString);
         String sizes = Integer.toString(ReserveMH.items.size());
@@ -370,24 +352,19 @@ public class Controller {
 
        System.out.println(startDateMONTHTxtField.getValue());
        if ( startDateMONTHTxtField.getValue() == null|| startDateDAYTxtField.getValue()== null || endDateMONTHTxtField.getValue()== null || endDateDAYTxtField.getValue() == null ){
-           System.out.println(" Ble cyka you need normal value");
            whichSeason.setText("Fill all the dates!");
            whichSeason.setFont(Font.font ("Verdana", 17));
 
        }else if ( reserverCombo.getValue() == null){
-            System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
-            statusBarForReserver.setText("Please check if MH selected");
+           statusBarForReserver.setText("Please check if MH selected");
 
        }else if (howManyDays <= 0){
-           System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("Choose normal date");
        }else if (Integer.parseInt( reserveMH.currentDaytoStartDate(startDate)) < 0){
-           System.out.println(" Ble cyka you need normal value");
            whichSeason.setFont(Font.font ("Verdana", 17));
            statusBarForReserver.setText("You cant travel time m88888: "+startDate);
-
        }else{
 
             ReserveMH rmh = new ReserveMH();
@@ -401,10 +378,7 @@ public class Controller {
             int seasonPrice= (((motorhomePriceforDay *howManyDays) )/ 100 *  seasonPercentage);
             int lastPrice = seasonPrice + (motorhomePriceforDay *howManyDays) + extraItemPrice;
             finalPrice.setText(Integer.toString(lastPrice));//
-            System.out.println(seasonPercentage);
             statusBarForReserver.setText("Price was calculated  Total: "+ lastPrice);
-           System.out.println(howManyDays);
-           System.out.println(reserveMH.currentDaytoStartDate(startDate) + "u dipppppppp");
         }
 }
     //saves the reserved order
@@ -438,7 +412,6 @@ public class Controller {
         //set the text into the text fields from the combo box directly
         String valuesFromComBox = (String) repairListOFMHforMechanic.getValue();
         String ID = valuesFromComBox.substring(0,2);
-        System.out.println(valuesFromComBox);
 
         idForMechanic.setText(ID);
         brandForMechanic.setText(loadInformation.load(ID).get(0));
@@ -480,14 +453,9 @@ public class Controller {
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
 
-
-
        try {
-
-                System.out.print(" GLOBAL MILEAGE: " + globalBeforeTripMileage);
-
-                if(turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0 ){
-            receiptTxtArea.setText("Pick a name from combo box you dip");
+           if(turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0 ){
+            receiptTxtArea.setText("Pick a name from combo box.");
         }else{
             String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
             int currentMileage = Integer.parseInt( turnInMileage.getText());
@@ -499,18 +467,16 @@ public class Controller {
                 if(currentFuel <= 0 || currentFuel >=200){
                     turnInFuel.setText("Fuel negative/too much");
                 }else{
-                    cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel);
-                    System.out.println("u dipppppppp");
-                    receiptTxtArea.setText("Customer who turned in: "+nameOfTheGuyWhoTurnIns);
+                    receiptTxtArea.setText(
+                            "Customer who turned in: "+nameOfTheGuyWhoTurnIns+
+                            "\nThe total cost was:    "+cusOrder.turnIn(nameOfTheGuyWhoTurnIns,currentMileage,currentFuel));
                 }
                            }
         }
 
        } catch (NumberFormatException e) {
-           receiptTxtArea.setText("u focken dip");
-
+           receiptTxtArea.setText("Use normal numerical values no decimals also");
        }
-
 }
 
     @FXML//and adition to turn in to see that was the mileage before the trip
@@ -545,7 +511,7 @@ public class Controller {
 
             receiptTxtArea.setText(
 
-                    "Days berore start " + daysBeforeStart       + " " + "\n" +
+                            "Days berore start " + daysBeforeStart       + " " + "\n" +
                             "Price             " + kaina                 + " " + "\n" +
                             "Penalty           " + refund                + " " + "\n" +
                             "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
