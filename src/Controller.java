@@ -65,6 +65,7 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox startDateDAYTxtField;
     @FXML
+    private javafx.scene.control.ComboBox dropoffLocation;
     private javafx.scene.control.ComboBox startDateMONTHTxtField;
     @FXML
     private javafx.scene.control.ComboBox endDateDAYTxtField;
@@ -125,6 +126,8 @@ public class Controller {
     @FXML
     private javafx.scene.control.ComboBox pickUpCustomer;
     @FXML
+    private javafx.scene.control.ComboBox pickupLocation;
+    @FXML
     private javafx.scene.control.ComboBox turnInCustomer;
     @FXML
     private javafx.scene.control.ComboBox cancelReservationCustomer;
@@ -183,6 +186,7 @@ public class Controller {
         }
         startDateDAYTxtField.setItems(days);
         endDateDAYTxtField.setItems(days);
+
     }
     //Ultimate refresher for comebo boxes that gets their value directly from data base for motorhome
     @FXML
@@ -526,4 +530,21 @@ public class Controller {
     public  void turnOffProgram(ActionEvent actionEvent){
         System.exit(1);
     }
+
+    @FXML
+    public void choosePickUpLocation(MouseEvent mouseEvent) {
+
+        ObservableList<String> locations = FXCollections.observableArrayList();
+        locations.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        pickupLocation.setItems(locations);
+      // pickupLocation.getItems().addAll("Hotel", "Airport", "Office", "Train Station");
+
+    }
+
+    @FXML
+    public void chooseDropOffLocation(MouseEvent mouseEvent) {
+        ObservableList<String> locationaser = FXCollections.observableArrayList();
+        locationaser.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        dropoffLocation.setItems(locationaser);
+       }
 }
