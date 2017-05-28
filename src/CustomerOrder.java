@@ -103,10 +103,8 @@ public class CustomerOrder {
 
         try {
             Connection con = DBConnection.getConnection();
-            //this one is for finding mileage and fuel and cost --------------------------------------------------------
             Statement stmt = con.createStatement();
 
-            //this one updates milege and fuel and cost
             String sql =    "UPDATE reserve, nordic_rv " +
                     "SET "         +
                     "status    = " +"'" + "Available"   +"'" + ", " +
@@ -120,12 +118,8 @@ public class CustomerOrder {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ObservableList<String> list2 = FXCollections.observableArrayList();
-            list2.add("Failed to load");
         }
     }
-
-
 
     public int penalty(int days,int cost ) {
         int refund = 0;
@@ -149,7 +143,6 @@ public class CustomerOrder {
             return refund;
         }
     }
-//JOptionPane.showMEssageDialog(null, "Go away");
     //side method to get the current mileage before the trip
     public String mileagaBeforeTheTrip(String customer){
 
@@ -157,7 +150,6 @@ public class CustomerOrder {
 
         try {
             Connection con = DBConnection.getConnection();
-            //this one is for finding mileage and fuel and cost --------------------------------------------------------
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT mileage " +
                     "FROM  nordic_rv, reserve " +
@@ -172,11 +164,6 @@ public class CustomerOrder {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return mileage;
     }
-
-
-
 }

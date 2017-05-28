@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-
 public class Controller {
 
     @FXML
