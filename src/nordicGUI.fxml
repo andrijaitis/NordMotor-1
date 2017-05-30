@@ -24,7 +24,7 @@
   <children>
     <Accordion layoutX="0.0" layoutY="0.0" prefHeight="718.0" prefWidth="966.0">
       <panes>
-        <TitledPane fx:id="startSceenPan" animated="false" text="Start Screen">
+        <TitledPane fx:id="startSceenPan" animated="false" disable="true" text="Start Screen">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;">
               <children>
@@ -82,9 +82,9 @@
                            <font>
                               <Font name="Times New Roman Bold" size="29.0" />
                            </font></Label>
-                        <Text layoutX="251.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
+                        <Text layoutX="229.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="213.302734375" />
                         <PasswordField fx:id="pas" layoutX="242.0" layoutY="426.0" />
-                        <ImageView fitHeight="202.0" fitWidth="207.0" layoutX="108.0" layoutY="66.0">
+                        <ImageView fitHeight="202.0" fitWidth="207.0" layoutX="265.0" layoutY="64.0">
                            <image>
                               <Image url="@VOYAGER.png" />
                            </image>
@@ -93,7 +93,7 @@
                   </AnchorPane>
               </content>
             </TitledPane>
-        <TitledPane fx:id="motorhomeModPan" animated="false" text="Add/Update">
+        <TitledPane fx:id="motorhomeModPan" animated="false" disable="true" text="Add/Update">
           <content>
             <AnchorPane id="AddCSS" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -215,7 +215,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="reservePan" animated="false" text="Reserver">
+        <TitledPane fx:id="reservePan" animated="false" disable="true" text="Reserver">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -339,7 +339,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="customerOrderFunctioPan" animated="false" text="Pick up/Turn in/Cancel reservation">
+        <TitledPane fx:id="customerOrderFunctioPan" animated="false" disable="true" text="Pick up/Turn in/Cancel reservation">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>
@@ -443,7 +443,7 @@
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane fx:id="repairPan" animated="false" text="Service and repair">
+        <TitledPane fx:id="repairPan" animated="false" disable="true" text="Service and repair">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@Style.css">
               <children>

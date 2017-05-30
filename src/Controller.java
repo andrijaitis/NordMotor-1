@@ -409,7 +409,7 @@ public class Controller {
             String reservedID= (String)reserverCombo.getValue();
             String reservedID2 = reservedID.substring(0, 1);
             ReserveMH.saveOrder(startYear, startMonth, startDay, endYear, endMonth, endDay, Season, itemAmount, cost, signiture,reservedID2 );
-            statusBarForReserver.setText("Your oder " + signiture+" was successful");
+            statusBarForReserver.setText("Your order " + signiture+" was successful");
         }
         reserverCombo.setValue("");
     }
