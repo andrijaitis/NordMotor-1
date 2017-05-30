@@ -1,0 +1,4 @@
+1.Extract ZIP file
+2.Start NordicMotor.jar
+3.Type Username and Password
+4.Enjoy the system
