@@ -549,21 +549,32 @@ if (dropoffLocation.getValue() == null) {
             System.out.println(daysBeforeStart);
             daysCounter.setText(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
             int refund = cusOrder.penalty(daysBeforeStart, kaina);
-            int sugrazinta = kaina - refund;
-            System.out.println("Days beror start " + daysBeforeStart);
-            System.out.println("Kaina " + kaina);
-            System.out.println("penalty" + refund);
-            System.out.println("Sugrazinta suma" + sugrazinta);
 
-            receiptTxtArea.setText(
+            if (refund < 200) {
+                int sugrazinta = kaina;
+                receiptTxtArea.setText(
 
-                            "Days before start " + daysBeforeStart       + " " + "\n" +
-                            "Price             " + kaina                 + " " + "\n" +
-                            "Penalty           " + refund                + " " + "\n" +
-                            "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
-                            "Returned amount   " + sugrazinta            + "\n"
-            );
+                        "Days before start " + daysBeforeStart       + " " + "\n" +
+                                "Price             " + kaina                 + " " + "\n" +
+                                "Penalty           " + refund                + " " + "\n" +
+                                "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
+                                "Returned amount   " + sugrazinta            + "\n"
+                );
+            } else {
+                int sugrazinta = kaina - refund;
+                receiptTxtArea.setText(
+
+                        "Days before start " + daysBeforeStart       + " " + "\n" +
+                                "Price             " + kaina                 + " " + "\n" +
+                                "Penalty           " + refund                + " " + "\n" +
+                                "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
+                                "Returned amount   " + sugrazinta            + "\n"
+                );
+            }
+
+
         }
+
     }
     // Customer order tab END====================================================================================================
 
