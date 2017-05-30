@@ -10,7 +10,8 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    private final static String URL = "jdbc:mysql://sql11.freemysqlhosting.net:3306/";
+    //we put these values into string so that we can change them easaly later on
+    private final static String URL = "jdbc:mysql://sql11.freemysqlhosting.net:3306/";//show the location of our databases
     private final static String DB_NAME = "sql11175872";
     private final static String USER = "sql11175872";
     private final static String PASS = "JYrq7ab6W9";

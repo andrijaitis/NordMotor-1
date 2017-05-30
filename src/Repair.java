@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Repair {
 
     //we look at all the check boxes of they are checked
-    public void serviceComplete(boolean oilSituation, boolean fuelSituation, boolean waterSituation, boolean cleanSituation, boolean repairsSituation, String repairMHid) {
+    public String serviceComplete(boolean oilSituation, boolean fuelSituation, boolean waterSituation, boolean cleanSituation, boolean repairsSituation, String repairMHid) {
 
         if(repairsSituation == true){
             try {
@@ -29,6 +29,7 @@ public class Repair {
                 stmt.executeUpdate(sql);
                 con.close();
 
+                return " The motorhome is sent of to repairs";
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -53,6 +54,7 @@ public class Repair {
                 e.printStackTrace();
             }
         }
+        return "All service is done.";
         }
 
 }

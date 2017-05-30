@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-
 import javax.swing.*;
 
 
@@ -269,6 +268,8 @@ public class Controller {
         updatePrice.setText(loadInformation.load(ID).get(3));
         updateBeds.setValue(loadInformation.load(ID).get(4));
         updateID.setText(" ID: "+ID);
+
+        statusBarForSuccessesfullyAddingMH.setText("Status: ");
     }
     //Updates existing motorhomes
     @FXML
@@ -427,6 +428,8 @@ public class Controller {
         bedForMechanic.setText(loadInformation.load(ID).get(2));
         fuelForMechanic.setText(loadInformation.load(ID).get(3)+ " [L]");
         mileageForMechanic.setText(loadInformation.load(ID).get(4)+ " [km]");
+
+        statusBarForService.setText("Status: ");
     }
     @FXML//Check list to checks  all the maintenance is done
     public void checkUpForMechanic(ActionEvent actionEvent) {
@@ -438,14 +441,14 @@ public class Controller {
         boolean cleanSituation   = cleanCheck.isSelected();
         boolean repairsSituation = repairNeededCheck.isSelected();
 
-        repair.serviceComplete(oilSituation,fuelSituation,waterSituation,cleanSituation,repairsSituation, repairMHid);
+        statusBarForService.setText(repair.serviceComplete(oilSituation,fuelSituation,waterSituation,cleanSituation,repairsSituation, repairMHid));
 
         oilCheck.setSelected(false);
         fuelCheck.setSelected(false);
         waterCheck.setSelected(false);
         cleanCheck.setSelected(false);
         repairNeededCheck.setSelected(false);
-        statusBarForService.setText("Service information for this motorhome was saved");
+
     }
     // Repair tab END====================================================================================================
 
@@ -535,7 +538,7 @@ if (dropoffLocation.getValue() == null) {
     public void orderCancelation(ActionEvent actionEvent) {
 
         if (cancelReservationCustomer.getSelectionModel().isEmpty()) {
-            receiptTxtArea.setText("Pick a name from combo box you dip");
+            receiptTxtArea.setText("Pick a name from combo box ");
         } else {
             String nameOfTheGuyWhoCancel = (String) cancelReservationCustomer.getValue();
 

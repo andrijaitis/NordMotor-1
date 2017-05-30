@@ -1,7 +1,4 @@
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,15 +100,15 @@ public class CustomerOrder {
 
         try {
             Connection con = DBConnection.getConnection();
-            //this one is for finding mileage and fuel and cost --------------------------------------------------------
             Statement stmt = con.createStatement();
 
-            //this one updates milege and fuel and cost
-            String sql = "UPDATE reserve, nordic_rv " +
-                    "SET " +
-                    "status    = " + "'" + "Available" + "'" + ", " +
-                    "situation = " + "'" + "Canceled" + "'" + "  " +
-                    "WHERE reservedID = rvID AND signiture = " + "'" + nameOfTheGuyWhoCanceled + "'" + ";";
+
+            String sql =    "UPDATE reserve, nordic_rv " +
+                    "SET "         +
+                    "status    = " +"'" + "Available"   +"'" + ", " +
+                    "situation = " +"'" + "Canceled" +"'" + "  " +
+                    "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
+
 
             System.out.println(sql);
 
@@ -120,13 +117,13 @@ public class CustomerOrder {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ObservableList<String> list2 = FXCollections.observableArrayList();
-            list2.add("Failed to load");
         }
     }
 
 
+
     public int penalty(int days, int cost) {
+
         int refund = 0;
         if (50 < days) {
             refund = cost / 100 * 20;
@@ -149,7 +146,6 @@ public class CustomerOrder {
         }
     }
 
-    //JOptionPane.showMEssageDialog(null, "Go away");
     //side method to get the current mileage before the trip
     public String mileagaBeforeTheTrip(String customer) {
 
@@ -157,7 +153,6 @@ public class CustomerOrder {
 
         try {
             Connection con = DBConnection.getConnection();
-            //this one is for finding mileage and fuel and cost --------------------------------------------------------
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT mileage " +
                     "FROM  nordic_rv, reserve " +
@@ -174,6 +169,7 @@ public class CustomerOrder {
         }
         return mileage;
     }
+
 
     public void updateOrderPrice(String customerName, int kainyte) {
 
@@ -195,6 +191,7 @@ public class CustomerOrder {
             e.printStackTrace();
         }
     }
+
 
 }
 
