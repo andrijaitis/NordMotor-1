@@ -267,7 +267,7 @@ public class Controller {
         updateModel.setText(loadInformation.load(ID).get(2));
         updatePrice.setText(loadInformation.load(ID).get(3));
         updateBeds.setValue(loadInformation.load(ID).get(4));
-        updateID.setText(" ID: "+ID);
+        updateID.setText(ID);
 
         statusBarForSuccessesfullyAddingMH.setText("Status: ");
     }
