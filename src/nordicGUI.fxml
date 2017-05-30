@@ -84,9 +84,9 @@
                            </font></Label>
                         <Text layoutX="251.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="login: Admin    pass: password123" wrappingWidth="131.302734375" />
                         <PasswordField fx:id="pas" layoutX="242.0" layoutY="426.0" />
-                        <ImageView fitHeight="222.0" fitWidth="214.0" layoutX="115.0" layoutY="44.0">
+                        <ImageView fitHeight="202.0" fitWidth="207.0" layoutX="108.0" layoutY="66.0">
                            <image>
-                              <Image url="@../../Downloads/VOYAGER.png" />
+                              <Image url="@VOYAGER.png" />
                            </image>
                         </ImageView>
                      </children>
