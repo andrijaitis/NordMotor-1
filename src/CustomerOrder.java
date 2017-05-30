@@ -20,12 +20,12 @@ public class CustomerOrder {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql =    "UPDATE reserve, nordic_rv " +
-                            "SET "         +
-                            "status    = " +"'" + "In_use"   +"'" + ", " +
-                            "situation = " +"'" + "Using_it" +"'" +
-                                "  " +
-                            "WHERE reservedID = rvID AND signiture = " + "'" +customerName +    "'"+           ";"        ;
+            String sql = "UPDATE reserve, nordic_rv " +
+                    "SET " +
+                    "status    = " + "'" + "In_use" + "'" + ", " +
+                    "situation = " + "'" + "Using_it" + "'" +
+                    "  " +
+                    "WHERE reservedID = rvID AND signiture = " + "'" + customerName + "'" + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -39,52 +39,52 @@ public class CustomerOrder {
     public int turnIn(String nameOfTheGuyWhoTurnIns, int currentMileage, int currentFuel) {
 
         String dataBaseMileage = " ";
-        String dataBaseFuel    = " ";
-        String dataBaseCost    = " ";
+        String dataBaseFuel = " ";
+        String dataBaseCost = " ";
 
         int distenceOfTheJourney = 0;
-        int fourHundredKMfree    = 0;
-        int lessThenHalfFuel     = 0;
+        int fourHundredKMfree = 0;
+        int lessThenHalfFuel = 0;
 
         try {
             Connection con = DBConnection.getConnection();
             //this one is for finding mileage and fuel and cost --------------------------------------------------------
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT mileage , fuel, cost " +
-                                                 "FROM reserve, nordic_rv " +
-                                                 "WHERE reservedID = rvID AND signiture ="+ "'"+ nameOfTheGuyWhoTurnIns + "'"  + ";"
-                                                 );
+                    "FROM reserve, nordic_rv " +
+                    "WHERE reservedID = rvID AND signiture =" + "'" + nameOfTheGuyWhoTurnIns + "'" + ";"
+            );
 
             while (rs.next()) {
                 dataBaseMileage = rs.getString(1);
-                dataBaseFuel    = rs.getString(2);
-                dataBaseCost    = rs.getString(3);
+                dataBaseFuel = rs.getString(2);
+                dataBaseCost = rs.getString(3);
 
             }
             //----------------------------------------------------------------------------------------------------------
 
 
-            if( (Integer.parseInt(dataBaseFuel)/2) > currentFuel){
-                lessThenHalfFuel =  70;
+            if ((Integer.parseInt(dataBaseFuel) / 2) > currentFuel) {
+                lessThenHalfFuel = 70;
             }
 
-            distenceOfTheJourney =  currentMileage - Integer.parseInt(dataBaseMileage);
-            if(distenceOfTheJourney > 400){
+            distenceOfTheJourney = currentMileage - Integer.parseInt(dataBaseMileage);
+            if (distenceOfTheJourney > 400) {
                 fourHundredKMfree = distenceOfTheJourney;
-                fourHundredKMfree += Integer.parseInt(dataBaseCost) ;
+                fourHundredKMfree += Integer.parseInt(dataBaseCost);
                 fourHundredKMfree += lessThenHalfFuel;
             }
 
 
             //this one updates milege and fuel and cost
             String sql = "UPDATE nordic_rv, reserve " +
-                         "SET         " +
-                         "situation = " + "'" + "Finished"        +"'" + ", " +
-                         "status    = " + "'" + "Unavailable"     +"'" + ", " +
-                         "mileage   = " + "'" + currentMileage    +"'" + ", " +
-                         "fuel      = " + "'" + currentFuel       +"'" + ", " +
-                         "cost      = " + "'" + fourHundredKMfree +"'" + "  " +
-                         "WHERE rvID = reservedID AND signiture =  "   + "'" + nameOfTheGuyWhoTurnIns + "'"+    ";"        ;
+                    "SET         " +
+                    "situation = " + "'" + "Finished" + "'" + ", " +
+                    "status    = " + "'" + "Unavailable" + "'" + ", " +
+                    "mileage   = " + "'" + currentMileage + "'" + ", " +
+                    "fuel      = " + "'" + currentFuel + "'" + ", " +
+                    "cost      = " + "'" + fourHundredKMfree + "'" + "  " +
+                    "WHERE rvID = reservedID AND signiture =  " + "'" + nameOfTheGuyWhoTurnIns + "'" + ";";
 
             System.out.println(sql);
 
@@ -107,11 +107,11 @@ public class CustomerOrder {
             Statement stmt = con.createStatement();
 
             //this one updates milege and fuel and cost
-            String sql =    "UPDATE reserve, nordic_rv " +
-                    "SET "         +
-                    "status    = " +"'" + "Available"   +"'" + ", " +
-                    "situation = " +"'" + "Canceled" +"'" + "  " +
-                    "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
+            String sql = "UPDATE reserve, nordic_rv " +
+                    "SET " +
+                    "status    = " + "'" + "Available" + "'" + ", " +
+                    "situation = " + "'" + "Canceled" + "'" + "  " +
+                    "WHERE reservedID = rvID AND signiture = " + "'" + nameOfTheGuyWhoCanceled + "'" + ";";
 
             System.out.println(sql);
 
@@ -126,8 +126,7 @@ public class CustomerOrder {
     }
 
 
-
-    public int penalty(int days,int cost ) {
+    public int penalty(int days, int cost) {
         int refund = 0;
         if (50 < days) {
             refund = cost / 100 * 20;
@@ -145,13 +144,14 @@ public class CustomerOrder {
             refund = cost / 100 * 95;
             System.out.println("95%");
             return refund;
-              } else {
+        } else {
             return refund;
         }
     }
-//JOptionPane.showMEssageDialog(null, "Go away");
+
+    //JOptionPane.showMEssageDialog(null, "Go away");
     //side method to get the current mileage before the trip
-    public String mileagaBeforeTheTrip(String customer){
+    public String mileagaBeforeTheTrip(String customer) {
 
         String mileage = " ";
 
@@ -161,7 +161,7 @@ public class CustomerOrder {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT mileage " +
                     "FROM  nordic_rv, reserve " +
-                    "WHERE reservedID = rvID AND signiture ="+ "'"+ customer + "'"  + ";"
+                    "WHERE reservedID = rvID AND signiture =" + "'" + customer + "'" + ";"
             );
 
             while (rs.next()) {
@@ -172,11 +172,38 @@ public class CustomerOrder {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return mileage;
     }
 
+    public void updateOrderPrice(String customerName, int kainyte) {
 
+        try {
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "UPDATE reserve, nordic_rv " +
+                    "SET " +
+                    "cost    = "  +kainyte+ "" + " " +
+                    "  " +
+                    "WHERE reservedID = rvID AND signiture = " + "'" + customerName + "'" + ";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+

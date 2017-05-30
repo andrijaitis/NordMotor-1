@@ -10,11 +10,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import javax.swing.*;
+
 
 public class Controller {
 
     @FXML
-    private  javafx.scene.control.ComboBox startScreenComBox;
+    private javafx.scene.control.ComboBox startScreenComBox;
     //AdminLogin CLASS variables >>>>>>>>>> for logingin
     private boolean userLoggedIn = false;
     @FXML
@@ -66,6 +68,7 @@ public class Controller {
     private javafx.scene.control.ComboBox startDateDAYTxtField;
     @FXML
     private javafx.scene.control.ComboBox dropoffLocation;
+    @FXML
     private javafx.scene.control.ComboBox startDateMONTHTxtField;
     @FXML
     private javafx.scene.control.ComboBox endDateDAYTxtField;
@@ -133,13 +136,13 @@ public class Controller {
     private javafx.scene.control.ComboBox cancelReservationCustomer;
     //CustomerOrder CLASS variables >>>>>>>>>> for seeing returned mileage and fuel
     @FXML
-    private  javafx.scene.control.TextField turnInMileage;
+    private javafx.scene.control.TextField turnInMileage;
     @FXML
-    private  javafx.scene.control.TextField turnInFuel;
+    private javafx.scene.control.TextField turnInFuel;
     @FXML
-    private  javafx.scene.control.Label mileageBeforeTrip;
+    private javafx.scene.control.Label mileageBeforeTrip;
     @FXML
-    private  javafx.scene.control.TextArea receiptTxtArea;
+    private javafx.scene.control.TextArea receiptTxtArea;
     private int globalBeforeTripMileage = 0;
 
     //Class instences
@@ -150,6 +153,7 @@ public class Controller {
     CustomerOrder cusOrder = new CustomerOrder();
     ReserveMH reserveMH = new ReserveMH();
     LoadInformationIntoFields loadInformation = new LoadInformationIntoFields();
+
 
     //We use it to store stuff that is not database connected
     @FXML
@@ -448,39 +452,74 @@ public class Controller {
     //Customer picks up his reserved motorhome
     @FXML
     public void customerPickUp(ActionEvent actionEvent){
+        if (pickupLocation.getValue() == null) {
+            JOptionPane.showMessageDialog(null,"Please choose location");
+        } else {
+
+
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
+        int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoPicksUp).get(0));
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
         receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
+
+        String locations = (String) pickupLocation.getValue();
+        String kainyteString = locations.substring(0,1);
+        int kainyteInt = Integer.parseInt(kainyteString);
+        int galutineKaina = kainyteInt +kaina;
+        System.out.println(kainyteInt);
+
+cusOrder.updateOrderPrice(nameOfTheGuyWhoPicksUp,galutineKaina);
+
+        }
     }
 
     //When the customer wants to turn in his mh
     @FXML
     public void customerTurnIn(ActionEvent actionEvent){
+        String nameOfTheGuyWhoTurnIns = (String) turnInCustomer.getValue();
+if (dropoffLocation.getValue() == null) {
+    JOptionPane.showMessageDialog(null,"choose drop off location");
+} else {
 
-       try {
-           if(turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0 ){
+
+    int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoTurnIns).get(0));
+    cusOrder.pickUp(nameOfTheGuyWhoTurnIns);
+    receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoTurnIns);
+
+    String locationaser = (String) dropoffLocation.getValue();
+    String kainyteString = locationaser.substring(0,1);
+    int kainyteInt = Integer.parseInt(kainyteString);
+    int galutineKaina = kainyteInt +kaina;
+    System.out.println(kainyteInt);
+
+    cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,galutineKaina);
+
+
+    try {
+        if (turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0) {
             receiptTxtArea.setText("Pick a name from combo box.");
-        }else{
-            String nameOfTheGuyWhoTurnIns = (String ) turnInCustomer.getValue();
-            int currentMileage = Integer.parseInt( turnInMileage.getText());
+        } else {
+
+            int currentMileage = Integer.parseInt(turnInMileage.getText());
             int currentFuel = Integer.parseInt(turnInFuel.getText());
 
-            if(currentMileage <= globalBeforeTripMileage){
+            if (currentMileage <= globalBeforeTripMileage) {
                 turnInMileage.setText("Mileage too low!");
-            }else{
-                if(currentFuel <= 0 || currentFuel >=200){
+            } else {
+                if (currentFuel <= 0 || currentFuel >= 200) {
                     turnInFuel.setText("Fuel negative/too much");
-                }else{
+                } else {
                     receiptTxtArea.setText(
-                            "Customer who turned in: "+nameOfTheGuyWhoTurnIns+
-                            "\nThe total cost was:    "+cusOrder.turnIn(nameOfTheGuyWhoTurnIns,currentMileage,currentFuel));
+                            "Customer who turned in: " + nameOfTheGuyWhoTurnIns +
+                                    "\nThe total cost was:    " + cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel));
                 }
-                           }
+            }
         }
 
-       } catch (NumberFormatException e) {
-           receiptTxtArea.setText("Use normal numerical values no decimals also");
-       }
+    } catch (NumberFormatException e) {
+        receiptTxtArea.setText("Use normal numerical values no decimals also");
+    }
+}
 }
 
     @FXML//and adition to turn in to see that was the mileage before the trip
@@ -515,7 +554,7 @@ public class Controller {
 
             receiptTxtArea.setText(
 
-                            "Days berore start " + daysBeforeStart       + " " + "\n" +
+                            "Days before start " + daysBeforeStart       + " " + "\n" +
                             "Price             " + kaina                 + " " + "\n" +
                             "Penalty           " + refund                + " " + "\n" +
                             "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
@@ -535,16 +574,34 @@ public class Controller {
     public void choosePickUpLocation(MouseEvent mouseEvent) {
 
         ObservableList<String> locations = FXCollections.observableArrayList();
-        locations.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        locations.addAll("5 additional eur, Hotel \"Radisson\"", "8 additional eur, Airport", "0 free of charge, MH Office, ", "5 additional eur, Central Train Station", "5 additional eur, Hotel \"Last Chance\"", " 7 additional eur,Gym \"Urban man\", adds 7 eur");
         pickupLocation.setItems(locations);
       // pickupLocation.getItems().addAll("Hotel", "Airport", "Office", "Train Station");
 
     }
 
+
     @FXML
     public void chooseDropOffLocation(MouseEvent mouseEvent) {
         ObservableList<String> locationaser = FXCollections.observableArrayList();
-        locationaser.addAll("Hotel \"Radisson\", adds 15 eur", "Airport, adds 25 eur", "MH Office, free of charge", "Central Train Station, adds 10 eur", "Hotel \"Last Chance\", adds 15 eur", "Gym \"Urban man\", adds 7 eur");
+        locationaser.addAll("5 additional eur, Hotel \"Radisson\"", "8 additional eur, Airport", "0 free of charge, MH Office", "5 additional eur, Central Train Station", "5 additional eur, Hotel \"Last Chance\"", " 7 additional eur,Gym \"Urban man\", adds 7 eur");
         dropoffLocation.setItems(locationaser);
        }
+
+    public void addPickupLocation(ActionEvent event) {
+
+        String locations = (String) pickupLocation.getValue();
+        String kainyteString = locations.substring(0,1);
+
+        int kainyteInt = Integer.parseInt(kainyteString);
+        System.out.println(kainyteInt);
+    }
+
+
+
+    public void addDropoffLocation(ActionEvent event) {
+        String locationaser = (String) dropoffLocation.getValue();
+
+        System.out.println(locationaser);
+    }
 }
