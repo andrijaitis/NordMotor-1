@@ -11,7 +11,6 @@ public class AdminLogin {
 
             Connection con = DBConnection.getConnection();
 
-
             PreparedStatement prepeare =
             con.prepareStatement("SELECT * FROM `users` WHERE `userName`=? AND `password`=MD5(?)");
             prepeare.setString(1, peck);
@@ -20,8 +19,6 @@ public class AdminLogin {
             prepeare.execute();
 
             ResultSet rs = prepeare.getResultSet();
-
-
 
             if(!rs.first()){
                   return false;
@@ -33,9 +30,6 @@ public class AdminLogin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
 return false;
     }
 

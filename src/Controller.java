@@ -424,7 +424,7 @@ public class Controller {
         brandForMechanic.setText(loadInformation.load(ID).get(0));
         modelForMechanic.setText(loadInformation.load(ID).get(1));
         bedForMechanic.setText(loadInformation.load(ID).get(2));
-        fuelForMechanic.setText(loadInformation.load(ID).get(3)+ " [L]");
+        fuelForMechanic.setText(loadInformation.load(ID).get(3)   + " [L] ");
         mileageForMechanic.setText(loadInformation.load(ID).get(4)+ " [km]");
 
         statusBarForService.setText("Status: ");
@@ -479,7 +479,7 @@ cusOrder.updateOrderPrice(nameOfTheGuyWhoPicksUp,theLastPrice);
     public void customerTurnIn(ActionEvent actionEvent){
         String nameOfTheGuyWhoTurnIns = (String) turnInCustomer.getValue();
 if (dropoffLocation.getValue() == null) {
-    JOptionPane.showMessageDialog(null,"choose drop off location");
+    JOptionPane.showMessageDialog(null,"Choose drop off location.");
 } else {
 
 
@@ -493,8 +493,7 @@ if (dropoffLocation.getValue() == null) {
     int theLastPrice = thePriceInt +myPrice;
 
     cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,theLastPrice);
-
-
+    
     try {
         if (turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0) {
             receiptTxtArea.setText("Pick a name from combo box.");
@@ -547,7 +546,7 @@ if (dropoffLocation.getValue() == null) {
             cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
             int daysBeforeStart = Integer.parseInt(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
-            int myPrice = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoCancel).get(0));//////////////////////////////////////////
+            int myPrice = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoCancel).get(0));
             System.out.println(daysBeforeStart);
             daysCounter.setText(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
             int refund = cusOrder.penalty(daysBeforeStart, myPrice);
@@ -556,27 +555,24 @@ if (dropoffLocation.getValue() == null) {
                 int returned = myPrice;
                 receiptTxtArea.setText(
 
-                        "Days before start " + daysBeforeStart       + " " + "\n" +
-                                "Price             " + myPrice                 + " " + "\n" +
+                        "Days before start         " + daysBeforeStart       + " " + "\n" +
+                                "Price             " + myPrice               + " " + "\n" +
                                 "Penalty           " + refund                + " " + "\n" +
                                 "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
-                                "Returned amount   " + returned            + "\n"
+                                "Returned amount   " + returned              + "\n"
                 );
             } else {
                 int returned = myPrice - refund;
                 receiptTxtArea.setText(
 
-                        "Days before start " + daysBeforeStart       + " " + "\n" +
-                                "Price             " + myPrice                 + " " + "\n" +
+                        "Days before start         " + daysBeforeStart       + " " + "\n" +
+                                "Price             " + myPrice               + " " + "\n" +
                                 "Penalty           " + refund                + " " + "\n" +
                                 "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
-                                "Returned amount   " + returned            + "\n"
+                                "Returned amount   " + returned              + "\n"
                 );
             }
-
-
         }
-
     }
     // Customer order tab END====================================================================================================
 
@@ -595,8 +591,6 @@ if (dropoffLocation.getValue() == null) {
       // pickupLocation.getItems().addAll("Hotel", "Airport", "Office", "Train Station");
 
     }
-
-
     @FXML
     public void chooseDropOffLocation(MouseEvent mouseEvent) {
         ObservableList<String> locationaser = FXCollections.observableArrayList();
@@ -612,9 +606,6 @@ if (dropoffLocation.getValue() == null) {
         int thePriceInt = Integer.parseInt(thePriceString);
         System.out.println(thePriceInt);
     }
-
-
-
     public void addDropoffLocation(ActionEvent event) {
         String locationaser = (String) dropoffLocation.getValue();
 

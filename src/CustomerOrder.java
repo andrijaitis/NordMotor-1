@@ -16,7 +16,7 @@ public class CustomerOrder {
 
             String sql = "UPDATE reserve, nordic_rv " +
                     "SET " +
-                    "status    = " + "'" + "In_use" + "'" + ", " +
+                    "status    = " + "'" + "In_use"   + "'" + ", " +
                     "situation = " + "'" + "Using_it" + "'" +
                     "  " +
                     "WHERE reservedID = rvID AND signiture = " + "'" + customerName + "'" + ";";
@@ -32,13 +32,13 @@ public class CustomerOrder {
 
     public int turnIn(String nameOfTheGuyWhoTurnIns, int currentMileage, int currentFuel) {
 
-        String dataBaseMileage = " ";
-        String dataBaseFuel = " ";
-        String dataBaseCost = " ";
+        String dataBaseMileage  = " ";
+        String dataBaseFuel     = " ";
+        String dataBaseCost     = " ";
 
         int distenceOfTheJourney = 0;
-        int fourHundredKMfree = 0;
-        int lessThenHalfFuel = 0;
+        int fourHundredKMfree    = 0;
+        int lessThenHalfFuel     = 0;
 
         try {
             Connection con = DBConnection.getConnection();
@@ -51,8 +51,8 @@ public class CustomerOrder {
 
             while (rs.next()) {
                 dataBaseMileage = rs.getString(1);
-                dataBaseFuel = rs.getString(2);
-                dataBaseCost = rs.getString(3);
+                dataBaseFuel    = rs.getString(2);
+                dataBaseCost    = rs.getString(3);
 
             }
             //----------------------------------------------------------------------------------------------------------
@@ -73,11 +73,11 @@ public class CustomerOrder {
             //this one updates milege and fuel and cost
             String sql = "UPDATE nordic_rv, reserve " +
                     "SET         " +
-                    "situation = " + "'" + "Finished" + "'" + ", " +
-                    "status    = " + "'" + "Unavailable" + "'" + ", " +
-                    "mileage   = " + "'" + currentMileage + "'" + ", " +
-                    "fuel      = " + "'" + currentFuel + "'" + ", " +
-                    "cost      = " + "'" + fourHundredKMfree + "'" + "  " +
+                    "situation = " + "'" + "Finished"           + "'" + ", " +
+                    "status    = " + "'" + "Unavailable"        + "'" + ", " +
+                    "mileage   = " + "'" + currentMileage       + "'" + ", " +
+                    "fuel      = " + "'" + currentFuel          + "'" + ", " +
+                    "cost      = " + "'" + fourHundredKMfree    + "'" + "  " +
                     "WHERE rvID = reservedID AND signiture =  " + "'" + nameOfTheGuyWhoTurnIns + "'" + ";";
 
             System.out.println(sql);
@@ -102,8 +102,8 @@ public class CustomerOrder {
 
             String sql =    "UPDATE reserve, nordic_rv " +
                     "SET "         +
-                    "status    = " +"'" + "Available"   +"'" + ", " +
-                    "situation = " +"'" + "Canceled" +"'" + "  " +
+                    "status    = " +"'" + "Available"          + "'" + ", " +
+                    "situation = " +"'" + "Canceled"           + "'" + "  " +
                     "WHERE reservedID = rvID AND signiture = " + "'" +nameOfTheGuyWhoCanceled +    "'"+           ";"        ;
 
 
@@ -168,7 +168,7 @@ public class CustomerOrder {
     }
 
 
-    public void updateOrderPrice(String customerName, int kainyte) {
+    public void updateOrderPrice(String customerName, int price) {
 
         try {
             Connection con = DBConnection.getConnection();
@@ -176,7 +176,7 @@ public class CustomerOrder {
 
             String sql = "UPDATE reserve, nordic_rv " +
                     "SET " +
-                    "cost    = "  +kainyte+ "" + " " +
+                    "cost    = "  +price+ "" + " " +
                     "  " +
                     "WHERE reservedID = rvID AND signiture = " + "'" + customerName + "'" + ";";
 
