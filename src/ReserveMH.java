@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-/**
- * Created by Mantas_MSI on 5/12/2017.
- */
+//Vidas is responsible for this class
 public class ReserveMH {
     //checks which season it is
     public String season(int startMonth) {

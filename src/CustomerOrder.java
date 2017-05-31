@@ -5,10 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-
-/**
- * Created by Mantas_MSI on 5/14/2017.
- */
+//VIdas and Mantas are responsible for this class
 
 public class CustomerOrder {
 

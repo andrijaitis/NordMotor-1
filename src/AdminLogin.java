@@ -1,6 +1,5 @@
-/**
- * Created by Kompas on 2017-05-11.
- */
+
+//Vidas responsible for this class
 import java.sql.*;
 
 public class AdminLogin {
@@ -13,9 +12,8 @@ public class AdminLogin {
             Connection con = DBConnection.getConnection();
 
 
-            // best variable name ever
             PreparedStatement prepeare =
-                    con.prepareStatement("SELECT * FROM `users` WHERE `userName`=? AND `password`=MD5(?)");
+            con.prepareStatement("SELECT * FROM `users` WHERE `userName`=? AND `password`=MD5(?)");
             prepeare.setString(1, peck);
             prepeare.setString(2, pick);
 

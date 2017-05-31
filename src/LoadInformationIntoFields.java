@@ -4,9 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- * Created by Mantas_MSI on 5/24/2017.
- */
+//Mantas is responsible for this class
 public class LoadInformationIntoFields {
 
     public java.util.List<String> load(String ID) {

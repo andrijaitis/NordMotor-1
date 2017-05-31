@@ -1,6 +1,4 @@
-/**
- * Created by Kompas on 2017-05-11.
- */
+//Everyone is responsible for this class
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -373,7 +371,7 @@ public class Controller {
            statusBarForReserver.setText("Choose normal date");
        }else if (Integer.parseInt( reserveMH.currentDaytoStartDate(startDate)) < 0){
            whichSeason.setFont(Font.font ("Verdana", 17));
-           statusBarForReserver.setText("You cant travel time m88888: "+startDate);
+           statusBarForReserver.setText("You cant travel time. Wrong date "+startDate);
        }else{
 
             ReserveMH rmh = new ReserveMH();
@@ -461,17 +459,17 @@ public class Controller {
 
 
         String nameOfTheGuyWhoPicksUp = (String ) pickUpCustomer.getValue();
-        int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoPicksUp).get(0));
+        int myPrice = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoPicksUp).get(0));
         cusOrder.pickUp(nameOfTheGuyWhoPicksUp);
         receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoPicksUp);
 
         String locations = (String) pickupLocation.getValue();
-        String kainyteString = locations.substring(0,1);
-        int kainyteInt = Integer.parseInt(kainyteString);
-        int galutineKaina = kainyteInt +kaina;
-        System.out.println(kainyteInt);
+        String thePriceString = locations.substring(0,1);
+        int thePriceInt = Integer.parseInt(thePriceString);
+        int theLastPrice = thePriceInt +myPrice;
+        System.out.println(thePriceInt);
 
-cusOrder.updateOrderPrice(nameOfTheGuyWhoPicksUp,galutineKaina);
+cusOrder.updateOrderPrice(nameOfTheGuyWhoPicksUp,theLastPrice);
 
         }
     }
@@ -485,16 +483,16 @@ if (dropoffLocation.getValue() == null) {
 } else {
 
 
-    int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoTurnIns).get(0));
+    int myPrice = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoTurnIns).get(0));
     cusOrder.pickUp(nameOfTheGuyWhoTurnIns);
     receiptTxtArea.setText("Customer who picked up: "+nameOfTheGuyWhoTurnIns);
 
     String locationaser = (String) dropoffLocation.getValue();
-    String kainyteString = locationaser.substring(0,1);
-    int kainyteInt = Integer.parseInt(kainyteString);
-    int galutineKaina = kainyteInt +kaina;
+    String thePriceString = locationaser.substring(0,1);
+    int thePriceInt = Integer.parseInt(thePriceString);
+    int theLastPrice = thePriceInt +myPrice;
 
-    cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,galutineKaina);
+    cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,theLastPrice);
 
 
     try {
@@ -513,8 +511,11 @@ if (dropoffLocation.getValue() == null) {
                 } else {
                     receiptTxtArea.setText(
                             "Customer who turned in: " + nameOfTheGuyWhoTurnIns +
-                                    "\nThe total cost was:    " + cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel));
-
+                                    "\nThe total cost was:    " + myPrice + cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel));
+                    dropoffLocation.setValue(null);
+                    turnInFuel.setText(null);
+                    turnInMileage.setText(null);
+                    turnInCustomer.setValue(null);
 
                 }
             }
@@ -546,30 +547,30 @@ if (dropoffLocation.getValue() == null) {
             cusOrder.orderCancelation(nameOfTheGuyWhoCancel);
 
             int daysBeforeStart = Integer.parseInt(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
-            int kaina = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoCancel).get(0));//////////////////////////////////////////
+            int myPrice = Integer.parseInt(reserveMH.reservation(nameOfTheGuyWhoCancel).get(0));//////////////////////////////////////////
             System.out.println(daysBeforeStart);
             daysCounter.setText(reserveMH.dateDffCounter(nameOfTheGuyWhoCancel));
-            int refund = cusOrder.penalty(daysBeforeStart, kaina);
+            int refund = cusOrder.penalty(daysBeforeStart, myPrice);
 
             if (refund < 200) {
-                int sugrazinta = kaina;
+                int returned = myPrice;
                 receiptTxtArea.setText(
 
                         "Days before start " + daysBeforeStart       + " " + "\n" +
-                                "Price             " + kaina                 + " " + "\n" +
+                                "Price             " + myPrice                 + " " + "\n" +
                                 "Penalty           " + refund                + " " + "\n" +
                                 "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
-                                "Returned amount   " + sugrazinta            + "\n"
+                                "Returned amount   " + returned            + "\n"
                 );
             } else {
-                int sugrazinta = kaina - refund;
+                int returned = myPrice - refund;
                 receiptTxtArea.setText(
 
                         "Days before start " + daysBeforeStart       + " " + "\n" +
-                                "Price             " + kaina                 + " " + "\n" +
+                                "Price             " + myPrice                 + " " + "\n" +
                                 "Penalty           " + refund                + " " + "\n" +
                                 "Guy who cancelled " + nameOfTheGuyWhoCancel + " " + "\n" +
-                                "Returned amount   " + sugrazinta            + "\n"
+                                "Returned amount   " + returned            + "\n"
                 );
             }
 
@@ -606,10 +607,10 @@ if (dropoffLocation.getValue() == null) {
     public void addPickupLocation(ActionEvent event) {
 
         String locations = (String) pickupLocation.getValue();
-        String kainyteString = locations.substring(0,1);
+        String thePriceString = locations.substring(0,1);
 
-        int kainyteInt = Integer.parseInt(kainyteString);
-        System.out.println(kainyteInt);
+        int thePriceInt = Integer.parseInt(thePriceString);
+        System.out.println(thePriceInt);
     }
 
 

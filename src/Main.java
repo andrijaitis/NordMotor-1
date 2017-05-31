@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+//Everyone is responsible for this class
 public class Main extends Application {
 
     @Override
@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Nordic Motorhomes System");
         primaryStage.setScene(new Scene(root, 900, 690));
         primaryStage.show();
-        //inga
+
     }
 
 

@@ -1,6 +1,4 @@
-/**
- * Created by Mantas_MSI on 5/11/2017.
- */
+//Mantas and Vidas are responsible for this class
 
 import java.sql.Connection;
 import java.sql.SQLException;

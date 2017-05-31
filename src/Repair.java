@@ -1,15 +1,9 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-/**
- * Created by Mantas_MSI on 5/13/2017.
- */
+//Mantas is responsible for this class
 public class Repair {
 
     //we look at all the check boxes of they are checked

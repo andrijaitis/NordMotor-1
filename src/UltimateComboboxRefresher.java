@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- * Created by Mantas_MSI on 5/14/2017.
- */
+//Mantas is responsible for this class
 public class UltimateComboboxRefresher {
 
     public ObservableList<String> myUltimateRefresh(String tab){

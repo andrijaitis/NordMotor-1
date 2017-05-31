@@ -7,7 +7,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+//Thomas is responsible for this class
 
 public class DBConnection {
     //we put these values into string so that we can change them easaly later on
