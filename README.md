@@ -5,4 +5,4 @@
 
 you can check for latest updates on https://github.com/lietuviskalba/NordMotor
 
-If you have problems with operating the program, check the Program Manual in the report
+If you have problems with operating the program, check the Program Manual in the report.
