@@ -493,7 +493,7 @@ if (dropoffLocation.getValue() == null) {
     int theLastPrice = thePriceInt +myPrice;
 
     cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,theLastPrice);
-    
+
     try {
         if (turnInCustomer.getSelectionModel().isEmpty() || Integer.parseInt(turnInFuel.getText()) <= 0 || Integer.parseInt(turnInMileage.getText()) <= 0) {
             receiptTxtArea.setText("Pick a name from combo box.");
