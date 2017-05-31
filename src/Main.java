@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("nordicGUI.fxml"));
         primaryStage.setTitle("Nordic Motorhomes System");
-        primaryStage.setScene(new Scene(root, 900, 720));
+        primaryStage.setScene(new Scene(root, 900, 690));
         primaryStage.show();
         //inga
     }

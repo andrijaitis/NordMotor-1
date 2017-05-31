@@ -394,7 +394,7 @@ public class Controller {
     @FXML
     public  void saveOrderAction(ActionEvent actionEvent){
         if (singitureTxtField.getText().isEmpty() ||finalPrice.getText().isEmpty()){
-            statusBarForReserver.setText("Please Check final price or signature u DIP");
+            statusBarForReserver.setText("Please Check final price or signature");
         } else {
             String startYear = (String) startDateYEARtxtField.getValue();
             String startMonth = (String) startDateMONTHTxtField.getValue();
@@ -493,7 +493,6 @@ if (dropoffLocation.getValue() == null) {
     String kainyteString = locationaser.substring(0,1);
     int kainyteInt = Integer.parseInt(kainyteString);
     int galutineKaina = kainyteInt +kaina;
-    System.out.println(kainyteInt);
 
     cusOrder.updateOrderPrice(nameOfTheGuyWhoTurnIns,galutineKaina);
 
@@ -515,6 +514,8 @@ if (dropoffLocation.getValue() == null) {
                     receiptTxtArea.setText(
                             "Customer who turned in: " + nameOfTheGuyWhoTurnIns +
                                     "\nThe total cost was:    " + cusOrder.turnIn(nameOfTheGuyWhoTurnIns, currentMileage, currentFuel));
+
+
                 }
             }
         }
